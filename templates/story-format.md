@@ -148,7 +148,7 @@ move); fixtures before generators is a **D** split that unblocks a thread.
 A story is done only when **every** item holds — treat it as a gate, not a guideline:
 - [ ] Every acceptance criterion is green across the applicable test layers (`tech-design.md`).
 - [ ] Each `AC-*` / `LAW-*` id is cited by the test(s) that satisfy it.
-- [ ] Both levers pass — `scripts/test.sh` and `scripts/lint.sh`.
+- [ ] Both levers pass — the `test` and `lint` commands recorded in `levers.json`.
 - [ ] **Guardrail candidates recorded.** Any novel test/code/smell call not covered by
   `guardrails.md` is appended to its *Candidates* inbox — **or the story explicitly affirms
   "candidates: none."** Silence is not a pass; this is a required gate, not optional capture

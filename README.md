@@ -2,11 +2,10 @@
 
 A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-driven projects.
 
-> **Status: greenfield-only.** The lifecycle assumes its authority docs (the project contract below)
-> exist from the project's inception. Adopting it in an existing codebase requires a bootstrap
-> process — deriving guardrails, tech design, and a story backlog from code that already exists —
-> which is not yet defined. Do not point these skills at a brownfield project expecting them to
-> self-bootstrap.
+> **Status: greenfield-only.** `bootstrap-project` establishes the contract in a fresh project.
+> Adopting the lifecycle in an existing codebase requires a brownfield bootstrap — deriving
+> guardrails, tech design, and a story backlog from code that already exists — which is not yet
+> defined. `bootstrap-project` refuses brownfield folders rather than improvising.
 
 ```
                      ┌──────────────────────────────────────────────┐
@@ -19,6 +18,14 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
 
 ## Skills
 
+- **bootstrap-project** — bare folder → the project contract. Four checkpointed conversations:
+  product (domain design doc), stack + **design sensibility** (3–5 curated persona options with a
+  recommendation — generic architect available but discouraged), architecture under the chosen
+  sensibility (tech design), then mechanical instantiation: story format from template, guardrails
+  **seeded from the canonical smell catalog** in the stack's idiom, the `levers.json` manifest, and
+  a slice plan whose Slice 0 is the **walking skeleton** (the app the customer can already open).
+  Ends by handing off to write-stories; never scaffolds code. Invariants no sensibility can
+  negotiate: story-driven production, test-driven development.
 - **write-stories** — change request (slice, freeform prompt, or test-cycle feedback) →
   implementation-ready stories: INVEST reinterpreted for agents, sizing as a vector of countable
   signals, design-contradiction gate first, human checkpoints for precedence/breakdown/splits.
@@ -41,13 +48,18 @@ say so):
 
 | Role | Default path | Required by |
 | --- | --- | --- |
-| Story format & sizing spec | `docs/story-format.md` | all four skills (§-references must hold — seed from `templates/story-format.md`) |
-| Guardrails catalog (test/code/smell patterns + *Candidates* inbox + canonical-TDD rules) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug |
-| Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all four |
-| Domain design doc (settled product/system rules) | project-named | write-stories, fix-bug |
+| Story format & sizing spec | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
+| Guardrails catalog (one test+code smell catalog + *Candidates* inbox + canonical-TDD rules) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug (seeded by bootstrap from `references/code-smells.md`) |
+| Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
+| Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
-| Levers | `scripts/test.sh`, `scripts/lint.sh` | implement-story, fix-bug (raw toolchain gates until they exist) |
+| Lever manifest (the `test` and `lint` commands — one truth for agents, humans, and host-app runner UIs) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md` | written by the skills |
+
+`bootstrap-project` creates all of the above in a greenfield project. Plugin references
+(`references/code-smells.md`, `references/sensibilities.md`) are plugin knowledge, not project
+artifacts — the ladder to the giants' shoulders (Fowler/Beck, Meszaros, and the sensibility roster's
+corpus anchors).
 
 Conventions carried across projects: `STORY-nnnn` / `BUG-nnnn` / `AC-*` / `LAW-*` ids; per-cycle
 commits on story/fix branches (never `main`); disposable plans burned at story close; the

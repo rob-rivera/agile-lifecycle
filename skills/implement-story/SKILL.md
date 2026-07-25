@@ -77,10 +77,11 @@ more"). Say this in the seed explicitly. For a **behavioral** cycle, witnessed r
 don't take the worker's word for it. For a **gate** cycle, the "red" is the failing gate.
 
 ### 2 — 🛑 Independently validate (mechanical, not a re-read)
-Run the gates the sub-agent does not control:
-- [ ] `scripts/test.sh` — **full** suite, from clean (catches regressions, not just the new test).
+Run the gates the sub-agent does not control (the levers — the `test` and `lint` commands recorded
+in `levers.json` at the repo root):
+- [ ] The **test lever** — **full** suite, from clean (catches regressions, not just the new test).
       *(Gate lane: the relevant build/script gate.)*
-- [ ] `scripts/lint.sh` — passes (format + lint + any architecture checks).
+- [ ] The **lint lever** — passes (format + lint + any architecture checks).
 - [ ] **Scope & restraint check** — the diff touches only this cycle's expected files/layers (no
       cross-cycle creep) **and implements only what the pinned Red requires**. Behavior no test in
       *this* cycle pins is untested code or a stolen future red — reject it, even if it looks correct.
@@ -92,10 +93,10 @@ Run the gates the sub-agent does not control:
 
 The read is a spot-check on top; the tool runs are the gate.
 
-**Bootstrap fallback.** Until the project's lever scripts (`scripts/test.sh` / `scripts/lint.sh`)
-exist, substitute the raw toolchain gates they will wrap — full build with warnings as errors,
-formatter check, linter with warnings denied, and any architecture-boundary check done manually.
-Switch to the scripts the moment they exist.
+**Bootstrap fallback.** Until the levers are defined (`levers.json`) and proven, substitute the raw
+toolchain gates they will name — full build with warnings as errors, formatter check, linter with
+warnings denied, and any architecture-boundary check done manually. Switch to the manifest's
+commands the moment they exist.
 
 ### 3 — On pass: checkpoint durably
 - **Commit** — message cites the cycle + `AC-*`/`LAW-*` id; end with the project's required commit
