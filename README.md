@@ -2,6 +2,12 @@
 
 A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-driven projects.
 
+> **Status: greenfield-only.** The lifecycle assumes its authority docs (the project contract below)
+> exist from the project's inception. Adopting it in an existing codebase requires a bootstrap
+> process — deriving guardrails, tech design, and a story backlog from code that already exists —
+> which is not yet defined. Do not point these skills at a brownfield project expecting them to
+> self-bootstrap.
+
 ```
                      ┌──────────────────────────────────────────────┐
                      │              designed behavior               │
