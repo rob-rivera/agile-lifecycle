@@ -1,0 +1,8 @@
+{
+  "name": "agile-lifecycle",
+  "version": "0.1.0",
+  "description": "An agile, TDD-disciplined development lifecycle for agent-driven projects: write-stories → plan-cycles → implement-story, with fix-bug alongside. Skills are the procedure; each project supplies the specification (story format, guardrails, tech design).",
+  "author": {
+    "name": "Rob Rivera"
+  }
+}
