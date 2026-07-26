@@ -41,10 +41,16 @@ noise (and cost).
 
 **Check for the contract first.** If `docs/story-format.md` exists, this is already a lifecycle
 project — code presence is *expected* (it was built through the discipline) and is never grounds
-for a brownfield stop. Take the **resume/upgrade path**: compare what's present against the
-current contract (this doc's phase 4 list) and fill only what's missing — a project bootstrapped
-under an older plugin version picks up new contract pieces (a missing lever, the model policy)
-this way, each through its normal checkpoint. Never overwrite an approved artifact.
+for a brownfield stop. Take the **resume/upgrade path**, delegated to the plugin's **`upgrader`
+agent** (mid-tier by design — checks and file mechanics don't need the orchestrator's model):
+dispatch it in **diff mode** to compare the project against the current contract (this doc's
+phase 4 list) and report missing pieces, pending decisions, and ledger backfill candidates; 🛑
+present that report with the decisions framed for the human; then dispatch **execute mode** with
+the approved plan. Fill only what's missing — a project bootstrapped under an older plugin
+version picks up new contract pieces (a missing lever, the model policy, the registries) this
+way, each through its normal checkpoint. Never overwrite an approved artifact. Spot-check the
+written files before declaring the upgrade done, and end with the session-restart reminder if any
+agents were created.
 
 Otherwise, **"empty" means empty of *decisions*, not empty of files.** The gate question for
 anything found: *would bootstrap have to reverse-engineer intent from it?* Classify what's present:
@@ -83,7 +89,7 @@ determinism policy, the `LAW-*` registry (promote phase 1's candidates), the **t
 this stack, toolchain and levers. The sensibility shapes taste — what to leave out, what to insist
 on; the invariants outrank it everywhere. **Stop for approval.**
 
-### 4 — Mechanical instantiation (no persona)
+### 4 — Mechanical instantiation (no persona; MAY delegate the mechanics to `upgrader`)
 - `docs/story-format.md` — from the template; project name and any doc-name adjustments only. The
   §-structure is load-bearing (skills cite it) — do not restructure.
 - `docs/guardrails.md` — from the template. **Seed the smells**: select from

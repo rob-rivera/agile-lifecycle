@@ -71,9 +71,10 @@ say so):
 | Debt registry (observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision) | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md` | written by the skills |
 
-The plugin also ships one agent of its own: **`surveyor`** (`agents/surveyor.md`, pinned to a
-cheap model) — bootstrap-legacy's fan-out reader, deliberately not the session's model so wide
-surveys stay cheap. Projects may override it with their own `surveyor` definition.
+The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
+session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
+fan-out reader — and **`upgrader`** (sonnet) — the contract mechanic that diffs a project against
+the current contract and instantiates approved pieces on the resume/upgrade path.
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
 (`references/code-smells.md`, `references/sensibilities.md`) are plugin knowledge, not project
