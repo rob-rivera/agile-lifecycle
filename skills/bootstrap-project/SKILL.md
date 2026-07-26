@@ -63,6 +63,13 @@ reversible) or declare them deliberate overrides and skip the plugin's contract 
 don't know about. Divergent content is ratified side-by-side, never silently merged. A skill
 retirement or rename takes effect at the next session restart — say so.
 
+**Seed check (upgrade path):** if the project's guardrails catalog lacks the book-seeded smell
+floor (it grew entries organically from zero — the hole the seed exists to prevent), **offer the
+seeding step** as part of the upgrade: select from `references/code-smells.md` per the stack,
+express in its idiom, and **dedupe against the grown entries — grown entries always win** (they
+are project-ratified; seeds only fill the gaps around them). Same 🛑 selection approval as a
+fresh bootstrap. This is orchestrator work, not upgrader work — seeding is judgment.
+
 Otherwise, **"empty" means empty of *decisions*, not empty of files.** The gate question for
 anything found: *would bootstrap have to reverse-engineer intent from it?* Classify what's present:
 
