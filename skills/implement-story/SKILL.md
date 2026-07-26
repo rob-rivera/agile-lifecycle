@@ -57,9 +57,11 @@ commit cadence below is the resume mechanism; using this skill is the standing r
 For each cycle, in plan order:
 
 ### 1 — Dispatch a fresh implementer sub-agent
-Seed it with: the cycle's **Red / Green / Refactor** spec, its **lane**, the relevant
-`guardrails.md` refs, and the instruction to follow **canonical Red→Green→Refactor** and return a
-**structured report**:
+Dispatch the project's **`implementer` agent** (`.claude/agents/implementer.md` — its model is the
+project's model policy, set at bootstrap; if the project defines no implementer agent, use a
+general-purpose sub-agent inheriting the session model). Seed it with: the cycle's
+**Red / Green / Refactor** spec, its **lane**, the relevant `guardrails.md` refs, and the
+instruction to follow **canonical Red→Green→Refactor** and return a **structured report**:
 - `summary` — one line.
 - `red` — evidence the test/gate **failed first** (the failing output).
 - `green` — evidence it now passes, **and that the full lint + test levers pass** — not just the new
@@ -104,10 +106,13 @@ commands the moment they exist.
 - **Update the plan ledger** — mark the cycle done (this is what resume reads).
 - **Accumulate** the cycle's candidates.
 
-### 4 — On failure: bounded retry, then re-plan
-Reject → feed back the **specific** failure → re-dispatch (fresh sub-agent), **bounded retries**. If it
-still won't close, **stop and route back to `plan-cycles`/`write-stories`** — a cycle that won't close
-is a signal the plan or the sizing was wrong, not something to grind on. Escalate to the user.
+### 4 — On failure: bounded retry, escalate once, then re-plan
+Reject → feed back the **specific** failure → re-dispatch (fresh sub-agent), **bounded retries**.
+When retries are exhausted, **escalate once to the project's `implementer-heavy` agent** (the
+model policy's stronger tier), seeding it with the accumulated failure feedback — it may close the
+cycle or return a mis-specification verdict. If it still won't close, **stop and route back to
+`plan-cycles`/`write-stories`** — a cycle that won't close is a signal the plan or the sizing was
+wrong, not something to grind on. Escalate to the user.
 
 ### 5 — 🛑 User checkpoint (calibratable cadence)
 Announce briefly what the cycle did, then check whether to proceed. **Cadence is adjustable** —

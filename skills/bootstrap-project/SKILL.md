@@ -88,6 +88,17 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   and `run` commands (`run` launches the app itself — the walking skeleton gives it something to
   launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
   red). Optional thin `scripts/` wrappers for CLI convenience.
+- `.claude/agents/` — **the model policy**: instantiate `templates/agents/implementer.md` and
+  `implementer-heavy.md` into the project. Two knobs, owned by the project, not the plugin:
+  - **Sub-agent models** — the `model:` line in each agent file (aliases track tiers:
+    haiku/sonnet/opus/fable; `inherit` = the session's model). Routine cycle work usually runs a
+    tier below the orchestrator; escalation usually `inherit`s.
+  - **Orchestrator model** — *is the session's model*; no skill can set it. Record the
+    recommendation per activity in `CLAUDE.md` (e.g. "design/story work: frontier tier;
+    implementation orchestration: one tier down") — the user applies it with `/model`.
+  🛑 **Present the proposed role→model mapping (with the reasoning) for approval.** Models shift
+  over time; changing the policy later is editing one frontmatter line, and re-running bootstrap
+  never overwrites an approved policy.
 - `docs/slice-plan.md` — Slice 0 proposed as **the walking skeleton**: the app the customer can
   already open, however blank, plus the levers proven (built/wired through stories, including any
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value

@@ -61,7 +61,8 @@ Load only the report plus the surface it implicates — never the whole codebase
 - **Usually one cycle.** Most bugs are a single Red→Green→Refactor. The orchestrator MAY run a small,
   single-layer fix inline (validation stays mechanical — levers it doesn't control); a fix touching real
   logic or spanning layers gets a fresh implementer sub-agent (implementer ≠ verifier), like
-  `implement-story`. If a "fix" balloons past ~3 cycles or keeps growing scope, **stop — it's probably a
+  `implement-story` — the project's `implementer` agent, with the same one-shot `implementer-heavy`
+  escalation after bounded retries. If a "fix" balloons past ~3 cycles or keeps growing scope, **stop — it's probably a
   story wearing a bug's clothes.**
 
 ## Setup (once per bug)
