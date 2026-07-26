@@ -22,7 +22,7 @@ distinct, focused designs; generic ones produce huge documents.
 | Sensibility | Corpus anchor | Optimizes for | Recommend when |
 | --- | --- | --- | --- |
 | **Kent Beck** | *TDD by Example*, *XP Explained*, *Tidy First?* | Simplicity, small safe steps, evolutionary design, feedback loops | Default for most greenfield product apps; small teams; the suite's home philosophy |
-| **Martin Fowler** | *Refactoring*, *Patterns of Enterprise Application Architecture* | Evolutionary architecture, a shared pattern vocabulary, incremental rework | Enterprise-ish domains; workflow/data apps; teams that communicate in patterns |
+| **Martin Fowler** | *Refactoring*, *Patterns of Enterprise Application Architecture* | Evolutionary architecture, a shared pattern vocabulary, incremental rework | Enterprise-ish domains; workflow/data apps; teams that communicate in patterns. **Also the process sensibility of `refactor-pass`** (fixed for that skill) |
 | **Robert C. Martin** | *Clean Architecture*, SOLID corpus | Explicit boundaries, the dependency rule, framework-independence of the core | Long-lived business cores; teams wanting hard layering discipline |
 | **Sandi Metz** | *POODR*, *99 Bottles of OOP* | Small objects, message-centric design, affordable change | OO-idiomatic dynamic stacks (Ruby, Python, JS classes) |
 | **Rich Hickey** | "Simple Made Easy," Clojure corpus | Data-first design, immutability, decomplecting state/time/identity | Data pipelines, functional stacks, state-heavy simulations |

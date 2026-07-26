@@ -21,7 +21,13 @@ forever.
 
 Sits beside the three build skills, not inside them: `write-stories` → `plan-cycles` → `implement-story`
 build *designed* behavior forward; `fix-bug` diagnoses *observed* behavior backward — and hands off to
-`write-stories` when the report turns out to be a request for behavior that was never designed.
+`write-stories` when the report turns out to be a request for behavior that was never designed, or to
+`refactor-pass` when nothing is observably wrong and the reporter wants cleaner structure (entropy is
+not a symptom).
+
+**Resource and performance symptoms are bugs.** Excess memory, latency, throughput collapse — a
+measurable symptom takes this path, not a refactor pass: **a measurement is a reproduction**, and the
+fix keeps a real Red (a failing measurement gate).
 
 ## Authority (read first)
 
@@ -80,6 +86,12 @@ cheap — same seed + same inputs; where it doesn't, pin the conditions as tight
 **If you cannot reproduce it, stop and gather more** — a bug you can't reproduce, you can't test-guard.
 State the reproduction concretely before touching code.
 
+**Resource/performance symptoms reproduce as measurements**: a fixed scenario (inputs, seed, scale) +
+the measured value (peak memory, wall time, allocation count) vs. an acceptable bound. **The bound is
+intent** — often nothing recorded says "must stay under X," so classifying the measurement as a bug
+*ratifies a threshold*: state it explicitly at the verdict, record it (a natural `LAW-PERF-*` /
+`LAW-MEM-*`), and the reproduction asserts against it.
+
 ### 2 — Localize & root-cause
 Find the **defect, not the symptom**. Read the implicated code, form a hypothesis for *why* the observed
 behavior happens, and confirm it against the code. Name the exact cause (file:line + mechanism) and how it
@@ -131,8 +143,12 @@ ignored-test rot (the record is the required artifact, the ignored test is a *ma
   decision/unit test over a full end-to-end harness where the logic allows). It asserts the **correct**
   behavior and therefore **fails because of the bug** — a witnessed red on the real defect. Name it
   `bug_*` / cite the `BUG-nnnn`. Choose the layer by tool (the project's test-layers doc): a recurring
-  truth → a property test; this specific defect → an example/regression test.
-- **Green — minimal.** Only what makes the Red pass; smuggle no feature or refactor.
+  truth → a property test; this specific defect → an example/regression test. **For a
+  resource/performance defect, the Red is a failing measurement gate** (benchmark or resource
+  assertion against the ratified bound) — witnessed like any other red.
+- **Green — minimal.** Only what makes the Red pass; smuggle no feature or refactor. A structural fix
+  (streaming instead of buffering, extracting the hot path) may *deploy* refactoring moves — still
+  bounded by the failing measurement: only what makes it pass.
 - **Refactor** — clean by reference to `guardrails.md`; extract a pure decision if the fix left
   logic inline and testability wants it.
 

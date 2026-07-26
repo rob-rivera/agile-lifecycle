@@ -42,7 +42,13 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   user checkpoints.
 - **fix-bug** — report of unexpected behavior → reproduce → root-cause → verdict (genuine bug /
   working-as-designed / on-the-line). Genuine bugs get a failing-first regression test and a minimal
-  fix, or a durable `BUG-nnnn` record when deferred.
+  fix, or a durable `BUG-nnnn` record when deferred. Resource/performance symptoms are bugs: the
+  reproduction is a measurement, the Red a failing gate against a ratified bound.
+- **refactor-pass** — entropy paydown for one named module/file, under Fowler's sensibility:
+  assess against both smell catalogs → human selects findings → characterization net first →
+  small named moves, levers green after each, per-move commits → `REF-nnnn` pass record with
+  dispositions. Explicitly green-to-green (the suite's one deliberate exception to RGR). Symptoms
+  route to fix-bug; contract/behavior changes route to write-stories.
 
 The through-line: **skills are the procedure; the project supplies the specification.** Every skill
 reads the project's authority docs live and never hardcodes their content.
@@ -61,7 +67,7 @@ say so):
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
 | Lever manifest (the `test`, `lint`, and `run` commands — one truth for agents, humans, and host-app runner UIs) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
 | Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md` | implement-story, fix-bug (fallback when absent: general-purpose sub-agent, `inherit`) |
-| Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md` | written by the skills |
+| Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md` | written by the skills |
 
 The plugin also ships one agent of its own: **`surveyor`** (`agents/surveyor.md`, pinned to a
 cheap model) — bootstrap-legacy's fan-out reader, deliberately not the session's model so wide
