@@ -85,6 +85,25 @@ Conventions carried across projects: `STORY-nnnn` / `BUG-nnnn` / `AC-*` / `LAW-*
 commits on story/fix branches (never `main`); disposable plans burned at story close; the
 affirmative candidates gate ("candidates: none" is a required statement, not a default).
 
+## Hooks (ship with the plugin)
+
+Prose asks; hooks enforce. Four ship out of the box, all **lifecycle-guarded** (silent no-op in
+any project without `docs/story-format.md`) and **fail-open** (any script surprise → exit 0;
+requires `jq`, silently inactive without it):
+
+- **Stop — the ledger reconciliation gate.** A turn cannot end while the books don't balance:
+  STORY/BUG/REF files without ledger rows, or rows without files, block the stop once with a
+  fix list. Presence checks only — status semantics stay in the skills.
+- **SessionStart — orientation.** Injects branch, outstanding ledger rows, and open debt count,
+  so no session starts cold.
+- **PostToolUse — instant nudge.** Writing a work-item file with no ledger row injects the
+  reminder immediately; the Stop gate is the backstop.
+- **PreToolUse — the branch invariant.** `git commit` on main surfaces a confirmation (ask, not
+  deny — deliberate main commits exist).
+
+Not hooked, deliberately: the candidates/debt affirmations — verifying an affirmation is
+judgment, not pattern-matching, and stays skill discipline.
+
 ## Install
 
 **Per-session (no install)** — point any session at a checkout or zip:
