@@ -36,6 +36,9 @@ also reports:
   in place of `levers.json`). Cite the evidence (who references it, what it contains). Each is a
   decision: **adopt the canonical name** (a rename, plus the reference updates across docs that
   cite the old name — list them) or **declare the rename in CLAUDE.md** and keep it.
+  **A role with an equivalence candidate is never also listed `missing`** — it is pending that
+  decision, and instantiating the canonical template beside a living equivalent would create a
+  duplicate authority. Only a role with no plausible equivalent lands in `missing`.
 - `drift` — present artifacts missing current schema elements (a story-format without §8 or the
   §5 ledger/debt gates; script-only levers). Each with a proposed **additive** patch. Where
   content genuinely *diverges* in substance (the old prose says something different, not merely
