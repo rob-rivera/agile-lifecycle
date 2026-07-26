@@ -79,7 +79,10 @@ say so):
 The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
 fan-out reader — and **`upgrader`** (sonnet) — the contract mechanic that diffs a project against
-the current contract and instantiates approved pieces on the resume/upgrade path.
+the current contract and instantiates approved pieces on the resume/upgrade path, including the
+**migration report** for prior-iteration projects (skill shadowing, role-equivalent renames,
+schema drift — every retirement/rename/patch a human decision; local-skills-or-plugin, never
+both).
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
 (`references/code-smells.md`, `references/sensibilities.md`) are plugin knowledge, not project

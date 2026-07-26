@@ -52,6 +52,17 @@ way, each through its normal checkpoint. Never overwrite an approved artifact. S
 written files before declaring the upgrade done, and end with the session-restart reminder if any
 agents were created.
 
+**Prior-iteration projects** (an earlier dialect of this framework: local skill copies, renamed
+authority docs, older schemas) get the upgrader's **migration report** in the same diff —
+`shadows`, `equivalents`, `drift` — and a 🛑 **migration checkpoint** where every retirement,
+rename, and patch is the human's call. The governing rule to state plainly at that checkpoint:
+**a project is governed by its local skill copies or by the plugin — never both.** A shadowed
+skill name silently runs the old procedure against the new contract, so the checkpoint's real
+output is that choice, made explicitly: retire the locals (archived to `.claude/skills.retired/`,
+reversible) or declare them deliberate overrides and skip the plugin's contract additions they
+don't know about. Divergent content is ratified side-by-side, never silently merged. A skill
+retirement or rename takes effect at the next session restart — say so.
+
 Otherwise, **"empty" means empty of *decisions*, not empty of files.** The gate question for
 anything found: *would bootstrap have to reverse-engineer intent from it?* Classify what's present:
 
