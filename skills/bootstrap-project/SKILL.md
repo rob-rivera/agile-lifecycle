@@ -104,6 +104,10 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   🛑 **Present the proposed role→model mapping (with the reasoning) for approval.** Models shift
   over time; changing the policy later is editing one frontmatter line, and re-running bootstrap
   never overwrites an approved policy.
+  **Registration caveat — say this at handoff:** agent definitions are read at *session start*.
+  Agents created or renamed in the current session are invisible to it — the user must restart the
+  session (in a wrapper app: its restart/continue affordance; in a terminal: `claude --continue`)
+  before `implement-story` can dispatch them.
 - `docs/slice-plan.md` — Slice 0 proposed as **the walking skeleton**: the app the customer can
   already open, however blank, plus the levers proven (built/wired through stories, including any
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value
