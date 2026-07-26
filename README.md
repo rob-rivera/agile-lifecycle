@@ -53,7 +53,7 @@ say so):
 | Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
 | Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
-| Lever manifest (the `test` and `lint` commands — one truth for agents, humans, and host-app runner UIs) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
+| Lever manifest (the `test`, `lint`, and `run` commands — one truth for agents, humans, and host-app runner UIs) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md` | written by the skills |
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references

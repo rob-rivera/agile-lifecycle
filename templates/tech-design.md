@@ -42,9 +42,9 @@ Name the tools that implement each layer in this stack. -->
 
 ## 7. Toolchain & levers
 
-<!-- The stack (languages, frameworks, build). The levers — the project's test and lint commands —
-are recorded machine-readably in `levers.json` at the repo root; this section explains them.
-Optional: thin `scripts/test.sh` / `scripts/lint.sh` wrappers for CLI convenience. -->
+<!-- The stack (languages, frameworks, build). The levers — the project's test, lint, and run
+commands — are recorded machine-readably in `levers.json` at the repo root; this section explains
+them. Optional: thin `scripts/` wrappers for CLI convenience. -->
 
 ## Change Log
 

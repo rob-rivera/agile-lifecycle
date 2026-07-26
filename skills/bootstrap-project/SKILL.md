@@ -84,8 +84,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   `references/code-smells.md` the entries relevant to the stack, express each in the stack's idiom
   (tell + cure, per the reference's per-language notes), one catalog for code and test smells
   alike. 🛑 **Present the selection for approval** — seeding is a judgment, not a copy.
-- `levers.json` (repo root) — the machine-readable lever manifest: the project's `test` and `lint`
-  commands. Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
+- `levers.json` (repo root) — the machine-readable lever manifest: the project's `test`, `lint`,
+  and `run` commands (`run` launches the app itself — the walking skeleton gives it something to
+  launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
   red). Optional thin `scripts/` wrappers for CLI convenience.
 - `docs/slice-plan.md` — Slice 0 proposed as **the walking skeleton**: the app the customer can
   already open, however blank, plus the levers proven (built/wired through stories, including any
