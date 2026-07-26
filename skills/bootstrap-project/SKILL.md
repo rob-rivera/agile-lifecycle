@@ -91,7 +91,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
 
 ### 4 — Mechanical instantiation (no persona; MAY delegate the mechanics to `upgrader`)
 - `docs/story-format.md` — from the template; project name and any doc-name adjustments only. The
-  §-structure is load-bearing (skills cite it) — do not restructure.
+  §-structure is load-bearing (skills cite it) — do not restructure. Confirm the **§8 craft
+  anchors** with the user (defaults ship in the template; swap per project taste — books cited,
+  never role personas).
 - `docs/guardrails.md` — from the template. **Seed the smells**: select from
   `references/code-smells.md` the entries relevant to the stack, express each in the stack's idiom
   (tell + cure, per the reference's per-language notes), one catalog for code and test smells

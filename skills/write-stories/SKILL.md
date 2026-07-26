@@ -66,7 +66,10 @@ Propose the candidate story set as **titles + one-line value each** (not full dr
 the user confirm the breakdown** before drafting.
 
 ### 3 — Draft
-Write each confirmed story in the standard format (`story-format.md` §1):
+Write each confirmed story in the standard format (`story-format.md` §1), **drafting under the
+craft anchors of `story-format.md` §8** (defaults: *Specification by Example* for acceptance
+criteria, *User Story Mapping* for summaries). Anchors shape the prose; the doc governs the
+format — **the doc wins on any conflict.**
 - **Summary** — `As a <role>, I want <capability>, so that <outcome>.` Apply the "and" test.
 - **Acceptance criteria** — `Given/When/Then`, each **independently verifiable**, each citing the
   `AC-*` (if from a slice) and any `LAW-*` IDs its tests satisfy.

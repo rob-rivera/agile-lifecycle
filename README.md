@@ -65,7 +65,7 @@ say so):
 
 | Role | Default path | Required by |
 | --- | --- | --- |
-| Story format & sizing spec | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
+| Story format & sizing spec, incl. §8 **craft anchors** (books cited at drafting moments — never role personas; the doc wins on conflict) | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
 | Guardrails catalog (one test+code smell catalog + *Candidates* inbox + canonical-TDD rules) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug (seeded by bootstrap from `references/code-smells.md`) |
 | Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
 | Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |

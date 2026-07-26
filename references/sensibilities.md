@@ -34,3 +34,10 @@ distinct, focused designs; generic ones produce huge documents.
 
 The roster is a starting point — grow it the way the guardrails catalog grows, when a project's
 domain earns a new entry (a game needs different giants than a compiler).
+
+**Personas vs. craft anchors.** Sensibilities (this roster) apply to *generative legs* — whole
+design conversations where a coherent point of view is the deliverable. The **procedural core
+skills never take personas**; where they contain a generative *moment* (drafting a story, pinning
+a Red), they cite **craft anchors** instead — books named in the project's `story-format.md` §8,
+quoted for the craft of the sentences, with the doc always winning on conflict. The ladder is
+quoted, never role-played.

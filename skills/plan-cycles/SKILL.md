@@ -53,8 +53,11 @@ into cycles (that reproduces the long-document problem).
 For every enumerated cycle, produce a thin entry:
 - **Red** — the exact failing test: name it, cite its `AC-*`/`LAW-*`, state what it asserts and at
   which of the project's test layers (a property test, a snapshot test, an example test — per
-  `tech-design.md`). **For infra/tooling cycles, the "Red" is a failing gate** (build/script/
-  linter-bite), not a test (`story-format.md` §5).
+  `tech-design.md`). Pin it under the craft anchors of `story-format.md` §8 (defaults: *TDD by
+  Example*, *GOOS*) — the smallest test that fails for the right reason, named so it reads as the
+  spec; anchors shape the test's craft, the test-layers doc governs its placement. **For
+  infra/tooling cycles, the "Red" is a failing gate** (build/script/linter-bite), not a test
+  (`story-format.md` §5).
 - **Green** — one line of intent. Latitude left to the implementer.
 - **Refactor** — the `guardrails.md` pattern/smell to apply or watch for (by reference).
 

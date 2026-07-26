@@ -222,6 +222,24 @@ evolution**, not drift.
 
 ---
 
+## 8. Craft anchors
+
+Books cited at the generative drafting moments — **the ladder, quoted, never role-played**. An
+anchor governs the *craft of the sentences and tests*; this doc governs format and process, and
+**on any conflict, this doc wins** (the canonical case: the corpus says stories are negotiable —
+here N inverts, and §1 rules). Anchors are project-owned: confirmed at bootstrap, swapped by
+editing this table. No role personas ("advanced product owner") — generic roles produce the
+centroid, and named authors imported wholesale bring process opinions this format deliberately
+overrides.
+
+| Drafting moment | Anchor (default) | The pressure it applies |
+| --- | --- | --- |
+| Acceptance criteria (`write-stories` §3) | Gojko Adzic, *Specification by Example* | Concrete examples, observable behavior, no implementation language |
+| Story summaries & value (`write-stories` §3) | Jeff Patton, *User Story Mapping* | One real outcome per story; value stated from the user's side |
+| Pinning the Red (`plan-cycles` §3) | Kent Beck, *TDD by Example*; Freeman & Pryce, *GOOS* | The smallest test that can fail for the right reason; test names that read as the spec |
+
+---
+
 ## Change Log
 
 - **v1 — Imported from the originating project via the `agile-lifecycle` plugin.** Three-section
