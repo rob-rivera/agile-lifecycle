@@ -38,8 +38,21 @@ handoff. **Sensibility applies to phase 3 only** — never to mechanical phases,
 noise (and cost).
 
 ### 0 — Detect state
-- **Empty / near-empty** (docs, license, dotfiles only) → proceed.
-- **Existing code** → **STOP.** Brownfield: name what was found, explain the greenfield-only scope.
+
+**"Empty" means empty of *decisions*, not empty of files.** The gate question for anything found:
+*would bootstrap have to reverse-engineer intent from it?* Classify what's present:
+
+- **Ignore (still greenfield)** — files embodying no design decisions: VCS scaffolding (`.git`,
+  `.gitignore`), license, README/prose, editor and tool dotfiles, CI stubs. A repo initialized with
+  README + license + gitignore is the canonical greenfield project.
+- **Evidence (greenfield; disclose and absorb)** — toolchain manifests and untouched starter
+  scaffolds (`cargo new`'s hello-world, a bare `npm init` package.json): they carry exactly one
+  decision — the stack. Proceed, and open phase 2 with it: "found `Cargo.toml` — treating Rust as
+  chosen unless you say otherwise." Prior design prose in `docs/` is likewise not code — offer it
+  as phase 1 input.
+- **Brownfield → STOP** — source implementing actual behavior (anything a characterization test
+  could meaningfully guard): real logic, tests, wired-up modules. Name what was found and explain
+  the greenfield-only scope.
 - **Partial contract** (some authority docs exist) → resume idempotently: fill only what's missing,
   never overwrite an approved doc.
 - No git repo → offer `git init` first (per-cycle commits are the lifecycle's resume mechanism).
