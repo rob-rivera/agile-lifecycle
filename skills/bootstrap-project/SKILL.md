@@ -111,6 +111,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   Agents created or renamed in the current session are invisible to it — the user must restart the
   session (in a wrapper app: its restart/continue affordance; in a terminal: `claude --continue`)
   before `implement-story` can dispatch them.
+- `docs/ledger.md` and `docs/debt.md` — the **work ledger** and **debt registry**, empty from
+  their templates (the skills maintain them: ledger rows per STORY/BUG/REF, debt entries at the
+  affirmative close gates).
 - `docs/slice-plan.md` — Slice 0 proposed as **the walking skeleton**: the app the customer can
   already open, however blank, plus the levers proven (built/wired through stories, including any
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value

@@ -63,7 +63,8 @@ Present the annotated spine — **especially the pinned Red tests**, since they 
 **stop for the human to approve** before implementation begins.
 
 ### 5 — Hand off
-On approval, hand cycles to the TDD implementer **one at a time**, canonical Red → Green → Refactor.
+On approval, mark the story *planned* in `docs/ledger.md`, then hand cycles to the TDD implementer
+**one at a time**, canonical Red → Green → Refactor.
 Remind that the **story-close gate** (`story-format.md` §5) requires the guardrail-candidates
 affirmation ("candidates: none" or entries appended to `guardrails.md`).
 

@@ -35,3 +35,5 @@ assurances:
 - `scope` — attestation you implemented only what the pinned Red requires; anything deferred, named.
 - `files` — files touched.
 - `candidates` — novel test/code/smell cases for the guardrails inbox, or the explicit word "none".
+- `debt` — structural mess you saw but correctly did not touch (area + `file:line` tell), or the
+  explicit word "none". Recording it is the outlet for the urge to fix it.

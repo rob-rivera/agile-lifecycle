@@ -51,6 +51,7 @@ trusts its own work.
 
 Work on a **story branch** (branch from `main` first — never commit the run to `main`). The per-cycle
 commit cadence below is the resume mechanism; using this skill is the standing request to commit.
+Mark the story *in progress* in `docs/ledger.md`.
 
 ## Per-cycle loop
 
@@ -70,6 +71,8 @@ instruction to follow **canonical Red→Green→Refactor** and return a **struct
   consciously left for a later cycle is named here.
 - `files` — files touched.
 - `candidates` — novel guardrail cases, or **"none"** (the `guardrails.md` candidate loop).
+- `debt` — observed-but-out-of-scope structural debt (area + the tell, `file:line`), or **"none"**
+  (feeds `docs/debt.md`). Seeing the mess is not license to touch it — recording it is the outlet.
 
 **Pin the Red; leave Green latitude — but latitude is *how*, not *what*.** The sub-agent chooses the
 implementation; it does **not** choose the scope. It implements **only what the pinned Red requires** —
@@ -104,7 +107,7 @@ commands the moment they exist.
 - **Commit** — message cites the cycle + `AC-*`/`LAW-*` id; end with the project's required commit
   trailer, if any (see the project's CLAUDE.md).
 - **Update the plan ledger** — mark the cycle done (this is what resume reads).
-- **Accumulate** the cycle's candidates.
+- **Accumulate** the cycle's candidates and debt observations.
 
 ### 4 — On failure: bounded retry, escalate once, then re-plan
 Reject → feed back the **specific** failure → re-dispatch (fresh sub-agent), **bounded retries**.
@@ -128,8 +131,10 @@ repo is the source of truth.
 ## Story close (after the last cycle)
 
 Satisfy the `story-format.md` §5 gate: every `AC-*` green and cited, both levers pass, and the
-**affirmative candidates gate** — present the accumulated candidates, or affirm **"candidates: none."**
-Then mark the story done and burn its disposable plan.
+**affirmative capture gates** — present the accumulated candidates (or affirm **"candidates:
+none"**) and record accumulated debt observations as dated `DEBT-nnnn` entries in `docs/debt.md`
+(or affirm **"debt: none"**). Mark the story *done* in `docs/ledger.md` — and if it closed its
+slice, mark the slice complete in `docs/slice-plan.md`. Then burn the disposable plan.
 
 ## Guardrails — what this skill never does
 

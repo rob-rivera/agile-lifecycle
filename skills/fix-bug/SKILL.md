@@ -76,8 +76,8 @@ Load only the report plus the surface it implicates — never the whole codebase
 ## Setup (once per bug)
 
 Assign a stable **`BUG-nnnn` id** (parallel to `STORY-*` / `LAW-*`) — cited by its regression test and
-its commit. Work on a **`fix/<slug>` branch** off `main` (never commit the fix to `main`; merge on
-close). The per-step commit + merge is the durable record.
+its commit — and add its `docs/ledger.md` row (*open*). Work on a **`fix/<slug>` branch** off `main`
+(never commit the fix to `main`; merge on close). The per-step commit + merge is the durable record.
 
 ## Procedure
 
@@ -148,8 +148,8 @@ can be addressed cold — capture it **while the diagnosis is hot**:
 - **Definition of done** — the reproducing test that must go **red-then-green** when it's fixed (the
   future step-4 Red, described).
 
-Status stays **Open (deferred)** until a later `fix-bug` run **resumes at step 4 (the Red)** off the
-documented reproduction. *Optional:* commit the reproduction now as an ignored/skipped test citing the
+Status stays **Open (deferred)** — mirror it in `docs/ledger.md` — until a later `fix-bug` run
+**resumes at step 4 (the Red)** off the documented reproduction. *Optional:* commit the reproduction now as an ignored/skipped test citing the
 `BUG-nnnn` — an executable repro that flips to the standing guard when the fix lands; weigh it against
 ignored-test rot (the record is the required artifact, the ignored test is a *may*).
 
@@ -184,9 +184,11 @@ reproduced defect, nothing more). Then:
 - **Candidate gate** — a bug is *evidence of a real failure mode*, so it very often earns a
   `guardrails.md` candidate (the *class* the defect belongs to). Record it, or affirm
   "candidates: none."
+- **Debt observations** — out-of-scope mess seen along the way lands in `docs/debt.md`, or affirm
+  "debt: none."
 - **Design-doc update** — if the RCA exposed a requirement gap (behavior nobody specified), note it where
   requirements live (the domain design doc / slice plan), or open the follow-up story.
-- **Merge** the `fix/<slug>` branch on close.
+- **Merge** the `fix/<slug>` branch on close; mark the ledger row *fixed*.
 
 ## Guardrails — what this skill never does
 

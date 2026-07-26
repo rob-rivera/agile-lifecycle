@@ -22,4 +22,4 @@ pass** — that verdict is exactly what the orchestrator needs to route back to 
 Otherwise the contract is identical to `implementer`, canonical and non-negotiable: witness the
 red; Green satisfies the pinned Red — no more; refactor by reference to `docs/guardrails.md`; both
 levers pass before reporting green. Return the same structured report (`summary`, `red`, `green`,
-`scope`, `files`, `candidates` — or a mis-specification verdict with your reasoning).
+`scope`, `files`, `candidates`, `debt` — or a mis-specification verdict with your reasoning).

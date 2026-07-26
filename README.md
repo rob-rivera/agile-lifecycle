@@ -67,6 +67,8 @@ say so):
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
 | Lever manifest — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
 | Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md` | implement-story, fix-bug (fallback when absent: general-purpose sub-agent, `inherit`) |
+| Work ledger (one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention) | `docs/ledger.md` | all build/fix/refactor skills |
+| Debt registry (observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision) | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md` | written by the skills |
 
 The plugin also ships one agent of its own: **`surveyor`** (`agents/surveyor.md`, pinned to a

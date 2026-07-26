@@ -153,6 +153,11 @@ A story is done only when **every** item holds — treat it as a gate, not a gui
   `guardrails.md` is appended to its *Candidates* inbox — **or the story explicitly affirms
   "candidates: none."** Silence is not a pass; this is a required gate, not optional capture
   (`guardrails.md`, the candidate loop).
+- [ ] **Debt observations recorded.** Out-of-scope structural debt seen during the story lands in
+  `docs/debt.md` as dated `DEBT-nnnn` entries — **or the story affirms "debt: none."** Same
+  affirmative rule: silence is not a pass.
+- [ ] **`docs/ledger.md` updated** — story marked *done*; slice marked complete in
+  `docs/slice-plan.md` if this story closed it.
 
 Implementation plans (the cycle breakdown) are disposable — burned when the story closes.
 

@@ -97,6 +97,8 @@ is stories. A red baseline is information, not an emergency.
   *candidates*, not settled entries.
 - `.claude/agents/` — the model policy, exactly as in `bootstrap-project` (same templates, same
   🛑 mapping approval, same session-restart caveat).
+- `docs/ledger.md` and `docs/debt.md` — empty from their templates. The survey's observed
+  hazards that are clearly structural debt may seed the registry as its first dated entries.
 - `CLAUDE.md` — **merge** contract pointers into whatever exists.
 
 ### 7 — 🛑 Slice plan — the safety net, not a skeleton

@@ -38,9 +38,11 @@ A request lands here only if it is **entropy, not symptom**:
 ## Procedure
 
 ### 0 — Scope
-The pass targets a **named module or file** — never the codebase. Assign a **`REF-nnnn` id**; work
-on a `refactor/<slug>` branch off `main`. Load the target plus `docs/guardrails.md`, the plugin's
-canonical `references/code-smells.md`, and the Direction note — nothing more.
+The pass targets a **named module or file** — never the codebase. Assign a **`REF-nnnn` id** and
+its `docs/ledger.md` row (*in progress*); work on a `refactor/<slug>` branch off `main`. Load the
+target plus `docs/guardrails.md`, the plugin's canonical `references/code-smells.md`, the Direction
+note, and **the target area's entries in `docs/debt.md`** (they enter the assessment as pre-loaded
+findings) — nothing more.
 
 ### 1 — Assess
 Read the target and compare against **both catalogs**: the project's `guardrails.md` (the
@@ -80,7 +82,9 @@ Bounded and reversible — a move that won't go green in a step or two gets reve
   (**done / deferred / declined / routed**), moves applied, net added. Deferred findings survive
   here the way `BUG-nnnn` records survive — re-discoverable, never re-diagnosed from scratch.
 - **Candidates gate** — harvest to `guardrails.md`, or affirm "candidates: none."
-- Present the record; on approval, merge the branch.
+- **Update `docs/debt.md`** — entries the pass fixed → *retired* (cite the `REF-nnnn`); entries
+  examined and declined stay *open* with the finding noted.
+- Present the record; on approval, merge the branch and mark the ledger row *closed*.
 
 ## Guardrails — what this skill never does
 

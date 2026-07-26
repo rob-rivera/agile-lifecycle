@@ -84,8 +84,9 @@ Decomposition is a business-value judgment the user owns.
 
 ### 5 — Finalize
 On the user's decisions, write the story files to `docs/stories/` (one file per story; suggested name
-`STORY-<nnnn>-<kebab-title>.md`). A story is done-for-authoring when it is on-format, its sizing vector
-is recorded, and any recommendation is resolved. Definition of done for *implementation* is in
+`STORY-<nnnn>-<kebab-title>.md`) and **add a `docs/ledger.md` row per story (*drafted*)**. A story is
+done-for-authoring when it is on-format, its sizing vector is recorded, and any recommendation is
+resolved. Definition of done for *implementation* is in
 `story-format.md` §5.
 
 ## Guardrails — what this skill never does
