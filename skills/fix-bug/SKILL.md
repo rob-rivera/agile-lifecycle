@@ -63,7 +63,9 @@ Load only the report plus the surface it implicates — never the whole codebase
   actually fixed the defect.
 - **Diagnosis is the hard part, not the patch.** The two phases the build pipeline lacks — *reproduce*
   and *root-cause* — are where a fix-bug goes right or wrong. Test-driving a fix for a symptom you
-  haven't localized papers over the cause and leaves the real defect live.
+  haven't localized papers over the cause and leaves the real defect live. Which is why diagnosis
+  gets the model policy's strongest sub-agent role (**`diagnostician`**) *and* why the orchestrator
+  still verifies its output — see steps 1–2.
 - **Usually one cycle.** Most bugs are a single Red→Green→Refactor. The orchestrator MAY run a small,
   single-layer fix inline (validation stays mechanical — levers it doesn't control); a fix touching real
   logic or spanning layers gets a fresh implementer sub-agent (implementer ≠ verifier), like
@@ -78,6 +80,19 @@ its commit. Work on a **`fix/<slug>` branch** off `main` (never commit the fix t
 close). The per-step commit + merge is the durable record.
 
 ## Procedure
+
+**Steps 1–2 are delegated by default.** Dispatch the project's **`diagnostician` agent**
+(`.claude/agents/diagnostician.md`, model per the project's policy; if absent, a general-purpose
+sub-agent inheriting the session model) with the report and the implicated surface. It returns a
+compact RCA report: reproduction, cause (`file:line` + mechanism), verdict recommendation,
+suggested Red, blast radius. Diagnosis is read-heavy — delegating keeps the orchestrator lean
+(it retains the report, not the excavation). **The orchestrator MAY diagnose inline** when the
+symptom is trivially localized (tiny codebase, symptom names the file); calibrate like
+implement-story's gate cycles.
+
+**Then verify the diagnosis — mechanically, before any verdict.** Re-run the returned reproduction
+yourself (witnessed, not trusted) and spot-read the cited cause. A verdict presented to the human
+stands on the orchestrator's confirmation, never on the sub-agent's word alone.
 
 ### 1 — Reproduce
 Turn the report into a **deterministic reproduction**: the exact inputs/state and the observed-vs-expected
