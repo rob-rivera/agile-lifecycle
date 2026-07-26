@@ -57,9 +57,10 @@ anything found: *would bootstrap have to reverse-engineer intent from it?* Class
   decision — the stack. Proceed, and open phase 2 with it: "found `Cargo.toml` — treating Rust as
   chosen unless you say otherwise." Prior design prose in `docs/` is likewise not code — offer it
   as phase 1 input.
-- **Brownfield → STOP** — source implementing actual behavior (anything a characterization test
+- **Brownfield → route** — source implementing actual behavior (anything a characterization test
   could meaningfully guard) *without* the contract: real logic, tests, wired-up modules. Name what
-  was found and explain the greenfield-only scope.
+  was found and hand off to **`bootstrap-legacy`** — adopting a codebase is excavation, not
+  authoring, and it has its own skill.
 - No git repo → offer `git init` first (per-cycle commits are the lifecycle's resume mechanism).
 
 ### 1 — 🛑 The product conversation → `docs/design.md`

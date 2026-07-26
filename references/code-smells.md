@@ -58,6 +58,19 @@ whether it lives in `src/` or `tests/` — one catalog, one candidates gate.
 | Obscure Test | Setup noise buries what's being asserted | Extract builders/helpers; arrange-act-assert visible |
 | General Fixture | One giant shared fixture for all tests | Minimal fixture per test |
 
+## Legacy-safety patterns (Feathers, *Working Effectively with Legacy Code*)
+
+Seeded into `guardrails.md` §2 (Patterns) by `bootstrap-legacy` — the moves that make changing
+untested code safe:
+
+| Pattern | When | The move |
+| --- | --- | --- |
+| Characterization test | Before changing behavior nobody can vouch for | Pin what the code *does now* (not what it should do); then change with the net up |
+| Seam | Logic tangled with dependencies you can't have in a test | Find/create the point where behavior can be swapped without editing the code under test |
+| Sprout method/class | Adding behavior to a function you dare not touch | Write the new behavior in a new, tested unit; call it from the old code with a one-line change |
+| Wrap method | Behavior must happen before/after untouchable code | New tested wrapper calls the old code; callers move to the wrapper |
+| Scratch refactoring | You can't understand the code well enough to test it | Refactor freely to learn it — then *throw the refactor away* and make the real change tested |
+
 ## Per-language expression notes (selection guidance, not rules)
 
 - **Repeated Switches** — in languages with exhaustive matching (Rust, ML-family), a single

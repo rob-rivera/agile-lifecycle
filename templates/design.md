@@ -20,7 +20,10 @@ once, here, and use those names everywhere. -->
 ## 3. Rules & invariants
 
 <!-- The settled behaviors. Promote the load-bearing ones to `LAW-*` ids in tech-design.md §5 so
-tests can cite them. -->
+tests can cite them. Excavated projects tag every entry: `[observed YYYY-MM-DD]` (the code does
+this; intent unconfirmed — prompts ratification when challenged, never gates) or
+`[ratified YYYY-MM-DD]` (a human confirmed intent — the contradiction gate enforces it). Only a
+human decision promotes observed → ratified. -->
 
 ## 4. Open questions
 

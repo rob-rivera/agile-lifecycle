@@ -29,7 +29,7 @@ distinct, focused designs; generic ones produce huge documents.
 | **John Ousterhout** | *A Philosophy of Software Design* | Deep modules, small interfaces, minimizing cognitive load | Systems tools, libraries, infrastructure |
 | **Freeman & Pryce** | *Growing Object-Oriented Software, Guided by Tests* | Outside-in TDD, walking skeleton, ports at the boundaries | Message/port-heavy services; when the walking skeleton is the whole game |
 | **Eric Evans** | *Domain-Driven Design* | Ubiquitous language, bounded contexts, model-rich cores | Genuinely complex domains; multi-context products |
-| **Michael Feathers** | *Working Effectively with Legacy Code* | Seams, characterization tests | **Reserved for brownfield bootstrap** (not yet defined) |
+| **Michael Feathers** | *Working Effectively with Legacy Code* | Seams, characterization tests, safety net where you work | **The process sensibility of `bootstrap-legacy`** (fixed for that skill); rarely an evolution choice |
 | *Generic advanced architect* | — (the centroid) | Coverage | **Not recommended.** Available on request; expect an unfocused, expensive document |
 
 The roster is a starting point — grow it the way the guardrails catalog grows, when a project's

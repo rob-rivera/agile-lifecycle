@@ -49,6 +49,9 @@ design doc** (product/system rules) and `docs/tech-design.md` (architecture/buil
 - **Contradiction** — conflicts with a stated rule or `LAW-*` → **STOP. Flag it**: name the exact
   rule / section / `LAW-*` and how the ask conflicts. **Ask the user which takes precedence: the
   design or the story.**
+  *(Excavated projects: only `ratified` entries contradict. Conflict with an `observed` entry is a
+  **ratification prompt** — "the code does X; you're asking for Y — is X intended?" — and the
+  answer is recorded either way: ratify X and gate, or the story proceeds and X is corrected.)*
   - **Design wins** → revise or reject the ask to conform. No design-doc changes.
   - **Story wins** → this is a design change. Update the source of truth **before proceeding** —
     the relevant section **+ a dated Change Log entry with one-line rationale**:

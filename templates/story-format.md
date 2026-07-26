@@ -187,6 +187,9 @@ A story request may **contradict a settled rule** in the design — and that can
 Design evolves; this gate exists to make the evolution **explicit and recorded**, never silent. Run
 it as an **intake step**, on receiving the request, before breakdown or drafting.
 
+*(Excavated projects: "settled" means `ratified`. Conflict with an `observed` entry is not a
+contradiction — it is a ratification prompt, and the human's answer is recorded either way.)*
+
 **Detect.** Compare the ask against the settled rules in the domain design doc (product/system
 rules) and `tech-design.md` (architecture/build), distinguishing:
 - **Contradiction** — the ask conflicts with a stated rule or `LAW-*`. → triggers the gate.

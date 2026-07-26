@@ -93,6 +93,11 @@ RCA renders a **verdict** — **stop for the classification** — and a genuine 
   behavior. Present the finding plainly (cite the story/design that specified the current behavior).
   **Do not fix.** With the user's approval, **route to `write-stories`** — it's a change request, and may
   trip the §7 design-contradiction gate.
+- **Working as implemented, intent unrecorded** *(excavated projects)* — the governing behavior is
+  only `observed`, never ratified: nobody ever said whether X is design or accident. Present the
+  observed behavior and the report side by side; **the user's classification is also a
+  ratification** — record it (ratify the behavior, or confirm the defect) so the next verdict on
+  this ground stands on a settled rule.
 - **On the line** — present both readings with a recommendation; **the user classifies**, then it takes
   the matching path. (Reference rep: an existing quit capability made unreachable by a new input mode —
   recommended *bug*, because "the user can always exit the app" is an invariant no design waives.)

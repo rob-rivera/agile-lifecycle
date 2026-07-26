@@ -2,10 +2,10 @@
 
 A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-driven projects.
 
-> **Status: greenfield-only.** `bootstrap-project` establishes the contract in a fresh project.
-> Adopting the lifecycle in an existing codebase requires a brownfield bootstrap — deriving
-> guardrails, tech design, and a story backlog from code that already exists — which is not yet
-> defined. `bootstrap-project` refuses brownfield folders rather than improvising.
+> **Status: greenfield and brownfield.** `bootstrap-project` establishes the contract in a fresh
+> project; `bootstrap-legacy` adopts it in an existing codebase (thin descriptive map, intent
+> interview, `observed`/`ratified` knowledge tags, honest lever baselines, safety-net Slice 0).
+> `bootstrap-project` routes brownfield folders to `bootstrap-legacy` automatically.
 
 ```
                      ┌──────────────────────────────────────────────┐
@@ -26,6 +26,12 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   a slice plan whose Slice 0 is the **walking skeleton** (the app the customer can already open).
   Ends by handing off to write-stories; never scaffolds code. Invariants no sensibility can
   negotiate: story-driven production, test-driven development.
+- **bootstrap-legacy** — adopt the contract in an existing codebase, under Feathers's sensibility:
+  mechanical recon → fan-out survey → **thin descriptive map** (lazy excavation; depth per story)
+  → intent interview (excavated knowledge tagged **`observed`**, human decisions promote to
+  **`ratified`** — only ratified rules trigger the contradiction gate) → honest lever baselines
+  (recorded, never fixed) → safety-net Slice 0 (characterize only the first area of change).
+  Merges into existing `CLAUDE.md`/settings; never overwrites.
 - **write-stories** — change request (slice, freeform prompt, or test-cycle feedback) →
   implementation-ready stories: INVEST reinterpreted for agents, sizing as a vector of countable
   signals, design-contradiction gate first, human checkpoints for precedence/breakdown/splits.
