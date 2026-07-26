@@ -39,8 +39,15 @@ noise (and cost).
 
 ### 0 — Detect state
 
-**"Empty" means empty of *decisions*, not empty of files.** The gate question for anything found:
-*would bootstrap have to reverse-engineer intent from it?* Classify what's present:
+**Check for the contract first.** If `docs/story-format.md` exists, this is already a lifecycle
+project — code presence is *expected* (it was built through the discipline) and is never grounds
+for a brownfield stop. Take the **resume/upgrade path**: compare what's present against the
+current contract (this doc's phase 4 list) and fill only what's missing — a project bootstrapped
+under an older plugin version picks up new contract pieces (a missing lever, the model policy)
+this way, each through its normal checkpoint. Never overwrite an approved artifact.
+
+Otherwise, **"empty" means empty of *decisions*, not empty of files.** The gate question for
+anything found: *would bootstrap have to reverse-engineer intent from it?* Classify what's present:
 
 - **Ignore (still greenfield)** — files embodying no design decisions: VCS scaffolding (`.git`,
   `.gitignore`), license, README/prose, editor and tool dotfiles, CI stubs. A repo initialized with
@@ -51,10 +58,8 @@ noise (and cost).
   chosen unless you say otherwise." Prior design prose in `docs/` is likewise not code — offer it
   as phase 1 input.
 - **Brownfield → STOP** — source implementing actual behavior (anything a characterization test
-  could meaningfully guard): real logic, tests, wired-up modules. Name what was found and explain
-  the greenfield-only scope.
-- **Partial contract** (some authority docs exist) → resume idempotently: fill only what's missing,
-  never overwrite an approved doc.
+  could meaningfully guard) *without* the contract: real logic, tests, wired-up modules. Name what
+  was found and explain the greenfield-only scope.
 - No git repo → offer `git init` first (per-cycle commits are the lifecycle's resume mechanism).
 
 ### 1 — 🛑 The product conversation → `docs/design.md`
