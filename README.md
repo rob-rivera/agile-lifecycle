@@ -65,7 +65,7 @@ say so):
 | Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
 | Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
-| Lever manifest (the `test`, `lint`, and `run` commands — one truth for agents, humans, and host-app runner UIs) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
+| Lever manifest — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
 | Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md` | implement-story, fix-bug (fallback when absent: general-purpose sub-agent, `inherit`) |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md` | written by the skills |
 

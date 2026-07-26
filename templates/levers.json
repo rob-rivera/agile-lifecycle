@@ -1,0 +1,14 @@
+{
+  "test": {
+    "command": "<the full-suite test command>",
+    "what": "One line: what this proves and how to read the result."
+  },
+  "lint": {
+    "command": null,
+    "what": "A null command is a documented gap: name what's missing and the story that would add it."
+  },
+  "run": {
+    "command": "<launch the app itself>",
+    "what": "The walking skeleton gives this something to launch."
+  }
+}
