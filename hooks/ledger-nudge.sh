@@ -8,8 +8,8 @@ cwd=$(printf '%s' "$input" | jq -r '.cwd // empty' 2>/dev/null) || exit 0
 [ -n "$cwd" ] && [ -f "$cwd/docs/story-format.md" ] || exit 0
 
 file_path=$(printf '%s' "$input" | jq -r '.tool_input.file_path // empty' 2>/dev/null) || exit 0
-printf '%s' "$file_path" | grep -qE 'docs/(stories|bugs|refactors)/(STORY|BUG|REF)-[0-9]+' || exit 0
-id=$(basename "$file_path" | grep -oE '^(STORY|BUG|REF)-[0-9]+') || exit 0
+printf '%s' "$file_path" | grep -qE 'docs/(stories|bugs|refactors|spikes)/(STORY|BUG|REF|SPIKE)-[0-9]+' || exit 0
+id=$(basename "$file_path" | grep -oE '^(STORY|BUG|REF|SPIKE)-[0-9]+') || exit 0
 
 if [ -f "$cwd/docs/ledger.md" ] && grep -q "$id" "$cwd/docs/ledger.md" 2>/dev/null; then
   exit 0

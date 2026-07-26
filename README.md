@@ -32,6 +32,11 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   **`ratified`** — only ratified rules trigger the contradiction gate) → honest lever baselines
   (recorded, never fixed) → safety-net Slice 0 (characterize only the first area of change).
   Merges into existing `CLAUDE.md`/settings; never overwrites.
+- **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
+  🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
+  the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited
+  synthesis with stated confidence → dated `SPIKE-nnnn` record, decision ratified into the docs,
+  branch deleted. The iron rule: spike code never merges — knowledge survives, code dies.
 - **write-stories** — change request (slice, freeform prompt, or test-cycle feedback) →
   implementation-ready stories: INVEST reinterpreted for agents, sizing as a vector of countable
   signals, design-contradiction gate first, human checkpoints for precedence/breakdown/splits.
@@ -66,10 +71,10 @@ say so):
 | Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
 | Lever manifest — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
-| Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md` | implement-story, fix-bug (fallback when absent: general-purpose sub-agent, `inherit`) |
+| Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
 | Work ledger (one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention) | `docs/ledger.md` | all build/fix/refactor skills |
 | Debt registry (observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision) | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
-| Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md` | written by the skills |
+| Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
 
 The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's

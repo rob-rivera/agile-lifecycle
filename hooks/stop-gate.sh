@@ -18,17 +18,17 @@ cd "$cwd" 2>/dev/null || exit 0
 drift=""
 
 # Files without rows.
-for f in docs/stories/STORY-*.md docs/bugs/BUG-*.md docs/refactors/REF-*.md; do
+for f in docs/stories/STORY-*.md docs/bugs/BUG-*.md docs/refactors/REF-*.md docs/spikes/SPIKE-*.md; do
   [ -e "$f" ] || continue
-  id=$(basename "$f" | grep -oE '^(STORY|BUG|REF)-[0-9]+') || continue
+  id=$(basename "$f" | grep -oE '^(STORY|BUG|REF|SPIKE)-[0-9]+') || continue
   grep -q "$id" docs/ledger.md 2>/dev/null || drift="${drift}
 - $id ($f) has no row in docs/ledger.md"
 done
 
 # Rows without files.
-for id in $(grep -oE '(STORY|BUG|REF)-[0-9]+' docs/ledger.md 2>/dev/null | sort -u); do
+for id in $(grep -oE '(STORY|BUG|REF|SPIKE)-[0-9]+' docs/ledger.md 2>/dev/null | sort -u); do
   found=0
-  for g in docs/stories/"$id"* docs/bugs/"$id"* docs/refactors/"$id"*; do
+  for g in docs/stories/"$id"* docs/bugs/"$id"* docs/refactors/"$id"* docs/spikes/"$id"*; do
     [ -e "$g" ] && { found=1; break; }
   done
   [ "$found" = 1 ] || drift="${drift}

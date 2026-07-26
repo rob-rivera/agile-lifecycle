@@ -101,8 +101,8 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
   red). Optional thin `scripts/` wrappers for CLI convenience.
 - `.claude/agents/` — **the model policy**: instantiate every template in `templates/agents/`
-  into the project (`implementer`, `implementer-heavy`, `diagnostician`). Two knobs, owned by the
-  project, not the plugin:
+  into the project (`implementer`, `implementer-heavy`, `diagnostician`, `researcher`). Two
+  knobs, owned by the project, not the plugin:
   - **Sub-agent models** — the `model:` line in each agent file (aliases track tiers:
     haiku/sonnet/opus/fable; `inherit` = the session's model). Routine cycle work usually runs a
     tier below the orchestrator; escalation usually `inherit`s; diagnosis defaults strong

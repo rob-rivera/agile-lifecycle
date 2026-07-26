@@ -78,7 +78,8 @@ Write each confirmed story in the standard format (`story-format.md` §1):
 For each story, fill the sizing vector (enumerate the RGR cycles; count new contracts, layers whose
 contracts change, unknowns; check AC independence and the one-card test). If **any** signal trips:
 **recommend** a split or spike — name the tripped signal, its count, and the proposed cut — and **STOP
-for the human to decide.** Frame the split with the **SPIDR lenses** (`story-format.md` §4) and **name
+for the human to decide.** (An approved spike executes via the `spike` skill and routes its answer
+back here.) Frame the split with the **SPIDR lenses** (`story-format.md` §4) and **name
 the lens**; every slice must stay vertical, valuable, and testable. **Never split unprompted.**
 Decomposition is a business-value judgment the user owns.
 

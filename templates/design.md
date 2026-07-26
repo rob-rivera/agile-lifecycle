@@ -28,7 +28,7 @@ human decision promotes observed → ratified. -->
 ## 4. Open questions
 
 <!-- Known unknowns, parked deliberately. A story that needs one answered becomes a spike
-(story-format.md §4). -->
+(story-format.md §4, executed by the `spike` skill; the answer ratifies back into these docs). -->
 
 ## Change Log
 

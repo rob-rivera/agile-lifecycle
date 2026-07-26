@@ -130,7 +130,8 @@ reject any that would break value. **Name the chosen lens in the recommendation.
 
 - **S — Spike.** Uncertainty is what makes it big → split off a throwaway investigation that answers
   the open decision(s), leaving N now-estimable stories. Spike genuine research, not a call you can
-  just make.
+  just make. *(Executed by the `spike` skill: framed question, declared budget, evidence-cited
+  answer, code never merged.)*
 - **P — Path.** Split by distinct paths/workflows through the story (one path first, then the rest).
   Reject if a path is worthless alone.
 - **I — Interface.** Split by interface / channel / input source (one client, format, or source first).
