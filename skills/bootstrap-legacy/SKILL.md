@@ -59,9 +59,12 @@ actually happens); the prior-knowledge sources above. Produce a one-screen inven
 yet, no code reading beyond skimming entry points.
 
 ### 2 — 🛑 Survey → thin descriptive map (`docs/tech-design.md`)
-Fan out **parallel read-only sub-agents**, one per subsystem/area (this is the fan-out job the
-story format reserves workflows for). Each returns: what the area owns, its entry points, its
-load-bearing contracts, what it actually depends on, and any obvious hazards. Synthesize into a
+Fan out **the plugin's `surveyor` agent** in parallel, one per subsystem/area (this is the fan-out
+job the story format reserves workflows for). The surveyor is plugin machinery pinned to a cheap
+model precisely so a frontier-model session doesn't multiply itself across the fan-out — **never
+dispatch general-purpose/inheriting agents for the survey**. Before launching, state the plan —
+"N areas, N surveyor agents (model per the plugin's surveyor definition)" — so the user can trim
+the area list. Each returns a bounded, observed-only structural summary. Synthesize into a
 **thin map**, not an encyclopedia — `tech-design.md` drafted **descriptively** (the architecture
 as it *is*, warts included, everything tagged `observed`). The map says where things are; stories
 earn the detail later (**lazy excavation** — depth happens per-story, when an area is implicated).

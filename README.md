@@ -63,6 +63,10 @@ say so):
 | Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md` | implement-story, fix-bug (fallback when absent: general-purpose sub-agent, `inherit`) |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md` | written by the skills |
 
+The plugin also ships one agent of its own: **`surveyor`** (`agents/surveyor.md`, pinned to a
+cheap model) — bootstrap-legacy's fan-out reader, deliberately not the session's model so wide
+surveys stay cheap. Projects may override it with their own `surveyor` definition.
+
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
 (`references/code-smells.md`, `references/sensibilities.md`) are plugin knowledge, not project
 artifacts — the ladder to the giants' shoulders (Fowler/Beck, Meszaros, and the sensibility roster's
