@@ -25,6 +25,16 @@ Return a compact report, nothing else:
   `docs/bugs/`, `docs/refactors/`, `docs/spikes/` and `git log` (id, title, inferred status,
   evidence). For a new `docs/debt.md`: nothing — debt is never inferred, only observed going
   forward.
+- `instruction-conflicts` — every instruction surface beyond the root: nested `CLAUDE.md`
+  (vendored/pulled subtrees included), `CLAUDE.local.md`, nested `.claude/` trees (settings,
+  agents, skills, hooks, commands). Classify each project-owned vs. vendored, and report every
+  directive that contradicts the root `CLAUDE.md`, the contract docs, or another instruction
+  file — cite both sides verbatim. These files are live steering (the harness merges them by
+  directory scope), so a contradiction degrades every session, not just this one. Each is a
+  decision: **keep** (checked, consistent, scoped), **subordinate** (a dated precedence note in
+  the root `CLAUDE.md` naming the file and the conflicts the contract wins — the only durable
+  cure for a vendored file a re-sync would restore), or **archive** (project-owned strays only,
+  reversible). Report `none found` explicitly — silence is not evidence of consistency.
 
 For **prior-iteration projects** (artifacts from an earlier dialect of this framework), diff mode
 also reports:
@@ -49,7 +59,10 @@ Instantiate exactly those: copy the template, fill placeholders, write backfille
 migration actions execute the same way: retirements move shadowed skills to
 `.claude/skills.retired/` (archive, never delete — git and the directory both remember); adopted
 renames are `git mv` plus exactly the reference updates listed in the plan; drift patches are the
-approved additive insertions and nothing else.
+approved additive insertions and nothing else. Approved instruction reconciliations: subordination
+notes are appended to the root `CLAUDE.md` exactly as approved; archives move project-owned
+instruction files to `.claude/instructions.retired/`; **a vendored instruction file is never
+edited, moved, or deleted** — its cure lives in the root.
 
 In both modes: **never overwrite an existing approved artifact; never edit content beyond the
 plan; never improvise a decision that wasn't in the plan** — if execution surfaces a question,

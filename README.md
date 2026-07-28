@@ -27,11 +27,13 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   Ends by handing off to write-stories; never scaffolds code. Invariants no sensibility can
   negotiate: story-driven production, test-driven development.
 - **bootstrap-legacy** — adopt the contract in an existing codebase, under Feathers's sensibility:
-  mechanical recon → fan-out survey → **thin descriptive map** (lazy excavation; depth per story)
-  → intent interview (excavated knowledge tagged **`observed`**, human decisions promote to
-  **`ratified`** — only ratified rules trigger the contradiction gate) → honest lever baselines
-  (recorded, never fixed) → safety-net Slice 0 (characterize only the first area of change).
-  Merges into existing `CLAUDE.md`/settings; never overwrites.
+  mechanical recon → **instruction reconciliation** (nested/vendored `CLAUDE.md` and `.claude/`
+  trees are live steering, not evidence — conflicts with the contract surface at a checkpoint;
+  one project, one instruction authority) → fan-out survey → **thin descriptive map** (lazy
+  excavation; depth per story) → intent interview (excavated knowledge tagged **`observed`**,
+  human decisions promote to **`ratified`** — only ratified rules trigger the contradiction gate)
+  → honest lever baselines (recorded, never fixed) → safety-net Slice 0 (characterize only the
+  first area of change). Merges into existing `CLAUDE.md`/settings; never overwrites.
 - **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
   🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
   the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited

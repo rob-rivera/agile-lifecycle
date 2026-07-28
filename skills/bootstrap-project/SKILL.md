@@ -44,9 +44,12 @@ project — code presence is *expected* (it was built through the discipline) an
 for a brownfield stop. Take the **resume/upgrade path**, delegated to the plugin's **`upgrader`
 agent** (mid-tier by design — checks and file mechanics don't need the orchestrator's model):
 dispatch it in **diff mode** to compare the project against the current contract (this doc's
-phase 4 list) and report missing pieces, pending decisions, and ledger backfill candidates; 🛑
-present that report with the decisions framed for the human; then dispatch **execute mode** with
-the approved plan. Fill only what's missing — a project bootstrapped under an older plugin
+phase 4 list) and report missing pieces, pending decisions, ledger backfill candidates, and
+**`instruction-conflicts`** — nested/vendored `CLAUDE.md` and `.claude/` trees whose directives
+contradict the root contract (the common way this arises: code pulled in *after* bootstrap
+brought its own instruction files, and they silently steer every session — re-running bootstrap
+is the standing way to reconcile them); 🛑 present that report with the decisions framed for the
+human; then dispatch **execute mode** with the approved plan. Fill only what's missing — a project bootstrapped under an older plugin
 version picks up new contract pieces (a missing lever, the model policy, the registries) this
 way, each through its normal checkpoint. Never overwrite an approved artifact. Spot-check the
 written files before declaring the upgrade done, and end with the session-restart reminder if any
@@ -80,7 +83,10 @@ anything found: *would bootstrap have to reverse-engineer intent from it?* Class
   scaffolds (`cargo new`'s hello-world, a bare `npm init` package.json): they carry exactly one
   decision — the stack. Proceed, and open phase 2 with it: "found `Cargo.toml` — treating Rust as
   chosen unless you say otherwise." Prior design prose in `docs/` is likewise not code — offer it
-  as phase 1 input.
+  as phase 1 input. An instruction file that arrived with pulled-in code (`CLAUDE.md`, a
+  `.claude/` tree) is decision-*bearing*, not just evidence — it is live steering, so disclose it
+  and reconcile any contradiction with the contract being built (same keep / subordinate /
+  archive decisions as the upgrade path's `instruction-conflicts`, each the human's call).
 - **Brownfield → route** — source implementing actual behavior (anything a characterization test
   could meaningfully guard) *without* the contract: real logic, tests, wired-up modules. Name what
   was found and hand off to **`bootstrap-legacy`** — adopting a codebase is excavation, not
@@ -145,7 +151,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value
   thread. This is the plugin's standing proposal; the human approves the plan.
 - `CLAUDE.md` — point at the contract: the authority docs, the levers, the lifecycle skills, and
-  the project's chosen sensibility (so later sessions know the taste the design was cut to).
+  the project's chosen sensibility (so later sessions know the taste the design was cut to). Any
+  instruction-reconciliation precedence notes live here — the root is the one instruction
+  authority, and it records which nested files were subordinated and on what.
 
 ### 5 — 🛑 Handoff
 Present the contract in one screen: the five docs, the manifest, the proposed Slice 0. Then route:
