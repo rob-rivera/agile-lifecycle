@@ -87,6 +87,11 @@ anything found: *would bootstrap have to reverse-engineer intent from it?* Class
   `.claude/` tree) is decision-*bearing*, not just evidence — it is live steering, so disclose it
   and reconcile any contradiction with the contract being built (same keep / subordinate /
   archive decisions as the upgrade path's `instruction-conflicts`, each the human's call).
+- **Prototype (marked) → graduation choice** — a `PROTOTYPE.md` marker means the code was built
+  by `bootstrap-prototype` as an answer, not production. Never refuse it as brownfield; ask the
+  graduation question instead: **keep it** (→ `bootstrap-legacy`, the marker is its
+  highest-trust prior-knowledge input) or **discard** (proceed greenfield here, carrying the
+  marker's knowledge into phase 1 — the code dies, per the spike rule).
 - **Brownfield → route** — source implementing actual behavior (anything a characterization test
   could meaningfully guard) *without* the contract: real logic, tests, wired-up modules. Name what
   was found and hand off to **`bootstrap-legacy`** — adopting a codebase is excavation, not

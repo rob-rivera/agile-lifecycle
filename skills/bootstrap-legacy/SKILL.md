@@ -49,9 +49,11 @@ use — most ratification happens later, story by story, not during bootstrap.
 - Contract present (`docs/story-format.md`) → this is a lifecycle project; route to
   `bootstrap-project`'s resume/upgrade path.
 - No real code (greenfield by `bootstrap-project`'s tiers) → route to `bootstrap-project`.
-- Otherwise proceed. Enumerate **prior-knowledge sources** in rough trust order: `CLAUDE.md` ≈ CI
-  configs (operationally honest) > README > code comments > `docs/` prose (rots fastest). All of
-  it enters as *observed*-grade evidence.
+- Otherwise proceed. Enumerate **prior-knowledge sources** in rough trust order: `PROTOTYPE.md`
+  (a `bootstrap-prototype` marker — intent recorded at authoring time, the one source that
+  outranks the code's own docs) > `CLAUDE.md` ≈ CI configs (operationally honest) > README >
+  code comments > `docs/` prose (rots fastest). All of it enters as *observed*-grade evidence —
+  the marker included; recorded intent still gets ratified by a human, not grandfathered.
 
 ### 1 — Reconnaissance (mechanical)
 Stack and manifests; repo size and shape; existing tests and how they're run; lint/format configs;

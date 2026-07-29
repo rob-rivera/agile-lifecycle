@@ -34,6 +34,13 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   human decisions promote to **`ratified`** — only ratified rules trigger the contradiction gate)
   → honest lever baselines (recorded, never fixed) → safety-net Slice 0 (characterize only the
   first area of change). Merges into existing `CLAUDE.md`/settings; never overwrites.
+- **bootstrap-prototype** — prompt + empty folder → a runnable prototype: an answer in
+  executable form, spike's sibling (the invariants govern *production*; a prototype isn't one,
+  and its `PROTOTYPE.md` marker prints the price — no contract, no tests, no safety net).
+  Bounded critical-question interview (everything else a named assumption in the marker's
+  ledger), minimal `run` lever, re-entry checkpoint against feature creep, and a graduation
+  gate: **keep it** → `bootstrap-legacy` excavates it (the marker is pre-written intent);
+  **discard** → `bootstrap-project` with the knowledge. Never graduates silently.
 - **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
   🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
   the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited
