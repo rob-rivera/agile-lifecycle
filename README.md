@@ -41,6 +41,10 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
   ledger), minimal `run` lever, re-entry checkpoint against feature creep, and a graduation
   gate: **keep it** → `bootstrap-legacy` excavates it (the marker is pre-written intent);
   **discard** → `bootstrap-project` with the knowledge. Never graduates silently.
+- **orient** — greet the user and summarize what's next, one screen: on a lifecycle project,
+  from the ledger/slice plan/debt registry, leading with the next actionable item and the skill
+  that advances it; on any other repo, from branch/commits/README. Read-only — points at the
+  next move, never makes it. The user-facing counterpart of the SessionStart orientation hook.
 - **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
   🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
   the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited
