@@ -152,6 +152,14 @@ on; the invariants outrank it everywhere. **Stop for approval.**
     choice as one line in `tech-design.md`'s Direction note ("UI craft: frontend-design,
     preloaded into implementers"). Design pressure is Green craft, scoped by the implementer
     template's own rule — it never touches story drafting or the §8 anchors.
+    **When the preload is accepted, also offer the 🛑 look-and-feel definition** — design
+    decisions made once here, never re-derived by each cycle's fresh implementer (per-cycle
+    derivation drifts): run the `frontend-design` skill against the phase-1 brief to draft its
+    design plan (the token system — 4–6 named colors, the typeface pairing, the layout concept,
+    the signature element), present it for ratification, and record the approved plan as a
+    **Look & feel** section in `docs/design.md` (dated Change Log entry). Recorded tokens are
+    **requirements**: cycle seeds cite them, the design-contradiction gate guards them like any
+    settled rule, and the preload governs craft *within* them.
   **Registration caveat — say this at handoff:** agent definitions are read at *session start*.
   Agents created or renamed in the current session are invisible to it — the user must restart the
   session (in a wrapper app: its restart/continue affordance; in a terminal: `claude --continue`)

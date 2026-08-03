@@ -122,7 +122,9 @@ is stories. A red baseline is information, not an emergency.
   *candidates*, not settled entries.
 - `.claude/agents/` — the model policy, exactly as in `bootstrap-project` (same templates, same
   🛑 mapping approval, same session-restart caveat, same optional **UI-craft preload** offer for
-  projects with a user-facing frontend — verify-installed caveat included).
+  projects with a user-facing frontend — verify-installed caveat and the 🛑 **look-and-feel
+  definition** offer included; in a brownfield the existing UI is the draft's starting point,
+  and recording its *observed* tokens is also how an inherited look becomes a settled rule).
 - `docs/ledger.md` and `docs/debt.md` — empty from their templates. The survey's observed
   hazards that are clearly structural debt may seed the registry as its first dated entries.
 - `CLAUDE.md` — **merge** contract pointers into whatever exists. Phase 2's precedence notes

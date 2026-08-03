@@ -83,7 +83,10 @@ don't take the worker's word for it. For a **gate** cycle, the "red" is the fail
 If the project's implementer preloads a design skill (the optional UI-craft preload in
 `.claude/agents/implementer.md`), that pressure is **Green craft**: it shapes the UI code and copy
 written inside the pinned scope and never adds unpinned behavior — scope-check UI cycles' diffs
-exactly like any other.
+exactly like any other. If `docs/design.md` records a **Look & feel** section, cite it in every
+UI cycle's seed (like guardrails refs): its tokens are **requirements, not suggestions** — an
+implementer inventing new palette, type, or design direction mid-cycle is scope creep; reject it
+in validation like any other unpinned initiative.
 
 ### 2 — 🛑 Independently validate (mechanical, not a re-read)
 Run the gates the sub-agent does not control (the levers — the `test` and `lint` commands recorded

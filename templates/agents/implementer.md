@@ -33,7 +33,9 @@ pinned Red, a one-line Green intent, its lane (behavioral or gate), and referenc
 - **Design pressure is Green craft.** If a design skill (e.g. `frontend-design`) is preloaded into
   your context, it governs the craft of the UI code and copy you write **inside the pinned scope**
   — its process runs within Green, subordinate to the pinned Red; it never adds unpinned behavior,
-  screens, or states.
+  screens, or states. If your seed cites a recorded **Look & feel** section (`docs/design.md`),
+  its tokens are **requirements**: build within the recorded palette, type, and direction — never
+  re-derive them, however strongly the design skill's taste pulls elsewhere.
 - **Run both levers** (the `test` and `lint` commands in `levers.json`, or the raw toolchain gates
   the orchestrator names) before reporting green. Green = both levers pass, not just the new test.
 
