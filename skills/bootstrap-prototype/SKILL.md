@@ -61,10 +61,12 @@ proceed without and note it in the assumptions ledger): a prototype's look is pa
 human judges, and the skill's anti-default pressure costs nothing here since there is no TDD
 discipline to collide with. No stories, no TDD — speed is the
 point and the marker prints the price. **Build inline by default; MAY delegate** (the suite's
-delegation pattern) a larger build — several files, a whole page or app — to a general-purpose
-sub-agent seeded with the marker's critical answers and assumptions ledger (there is no model
-policy yet — no contract — so a tier below the session where practical); the orchestrator still
-launches the result via the `run` lever itself before the demo. Assumptions surfaced mid-build go **into the ledger**
+delegation pattern) a larger build — several files, a whole page or app — to the plugin's
+**`builder` agent** (mid-tier **by its own `model:` line**, like the surveyor and upgrader: a
+prototype has no contract and no model policy, and a bare general-purpose dispatch would inherit
+the session's full-weight model — the tier must be pinned in the agent, never inherited), seeded
+with the marker's critical answers and assumptions ledger; the orchestrator still launches the
+result via the `run` lever itself before the demo. Assumptions surfaced mid-build go **into the ledger**
 (dated), not into chat narration. Resist gold-plating: a prototype that grows features stops
 answering and starts shipping.
 
