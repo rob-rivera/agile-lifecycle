@@ -69,6 +69,14 @@ For each selected finding, in order: apply **one named move** (cite the catalog 
 levers → commit (message cites the `REF-nnnn`, the smell, and the move; the project's trailer).
 Bounded and reversible — a move that won't go green in a step or two gets reverted, not forced.
 
+**Execution tier is calibrated** (the suite's delegation pattern): small named moves default to
+**inline** — the mechanical gate (levers green after every move) is validation the executor
+cannot fool, the same argument that lets `implement-story` run trivial gate cycles inline.
+**Delegate to the project's `implementer` agent** when a move — or the step-3 net — carries real
+context load (a large extraction, a wide mechanical rename, characterization tests across
+several behaviors), seeding it with the selected finding, the named move, and the guardrails
+refs; the orchestrator still runs the levers itself before committing, either way.
+
 **Hard boundaries (stop, don't bend):**
 - The pass **never changes a public contract, an interface, or ratified behavior.** A move that
   wants to → **stop: that's a story wearing a refactor's clothes** — route to `write-stories`,
