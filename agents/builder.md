@@ -7,6 +7,14 @@ description: >-
   pre-contract for it to defer to.
 model: sonnet
 tools: Read, Glob, Grep, Write, Edit, Bash
+# UI-craft preload, ALWAYS ON (unlike the project-owned implementer templates, where it's a
+# bootstrap choice): builder is plugin machinery — no bootstrap moment exists to uncomment it
+# per-project. Safe both ways (SPIKE-0001, story-dev, probed 2026-08-03): not installed → the
+# reference is skipped silently; installed but the brief isn't a UI → the skill's own scoping
+# leaves it inert. Note builder's restricted tools list excludes the Skill tool, so preload is
+# the ONLY channel that can deliver this — do not swap for an invoke-it-yourself instruction.
+skills:
+  - frontend-design
 ---
 
 <!-- Plugin machinery, like the surveyor and upgrader: a prototype project has no contract and no
