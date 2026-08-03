@@ -79,5 +79,11 @@ plan; never improvise a decision that wasn't in the plan** — if execution surf
 stop and report it instead of answering it yourself. Return the list of files written/moved and
 anything skipped, with reasons.
 
+**Protected paths:** `.claude/**` writes are harness-gated and may be denied in your dispatch
+regardless of the approved plan (subagents cannot be pre-approved for them). On a denial: do not
+retry, and never shell around the permission system — return the intended file content verbatim
+as `manual-apply` items in your report; the orchestrator re-attempts from the main loop or hands
+the diff to the human.
+
 House rules in both modes: merge, never replace (an existing `CLAUDE.md` gets pointers added, not
 a rewrite); observed-only claims with citations; one screen of output.

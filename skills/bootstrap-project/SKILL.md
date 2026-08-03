@@ -160,6 +160,13 @@ on; the invariants outrank it everywhere. **Stop for approval.**
     **Look & feel** section in `docs/design.md` (dated Change Log entry). Recorded tokens are
     **requirements**: cycle seeds cite them, the design-contradiction gate guards them like any
     settled rule, and the preload governs craft *within* them.
+  **Protected-path caveat (`.claude/` writes):** the harness hard-protects `.claude/` — writes
+  there are never auto-approved, `permissions.allow` rules cannot pre-approve them, and subagents
+  face the same gate (so prefer doing these writes from the **main loop**, where the user can
+  approve the prompt — a delegated mechanic hitting the gate mid-dispatch can only report back).
+  On a denial: **fall back to presenting the exact file contents (or exact diff) for the human to
+  apply** — via the per-session grant ("allow Claude to edit its own settings for this session")
+  or by hand. A denial is a checkpoint, not a failure — and never route around it through Bash.
   **Registration caveat — say this at handoff:** agent definitions are read at *session start*.
   Agents created or renamed in the current session are invisible to it — the user must restart the
   session (in a wrapper app: its restart/continue affordance; in a terminal: `claude --continue`)
