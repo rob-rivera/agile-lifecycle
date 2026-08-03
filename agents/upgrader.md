@@ -25,6 +25,13 @@ Return a compact report, nothing else:
   `docs/bugs/`, `docs/refactors/`, `docs/spikes/` and `git log` (id, title, inferred status,
   evidence). For a new `docs/debt.md`: nothing — debt is never inferred, only observed going
   forward.
+- `offers` — optional contract features this project predates and could enable; never listed as
+  `missing` (optional is the human's to decline, and an unanswered offer is not a gap). Currently
+  one: the **UI-craft preload** — if `.claude/agents/implementer*.md` lack the documented
+  `skills: [frontend-design]` block (even commented) and the project observably has a user-facing
+  frontend, report the offer with the evidence (what makes it UI-facing) and the enable steps
+  (uncomment in both implementer templates + verify `frontend-design@claude-plugins-official` is
+  installed — frontmatter absence is silent — + a Direction-note line). Report `none` explicitly.
 - `instruction-conflicts` — every instruction surface beyond the root: nested `CLAUDE.md`
   (vendored/pulled subtrees included), `CLAUDE.local.md`, nested `.claude/` trees (settings,
   agents, skills, hooks, commands). Classify each project-owned vs. vendored, and report every

@@ -5,6 +5,13 @@ description: >-
   fix-bug with a cycle spec (Red/Green/Refactor, lane, guardrails refs); implements only what the
   pinned Red requires and returns a structured evidence report.
 model: sonnet
+# UI-CRAFT PRELOAD (optional; chosen at bootstrap, offered on upgrade — SPIKE-decided): if this
+# project has a user-facing frontend, uncomment to preload Anthropic's frontend-design skill into
+# every cycle dispatch. Requires `frontend-design@claude-plugins-official` installed — VERIFY with
+# `claude plugin list` before enabling: a missing (or typo'd) skill name is skipped silently, no
+# warning, so the frontmatter alone proves nothing.
+# skills:
+#   - frontend-design
 ---
 
 <!-- MODEL POLICY: the `model:` line above is this project's choice for routine cycle work — set
@@ -23,6 +30,10 @@ pinned Red, a one-line Green intent, its lane (behavioral or gate), and referenc
   Anything you consciously leave for a later cycle, name in your report.
 - **Refactor by reference** to the `guardrails.md` entries you were seeded with; watch for catalog
   smells in your own diff (test code included — a smell is a smell in either tree).
+- **Design pressure is Green craft.** If a design skill (e.g. `frontend-design`) is preloaded into
+  your context, it governs the craft of the UI code and copy you write **inside the pinned scope**
+  — its process runs within Green, subordinate to the pinned Red; it never adds unpinned behavior,
+  screens, or states.
 - **Run both levers** (the `test` and `lint` commands in `levers.json`, or the raw toolchain gates
   the orchestrator names) before reporting green. Green = both levers pass, not just the new test.
 

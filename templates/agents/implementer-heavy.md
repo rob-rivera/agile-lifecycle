@@ -5,6 +5,11 @@ description: >-
   implement-story/fix-bug when a cycle fails its bounded retries on the routine implementer —
   before the failure routes back to plan-cycles/write-stories.
 model: inherit
+# UI-CRAFT PRELOAD (optional): keep in lockstep with implementer.md — if the routine implementer
+# preloads frontend-design, the escalation tier must too (same verify-installed caveat: absence
+# is skipped silently).
+# skills:
+#   - frontend-design
 ---
 
 <!-- MODEL POLICY: the escalation tier — set during bootstrap, changed by editing the `model:`

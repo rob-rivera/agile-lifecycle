@@ -80,6 +80,10 @@ behavior no current test pins is a defect, not initiative: it ships untested *an
 cycle's witnessed red (the guardrails doc's canonical-TDD rule: "Green satisfies the pinned Red — no
 more"). Say this in the seed explicitly. For a **behavioral** cycle, witnessed red is mandatory — you
 don't take the worker's word for it. For a **gate** cycle, the "red" is the failing gate.
+If the project's implementer preloads a design skill (the optional UI-craft preload in
+`.claude/agents/implementer.md`), that pressure is **Green craft**: it shapes the UI code and copy
+written inside the pinned scope and never adds unpinned behavior — scope-check UI cycles' diffs
+exactly like any other.
 
 ### 2 — 🛑 Independently validate (mechanical, not a re-read)
 Run the gates the sub-agent does not control (the levers — the `test` and `lint` commands recorded

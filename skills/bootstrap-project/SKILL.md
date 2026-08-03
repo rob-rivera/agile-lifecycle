@@ -144,6 +144,14 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   🛑 **Present the proposed role→model mapping (with the reasoning) for approval.** Models shift
   over time; changing the policy later is editing one frontmatter line, and re-running bootstrap
   never overwrites an approved policy.
+  - **UI-craft preload (optional, per project)** — if the project has a user-facing frontend,
+    offer preloading `frontend-design@claude-plugins-official` into `implementer` and
+    `implementer-heavy` (uncomment the documented `skills:` block in both). On the human's yes:
+    **verify the plugin is installed** (`claude plugin list`; install it if not — a missing skill
+    name in frontmatter is skipped *silently*, so never trust the block alone), and record the
+    choice as one line in `tech-design.md`'s Direction note ("UI craft: frontend-design,
+    preloaded into implementers"). Design pressure is Green craft, scoped by the implementer
+    template's own rule — it never touches story drafting or the §8 anchors.
   **Registration caveat — say this at handoff:** agent definitions are read at *session start*.
   Agents created or renamed in the current session are invisible to it — the user must restart the
   session (in a wrapper app: its restart/continue affordance; in a terminal: `claude --continue`)

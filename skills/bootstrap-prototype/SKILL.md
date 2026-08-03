@@ -55,7 +55,11 @@ step that got skipped.
 
 ### 3 — Build
 The smallest artifact that answers the question. Boring stack defaults consistent with the
-user's environment unless a critical answer chose otherwise. No stories, no TDD — speed is the
+user's environment unless a critical answer chose otherwise. **If the prototype has a UI, load
+the `frontend-design` skill before building** (when installed — check the skill listing; absent,
+proceed without and note it in the assumptions ledger): a prototype's look is part of what the
+human judges, and the skill's anti-default pressure costs nothing here since there is no TDD
+discipline to collide with. No stories, no TDD — speed is the
 point and the marker prints the price. Assumptions surfaced mid-build go **into the ledger**
 (dated), not into chat narration. Resist gold-plating: a prototype that grows features stops
 answering and starts shipping.
