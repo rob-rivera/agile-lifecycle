@@ -12,7 +12,8 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
                      │              designed behavior               │
   change request →   │  write-stories → plan-cycles → implement-story  │
                      └──────────────────────────────────────────────┘
-                                        ▲
+                          ▲             ▲
+  small change  →  change-request ──────┘ (too large / contradiction routes to write-stories)
   observed behavior →  fix-bug ─────────┘ (working-as-designed routes to write-stories)
 ```
 
@@ -58,6 +59,13 @@ A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-
 - **implement-story** — the orchestrator: fresh sub-agent per behavioral cycle, sequential,
   mechanical independent validation, a git commit per validated cycle (durable resume), calibratable
   user checkpoints.
+- **change-request** — the compressed lane for small behavioral changes: one invocation, one
+  approval (the change card: summary, ACs, tightened sizing vector — **≤2 cycles, 0 new
+  contracts, 0 unknowns** — plus inline cycle annotations), then canonical RGR with execution
+  calibrated and the full §5 close gate. Ceremony compresses; sizing and discipline never do.
+  A tripped signal, a design contradiction, a failed-retries cycle, or mid-flight scope
+  discovery all route to write-stories with the intake work as the story's head start.
+  Change-requests are standard `STORY-nnnn` rows — no new id family.
 - **fix-bug** — report of unexpected behavior → reproduce → root-cause → verdict (genuine bug /
   working-as-designed / on-the-line). Genuine bugs get a failing-first regression test and a minimal
   fix, or a durable `BUG-nnnn` record when deferred. Resource/performance symptoms are bugs: the
