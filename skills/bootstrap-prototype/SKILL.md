@@ -71,8 +71,8 @@ result via the `run` lever itself before the demo. Assumptions surfaced mid-buil
 answering and starts shipping.
 
 ### 4 — Levers, minimal
-`levers.json` with at least `run`. A prototype someone else can't launch answers nothing —
-this is also what makes the hand-off to a colleague work. `test`/`lint` absent **by design**;
+`levers.json` with at least `run` — plus `stop` when `run` is long-running (a server someone
+can't kill is as unanswerable as one they can't launch). `test`/`lint` absent **by design**;
 their absence is part of the price the marker prints.
 
 ### 5 — 🛑 Demo & the graduation question

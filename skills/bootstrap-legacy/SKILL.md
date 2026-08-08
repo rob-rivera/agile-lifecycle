@@ -109,7 +109,8 @@ choice as a **Direction** note in `tech-design.md` — descriptive sections say 
 says what new code aims at. **Stop for the user's choice.**
 
 ### 6 — Levers & the honest baseline
-Discover the real test/lint/run commands (recon usually found them); write `levers.json`. **Run
+Discover the real test/lint/run commands (recon usually found them) — and when `run` is
+long-running, the explicit `stop` command that kills what it started; write `levers.json`. **Run
 the levers and record what actually happens** — failing tests, lint violations, flaky suites — as
 the documented baseline (in `tech-design.md` §7). **Bootstrap never fixes the baseline**; fixing
 is stories. A red baseline is information, not an emergency.
