@@ -139,7 +139,9 @@ repo is the source of truth.
 
 Satisfy the `story-format.md` §5 gate: every `AC-*` green and cited, both levers pass, and the
 **affirmative capture gates** — present the accumulated candidates (or affirm **"candidates:
-none"**) and record accumulated debt observations as dated `DEBT-nnnn` entries in `docs/debt.md`
+none"**; pattern-shaped candidates are named from the literature first — canonical name +
+citation via `references/patterns.md`, a house name only when no canonical name exists, declared
+as such) and record accumulated debt observations as dated `DEBT-nnnn` entries in `docs/debt.md`
 (or affirm **"debt: none"**). Mark the story *done* in `docs/ledger.md` — and if it closed its
 slice, mark the slice complete in `docs/slice-plan.md`. Then burn the disposable plan.
 

@@ -27,6 +27,7 @@ negotiates them:
 
 - This plugin's `templates/` — `story-format.md`, `design.md`, `tech-design.md`, `guardrails.md`.
 - This plugin's `references/` — `code-smells.md` (the smell catalog + per-language notes),
+  `patterns.md` (the pattern catalog: iron rule, naming discipline, paradigm notes),
   `sensibilities.md` (the persona roster and its rules of use).
 - **Greenfield only.** A folder with an existing codebase is brownfield; the adoption process for
   that is not yet defined — stop and say so rather than improvise.
@@ -71,7 +72,10 @@ floor (it grew entries organically from zero — the hole the seed exists to pre
 seeding step** as part of the upgrade: select from `references/code-smells.md` per the stack,
 express in its idiom, and **dedupe against the grown entries — grown entries always win** (they
 are project-ratified; seeds only fill the gaps around them). Same 🛑 selection approval as a
-fresh bootstrap. This is orchestrator work, not upgrader work — seeding is judgment.
+fresh bootstrap. This is orchestrator work, not upgrader work — seeding is judgment. The same
+check covers the patterns side: a §2 without the `references/patterns.md` rules (iron rule +
+naming discipline) gets them offered; grown pattern entries keep their names unless the human
+renames them to canonical.
 
 Otherwise, **"empty" means empty of *decisions*, not empty of files.** The gate question for
 anything found: *would bootstrap have to reverse-engineer intent from it?* Classify what's present:
@@ -126,7 +130,11 @@ on; the invariants outrank it everywhere. **Stop for approval.**
 - `docs/guardrails.md` — from the template. **Seed the smells**: select from
   `references/code-smells.md` the entries relevant to the stack, express each in the stack's idiom
   (tell + cure, per the reference's per-language notes), one catalog for code and test smells
-  alike. 🛑 **Present the selection for approval** — seeding is a judgment, not a copy.
+  alike. **Seed the patterns thin**: from `references/patterns.md`, only the few entries the
+  stack will visibly need (its paradigm notes govern selection — first-class functions dissolve
+  several; don't seed what the language already is), each with its context/forces line; the
+  section's iron rule and naming discipline ride in from the template. 🛑 **Present the
+  selection for approval** — seeding is a judgment, not a copy.
 - `levers.json` (repo root) — the machine-readable lever manifest: the project's `test`, `lint`,
   and `run` commands (`run` launches the app itself — the walking skeleton gives it something to
   launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed

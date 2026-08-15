@@ -46,10 +46,12 @@ findings) — nothing more.
 
 ### 1 — Assess
 Read the target and compare against **both catalogs**: the project's `guardrails.md` (the
-stack-idiomatic, augmented subset) and the plugin's canonical reference (catches smells never
-seeded). Produce the findings report: **smell → `file:line` → proposed catalog move → expected
-payoff**, ranked by payoff-per-risk. Findings matching no catalog entry are **candidates** — a
-pass is a smell harvest; record them regardless of what gets selected.
+stack-idiomatic, augmented subset) and the plugin's canonical references (`code-smells.md`,
+catching smells never seeded; `patterns.md`, naming the destinations moves arrive at). Produce
+the findings report: **smell → `file:line` → proposed catalog move → expected payoff**, ranked
+by payoff-per-risk — where a move's destination is a known pattern, name it canonically (the
+guardrails §2 naming rules). Findings matching no catalog entry are **candidates** — a pass is
+a smell harvest; record them regardless of what gets selected.
 
 ### 2 — 🛑 Select
 Present the findings. **The human selects which findings to act on, and in what order.** Recommend

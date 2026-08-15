@@ -59,7 +59,10 @@ For every enumerated cycle, produce a thin entry:
   infra/tooling cycles, the "Red" is a failing gate** (build/script/linter-bite), not a test
   (`story-format.md` §5).
 - **Green** — one line of intent. Latitude left to the implementer.
-- **Refactor** — the `guardrails.md` pattern/smell to apply or watch for (by reference).
+- **Refactor** — the `guardrails.md` pattern/smell to apply or watch for (by reference). A
+  pattern may be named here **as the refactoring destination** (canonical name, per the
+  guardrails §2 naming rules) — never in the Red or Green, where it would be a design
+  prescription (`story-format.md` §8, *Refactoring to Patterns*).
 
 ### 4 — 🛑 Checkpoint: approve the plan
 Present the annotated spine — **especially the pinned Red tests**, since they are the spec — and

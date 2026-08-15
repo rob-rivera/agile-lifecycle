@@ -150,10 +150,12 @@ A story is done only when **every** item holds — treat it as a gate, not a gui
 - [ ] Every acceptance criterion is green across the applicable test layers (`tech-design.md`).
 - [ ] Each `AC-*` / `LAW-*` id is cited by the test(s) that satisfy it.
 - [ ] Both levers pass — the `test` and `lint` commands recorded in `levers.json`.
-- [ ] **Guardrail candidates recorded.** Any novel test/code/smell call not covered by
+- [ ] **Guardrail candidates recorded.** Any novel test/code/smell/pattern call not covered by
   `guardrails.md` is appended to its *Candidates* inbox — **or the story explicitly affirms
   "candidates: none."** Silence is not a pass; this is a required gate, not optional capture
-  (`guardrails.md`, the candidate loop).
+  (`guardrails.md`, the candidate loop). Pattern-shaped candidates are **named from the
+  literature** (the `references/patterns.md` ladder): canonical name + citation, or a declared
+  house name only where no canonical name exists.
 - [ ] **Debt observations recorded.** Out-of-scope structural debt seen during the story lands in
   `docs/debt.md` as dated `DEBT-nnnn` entries — **or the story affirms "debt: none."** Same
   affirmative rule: silence is not a pass.
@@ -237,6 +239,7 @@ overrides.
 | Acceptance criteria (`write-stories` §3) | Gojko Adzic, *Specification by Example* | Concrete examples, observable behavior, no implementation language |
 | Story summaries & value (`write-stories` §3) | Jeff Patton, *User Story Mapping* | One real outcome per story; value stated from the user's side |
 | Pinning the Red (`plan-cycles` §3) | Kent Beck, *TDD by Example*; Freeman & Pryce, *GOOS* | The smallest test that can fail for the right reason; test names that read as the spec |
+| Naming refactor destinations (Refactor steps; the §5 candidates gate) | Joshua Kerievsky, *Refactoring to Patterns* | Patterns are destinations refactoring arrives at, never design starting points; canonical names from the literature over coinage |
 
 ---
 

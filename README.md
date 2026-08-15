@@ -87,7 +87,7 @@ say so):
 | Role | Default path | Required by |
 | --- | --- | --- |
 | Story format & sizing spec, incl. §8 **craft anchors** (books cited at drafting moments — never role personas; the doc wins on conflict) | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
-| Guardrails catalog (one test+code smell catalog + *Candidates* inbox + canonical-TDD rules) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug (seeded by bootstrap from `references/code-smells.md`) |
+| Guardrails catalog (two-sided: smells to move away from + patterns to move toward, with *Candidates* inbox + canonical-TDD rules; patterns are refactoring destinations named canonically from the literature, never design starting points) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug, refactor-pass (seeded by bootstrap from `references/code-smells.md` + thinly from `references/patterns.md`) |
 | Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
 | Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
 | Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
@@ -106,9 +106,9 @@ schema drift — every retirement/rename/patch a human decision; local-skills-or
 both).
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
-(`references/code-smells.md`, `references/sensibilities.md`) are plugin knowledge, not project
-artifacts — the ladder to the giants' shoulders (Fowler/Beck, Meszaros, and the sensibility roster's
-corpus anchors).
+(`references/code-smells.md`, `references/patterns.md`, `references/sensibilities.md`) are plugin knowledge, not project
+artifacts — the ladder to the giants' shoulders (Fowler/Beck, Meszaros, GoF/Kerievsky, and the
+sensibility roster's corpus anchors).
 
 Conventions carried across projects: `STORY-nnnn` / `BUG-nnnn` / `AC-*` / `LAW-*` ids; per-cycle
 commits on story/fix branches (never `main`); disposable plans burned at story close; the
