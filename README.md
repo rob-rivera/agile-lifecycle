@@ -96,6 +96,7 @@ say so):
 | Work ledger (one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention) | `docs/ledger.md` | all build/fix/refactor skills |
 | Debt registry (observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision) | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
 | Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
+| Contract version stamp (one line: the plugin version the contract was instantiated/last reviewed against; written by the bootstraps and every upgrade review — the SessionStart hook compares it to the loaded plugin and announces drift) | `docs/.contract-version` | SessionStart hook (advisory only) |
 
 The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
@@ -124,7 +125,9 @@ requires `jq`, silently inactive without it):
   STORY/BUG/REF files without ledger rows, or rows without files, block the stop once with a
   fix list. Presence checks only — status semantics stay in the skills.
 - **SessionStart — orientation.** Injects branch, outstanding ledger rows, and open debt count,
-  so no session starts cold.
+  so no session starts cold — plus **contract-drift detection**: when the project's
+  `docs/.contract-version` stamp is older than the loaded plugin (or absent), one advisory line
+  points at `bootstrap-project`'s upgrade review. Advisory only; equal-or-newer stays silent.
 - **PostToolUse — instant nudge.** Writing a work-item file with no ledger row injects the
   reminder immediately; the Stop gate is the backstop.
 - **PreToolUse — the branch invariant.** `git commit` on main surfaces a confirmation (ask, not

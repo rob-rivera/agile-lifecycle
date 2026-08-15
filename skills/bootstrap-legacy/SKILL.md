@@ -128,6 +128,10 @@ is stories. A red baseline is information, not an emergency.
   and recording its *observed* tokens is also how an inherited look becomes a settled rule).
 - `docs/ledger.md` and `docs/debt.md` — empty from their templates. The survey's observed
   hazards that are clearly structural debt may seed the registry as its first dated entries.
+- `docs/.contract-version` — one line: the plugin version adopted against (from
+  `.claude-plugin/plugin.json`), so the SessionStart drift line can announce future contract
+  upgrades. Same rules as `bootstrap-project`: rewritten at every upgrade review, never
+  hand-edited to hush the line.
 - `CLAUDE.md` — **merge** contract pointers into whatever exists. Phase 2's precedence notes
   live here — the root records which nested instruction files were subordinated and on what.
 

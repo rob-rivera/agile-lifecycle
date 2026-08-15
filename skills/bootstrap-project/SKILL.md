@@ -53,8 +53,10 @@ is the standing way to reconcile them); 🛑 present that report with the decisi
 human; then dispatch **execute mode** with the approved plan. Fill only what's missing — a project bootstrapped under an older plugin
 version picks up new contract pieces (a missing lever, the model policy, the registries) this
 way, each through its normal checkpoint. Never overwrite an approved artifact. Spot-check the
-written files before declaring the upgrade done, and end with the session-restart reminder if any
-agents were created.
+written files before declaring the upgrade done, **write the current plugin version (from the
+plugin's `.claude-plugin/plugin.json`) to `docs/.contract-version`** — accepted *or declined*,
+the review happened; declined offers are recorded decisions, and the SessionStart drift line
+must not nag them — and end with the session-restart reminder if any agents were created.
 
 **Prior-iteration projects** (an earlier dialect of this framework: local skill copies, renamed
 authority docs, older schemas) get the upgrader's **migration report** in the same diff —
@@ -182,6 +184,11 @@ on; the invariants outrank it everywhere. **Stop for approval.**
 - `docs/ledger.md` and `docs/debt.md` — the **work ledger** and **debt registry**, empty from
   their templates (the skills maintain them: ledger rows per STORY/BUG/REF, debt entries at the
   affirmative close gates).
+- `docs/.contract-version` — one line: the plugin version this contract was instantiated
+  against (from the plugin's `.claude-plugin/plugin.json`). The SessionStart hook compares it
+  to the loaded plugin and prints one advisory line when the project is behind — drift
+  announces itself instead of waiting to be noticed. Written here and at every upgrade review;
+  never hand-edited to silence the line without the review happening.
 - `docs/slice-plan.md` — Slice 0 proposed as **the walking skeleton**: the app the customer can
   already open, however blank, plus the levers proven (built/wired through stories, including any
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value

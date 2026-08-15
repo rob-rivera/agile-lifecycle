@@ -28,4 +28,23 @@ if [ -f docs/debt.md ]; then
   debt_open=$(grep -cE '^\|.*\|[[:space:]]*open[[:space:]]*\|?[[:space:]]*$' docs/debt.md 2>/dev/null || true)
   [ "${debt_open:-0}" -gt 0 ] 2>/dev/null && echo "- open debt entries: $debt_open (docs/debt.md)"
 fi
+
+# Contract-version drift: the project's stamp (docs/.contract-version, written at
+# bootstrap/upgrade) vs. the loaded plugin's version. Older stamp → one advisory line;
+# equal, newer, missing tooling, or unparsable → silent (fail-open).
+plugin_root=$(cd "$(dirname "$0")/.." 2>/dev/null && pwd) || plugin_root=""
+plugin_ver=""
+[ -n "$plugin_root" ] && [ -f "$plugin_root/.claude-plugin/plugin.json" ] && \
+  plugin_ver=$(jq -r '.version // empty' "$plugin_root/.claude-plugin/plugin.json" 2>/dev/null)
+if [ -n "$plugin_ver" ]; then
+  if [ -f docs/.contract-version ]; then
+    stamp=$(head -1 docs/.contract-version 2>/dev/null | tr -d '[:space:]')
+    if [ -n "$stamp" ] && [ "$stamp" != "$plugin_ver" ] && \
+       [ "$(printf '%s\n%s\n' "$stamp" "$plugin_ver" | sort -V 2>/dev/null | tail -1)" = "$plugin_ver" ]; then
+      echo "- contract stamp v$stamp < plugin v$plugin_ver — run bootstrap-project to review contract upgrades"
+    fi
+  else
+    echo "- no contract version stamp (docs/.contract-version) — run bootstrap-project to review contract upgrades; it writes the stamp"
+  fi
+fi
 exit 0
