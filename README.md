@@ -15,7 +15,8 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
 
 > **Maturity: pre-1.0, evolving.** The contract changes as it's road-tested; installed copies
 > update when the plugin version bumps, so upgrades are deliberate, never surprises. MIT-licensed.
-> Issues welcome; PRs by prior discussion, please — the suite's invariants are load-bearing.
+> Issues welcome — from inside a session, `agile-lifecycle:feedback` composes and files one for
+> you. PRs by prior discussion, please — the suite's invariants are load-bearing.
 
 > **Status: greenfield and brownfield.** `bootstrap-project` establishes the contract in a fresh
 > project; `bootstrap-legacy` adopts it in an existing codebase (thin descriptive map, intent
@@ -90,6 +91,12 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
   small named moves, levers green after each, per-move commits → `REF-nnnn` pass record with
   dispositions. Explicitly green-to-green (the suite's one deliberate exception to RGR). Symptoms
   route to fix-bug; contract/behavior changes route to write-stories.
+
+- **feedback** — plugin feedback from inside any session: a bug in a skill/hook/template,
+  friction in the procedure, or an idea, routed to this repo's GitHub issues (`gh issue create`,
+  with a copy-paste fallback when `gh` isn't available). One 🛑 checkpoint shows the exact issue
+  before anything leaves the machine; project content never rides along unconsented. Project
+  bugs route to `fix-bug` — this lane is for the machinery itself.
 
 The through-line: **skills are the procedure; the project supplies the specification.** Every skill
 reads the project's authority docs live and never hardcodes their content.
