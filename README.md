@@ -152,9 +152,23 @@ both).
 plugin knowledge, not project artifacts — the ladder to the giants' shoulders (Fowler/Beck,
 Meszaros, GoF/Kerievsky, and the sensibility roster's corpus anchors).
 
-Conventions carried across projects: `STORY-nnnn` / `BUG-nnnn` / `AC-*` / `LAW-*` ids; per-cycle
-commits on story/fix branches (never `main`); disposable plans burned at story close; the
-affirmative candidates gate ("candidates: none" is a required statement, not a default).
+Conventions carried across projects:
+
+- **Ids.** Work items are `STORY-nnnn` / `BUG-nnnn` / `REF-nnnn` / `SPIKE-nnnn`; a story's
+  acceptance criteria are `AC-*`. **`LAW-*` ids name design laws** — rules the human has
+  **ratified** as settled, held in the design docs' registries (`docs/design.md`,
+  `docs/tech-design.md`) under stable ids so everything else can cite them. Excavated brownfield
+  knowledge starts as `observed`; only a human decision promotes it to a law. The ids make the
+  discipline traceable end to end: acceptance criteria cite the laws they uphold, tests cite
+  their `AC-*`/`LAW-*` ids, so every settled rule points at the tests guarding it. Enforcement
+  is the **design-contradiction gate**: a change that conflicts with a law is never implemented
+  in place — it stops and routes to a human decision, because amending a law is a ratification,
+  not an edit.
+- **Branch discipline.** Per-cycle commits on story/fix branches — never `main`.
+- **Disposable plans.** The cycle breakdown is burned at story close; durable knowledge lives in
+  the docs and the ledger, not in plans.
+- **The affirmative candidates gate.** "candidates: none" is a required statement, not a
+  default — silence never passes for review.
 
 ## Hooks (ship with the plugin)
 
