@@ -2,6 +2,13 @@
 
 A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-driven projects.
 
+This project was created with the belief that the literature is the ladder to the shoulders of
+giants. LLM Assisted Development has afforded us an opportunity for self expression that hasn't
+been witnessed since the internet as we know it unfolded in the 90s. I don't know how it all
+shakes out in the end. Even the wisest cannot see all ends. What I do know is that if we're going
+to use it, we should use it responsibly. This project provides a framework to systematically
+build software that is not just working, it's good.
+
 **Quickstart**
 
 ```sh
