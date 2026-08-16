@@ -9,7 +9,7 @@ shakes out in the end. Even the wisest cannot see all ends. What I do know is th
 to use it, we should use it responsibly. This project provides a framework to systematically
 build software that is not just working, it's good.
 
-**Quickstart**
+## Quickstart
 
 ```sh
 /plugin marketplace add rob-rivera/agile-lifecycle
@@ -25,22 +25,29 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
 > Issues welcome — from inside a session, `agile-lifecycle:feedback` composes and files one for
 > you. PRs by prior discussion, please — the suite's invariants are load-bearing.
 
-> **Status: greenfield and brownfield.** `bootstrap-project` establishes the contract in a fresh
-> project; `bootstrap-legacy` adopts it in an existing codebase (thin descriptive map, intent
-> interview, `observed`/`ratified` knowledge tags, honest lever baselines, safety-net Slice 0).
-> `bootstrap-project` routes brownfield folders to `bootstrap-legacy` automatically.
+## The lifecycle at a glance
 
 ```
-                     ┌──────────────────────────────────────────────┐
-                     │              designed behavior               │
-  change request →   │  write-stories → plan-cycles → implement-story  │
-                     └──────────────────────────────────────────────┘
-                          ▲             ▲
-  small change  →  change-request ──────┘ (too large / contradiction routes to write-stories)
-  observed behavior →  fix-bug ─────────┘ (working-as-designed routes to write-stories)
+                      ┌─────────────────────────────────────────────────┐
+                      │                designed behavior                │
+  change request    → │  write-stories → plan-cycles → implement-story  │
+                      └─────────────────────────────────────────────────┘
+                         ▲              ▲
+  small change      → change-request ───┘ (too large / contradiction routes to write-stories)
+  observed behavior → fix-bug ──────────┘ (working-as-designed routes to write-stories)
 ```
+
+Greenfield and brownfield are both first-class: `bootstrap-project` establishes the contract in a
+fresh project; `bootstrap-legacy` adopts it in an existing codebase (thin descriptive map, intent
+interview, `observed`/`ratified` knowledge tags, honest lever baselines, safety-net Slice 0).
+`bootstrap-project` routes brownfield folders to `bootstrap-legacy` automatically.
 
 ## Skills
+
+The through-line: **skills are the procedure; the project supplies the specification.** Every
+skill reads the project's authority docs live and never hardcodes their content.
+
+### Adopting the contract
 
 - **bootstrap-project** — bare folder → the project contract. Four checkpointed conversations:
   product (domain design doc), stack + **design sensibility** (3–5 curated persona options with a
@@ -65,15 +72,9 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
   ledger), minimal `run` lever, re-entry checkpoint against feature creep, and a graduation
   gate: **keep it** → `bootstrap-legacy` excavates it (the marker is pre-written intent);
   **discard** → `bootstrap-project` with the knowledge. Never graduates silently.
-- **orient** — greet the user and summarize what's next, one screen: on a lifecycle project,
-  from the ledger/slice plan/debt registry, leading with the next actionable item and the skill
-  that advances it; on any other repo, from branch/commits/README. Read-only — points at the
-  next move, never makes it. The user-facing counterpart of the SessionStart orientation hook.
-- **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
-  🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
-  the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited
-  synthesis with stated confidence → dated `SPIKE-nnnn` record, decision ratified into the docs,
-  branch deleted. The iron rule: spike code never merges — knowledge survives, code dies.
+
+### Building designed behavior
+
 - **write-stories** — change request (slice, freeform prompt, or test-cycle feedback) →
   implementation-ready stories: INVEST reinterpreted for agents, sizing as a vector of countable
   signals, design-contradiction gate first, human checkpoints for precedence/breakdown/splits.
@@ -89,6 +90,9 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
   A tripped signal, a design contradiction, a failed-retries cycle, or mid-flight scope
   discovery all route to write-stories with the intake work as the story's head start.
   Change-requests are standard `STORY-nnnn` rows — no new id family.
+
+### Maintaining what exists
+
 - **fix-bug** — report of unexpected behavior → reproduce → root-cause → verdict (genuine bug /
   working-as-designed / on-the-line). Genuine bugs get a failing-first regression test and a minimal
   fix, or a durable `BUG-nnnn` record when deferred. Resource/performance symptoms are bugs: the
@@ -99,33 +103,41 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
   dispositions. Explicitly green-to-green (the suite's one deliberate exception to RGR). Symptoms
   route to fix-bug; contract/behavior changes route to write-stories.
 
+### Around the work
+
+- **orient** — greet the user and summarize what's next, one screen: on a lifecycle project,
+  from the ledger/slice plan/debt registry, leading with the next actionable item and the skill
+  that advances it; on any other repo, from branch/commits/README. Read-only — points at the
+  next move, never makes it. The user-facing counterpart of the SessionStart orientation hook.
+- **spike** — deep, budgeted research into a decidable question (the heavy-exploration lane):
+  🛑 frame (question + budget + modes) → delegated gathering (surveyor for code, `researcher` for
+  the outside world, `implementer` for measured probes on a throwaway branch) → 🛑 evidence-cited
+  synthesis with stated confidence → dated `SPIKE-nnnn` record, decision ratified into the docs,
+  branch deleted. The iron rule: spike code never merges — knowledge survives, code dies.
 - **feedback** — plugin feedback from inside any session: a bug in a skill/hook/template,
   friction in the procedure, or an idea, routed to this repo's GitHub issues (`gh issue create`,
   with a copy-paste fallback when `gh` isn't available). One 🛑 checkpoint shows the exact issue
   before anything leaves the machine; project content never rides along unconsented. Project
   bugs route to `fix-bug` — this lane is for the machinery itself.
 
-The through-line: **skills are the procedure; the project supplies the specification.** Every skill
-reads the project's authority docs live and never hardcodes their content.
-
 ## The project contract
 
-An adopting project provides these (defaults shown; a project may rename them — its CLAUDE.md should
-say so):
+An adopting project provides these (defaults shown; a project may rename them — its CLAUDE.md
+should say so):
 
 | Role | Default path | Required by |
 | --- | --- | --- |
-| Story format & sizing spec, incl. §8 **craft anchors** (books cited at drafting moments — never role personas; the doc wins on conflict) | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
-| Guardrails catalog (two-sided: smells to move away from + patterns to move toward, with *Candidates* inbox + canonical-TDD rules; patterns are refactoring destinations named canonically from the literature, never design starting points) | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug, refactor-pass (seeded by bootstrap from `references/code-smells.md` + thinly from `references/patterns.md`) |
-| Tech design (architecture boundaries + test-layers section) | `docs/tech-design.md` | all |
-| Domain design doc (settled product/system rules) | `docs/design.md` | write-stories, fix-bug |
-| Roadmap / slice plan | `docs/slice-plan.md` | write-stories (optional origin) |
-| Lever manifest — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers, and a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge); projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
-| Model policy (sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md) | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
-| Work ledger (one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention) | `docs/ledger.md` | all build/fix/refactor skills |
-| Debt registry (observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision) | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
-| Artifacts | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
-| Contract version stamp (one line: the plugin version the contract was instantiated/last reviewed against; written by the bootstraps and every upgrade review — the SessionStart hook compares it to the loaded plugin and announces drift) | `docs/.contract-version` | SessionStart hook (advisory only) |
+| **Story format & sizing spec** — incl. §8 craft anchors (books cited at drafting moments — never role personas; the doc wins on conflict) | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
+| **Guardrails catalog** — two-sided: smells to move away from + patterns to move toward, with *Candidates* inbox + canonical-TDD rules; patterns are refactoring destinations named canonically from the literature, never design starting points | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug, refactor-pass (seeded by bootstrap from `references/code-smells.md` + thinly from `references/patterns.md`) |
+| **Tech design** — architecture boundaries + test-layers section | `docs/tech-design.md` | all |
+| **Domain design doc** — settled product/system rules | `docs/design.md` | write-stories, fix-bug |
+| **Roadmap / slice plan** | `docs/slice-plan.md` | write-stories (optional origin) |
+| **Lever manifest** — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers, and a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge); projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
+| **Model policy** — sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
+| **Work ledger** — one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention | `docs/ledger.md` | all build/fix/refactor skills |
+| **Debt registry** — observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
+| **Artifacts** | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
+| **Contract version stamp** — one line: the plugin version the contract was instantiated/last reviewed against; written by the bootstraps and every upgrade review — the SessionStart hook compares it to the loaded plugin and announces drift | `docs/.contract-version` | SessionStart hook (advisory only) |
 
 The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
@@ -136,9 +148,9 @@ schema drift — every retirement/rename/patch a human decision; local-skills-or
 both).
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
-(`references/code-smells.md`, `references/patterns.md`, `references/sensibilities.md`) are plugin knowledge, not project
-artifacts — the ladder to the giants' shoulders (Fowler/Beck, Meszaros, GoF/Kerievsky, and the
-sensibility roster's corpus anchors).
+(`references/code-smells.md`, `references/patterns.md`, `references/sensibilities.md`) are
+plugin knowledge, not project artifacts — the ladder to the giants' shoulders (Fowler/Beck,
+Meszaros, GoF/Kerievsky, and the sensibility roster's corpus anchors).
 
 Conventions carried across projects: `STORY-nnnn` / `BUG-nnnn` / `AC-*` / `LAW-*` ids; per-cycle
 commits on story/fix branches (never `main`); disposable plans burned at story close; the
@@ -167,14 +179,8 @@ judgment, not pattern-matching, and stays skill discipline.
 
 ## Install
 
-**Per-session (no install)** — point any session at a checkout or zip:
-
-```sh
-claude --plugin-dir /path/to/agile-lifecycle
-```
-
-**Via marketplace** — this repo is its own marketplace (`.claude-plugin/marketplace.json` lists
-itself). With access to the GitHub repo:
+**Via marketplace** (recommended) — this repo is its own marketplace
+(`.claude-plugin/marketplace.json` lists itself). With access to the GitHub repo:
 
 ```sh
 /plugin marketplace add rob-rivera/agile-lifecycle
@@ -184,6 +190,12 @@ itself). With access to the GitHub repo:
 Skills are then invocable as `agile-lifecycle:write-stories`, etc. Updates ship by version bump —
 installed copies update when `plugin.json`'s `version` changes. Requires `jq` on PATH for the
 hooks (they no-op silently without it); hook scripts assume a POSIX shell with `bash` available.
+
+**Per-session (no install)** — point any session at a checkout or zip:
+
+```sh
+claude --plugin-dir /path/to/agile-lifecycle
+```
 
 **Team auto-registration** — a project repo can check this into `.claude/settings.json` so
 collaborators who trust the folder get the marketplace registered automatically:
@@ -211,3 +223,7 @@ Extracted from an earlier private project where the suite was developed and road
 project-specific variants there (language-specific guardrails references, toolchain levers) are
 instances of this contract. It now governs several projects, including the desktop app that
 bundles it.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
