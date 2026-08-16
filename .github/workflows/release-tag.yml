@@ -1,0 +1,33 @@
+name: release-tag
+
+# Tags are a consequence of plugin.json's version field: on every merge to main,
+# create v<version> if it doesn't exist yet. Idempotent — an unchanged version is a no-op.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag plugin.json's version if new
+        run: |
+          ver=$(jq -r '.version // empty' .claude-plugin/plugin.json)
+          if [ -z "$ver" ]; then
+            echo "::error::no version in plugin.json"
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v$ver" >/dev/null 2>&1; then
+            echo "tag v$ver already exists — nothing to do"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag -a "v$ver" -m "agile-lifecycle v$ver"
+            git push origin "v$ver"
+            echo "created tag v$ver"
+          fi
