@@ -1,8 +1,11 @@
 {
   "name": "agile-lifecycle",
-  "version": "0.19.0",
+  "version": "0.19.1",
   "description": "An agile, TDD-disciplined development lifecycle for agent-driven projects: bootstrap-project establishes the contract, then write-stories → plan-cycles → implement-story build it, with fix-bug alongside. Skills are the procedure; each project supplies the specification (story format, guardrails, tech design).",
   "author": {
     "name": "Rob Rivera"
-  }
+  },
+  "repository": "https://github.com/rob-rivera/agile-lifecycle",
+  "homepage": "https://github.com/rob-rivera/agile-lifecycle",
+  "keywords": ["agile", "tdd", "lifecycle", "stories", "workflow", "process"]
 }

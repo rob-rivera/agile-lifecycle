@@ -144,8 +144,31 @@ judgment, not pattern-matching, and stays skill discipline.
 claude --plugin-dir /path/to/agile-lifecycle
 ```
 
-**Via marketplace** — add this repo to a marketplace and `/plugin install agile-lifecycle`, or use
-the `claude plugin` CLI. Skills are then invocable as `agile-lifecycle:write-stories`, etc.
+**Via marketplace** — this repo is its own marketplace (`.claude-plugin/marketplace.json` lists
+itself). With access to the GitHub repo:
+
+```sh
+/plugin marketplace add rob-rivera/agile-lifecycle
+/plugin install agile-lifecycle@agile-lifecycle
+```
+
+Skills are then invocable as `agile-lifecycle:write-stories`, etc. Updates ship by version bump —
+installed copies update when `plugin.json`'s `version` changes. Requires `jq` on PATH for the
+hooks (they no-op silently without it); hook scripts assume a POSIX shell with `bash` available.
+
+**Team auto-registration** — a project repo can check this into `.claude/settings.json` so
+collaborators who trust the folder get the marketplace registered automatically:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "agile-lifecycle": {
+      "source": { "source": "github", "repo": "rob-rivera/agile-lifecycle" }
+    }
+  },
+  "enabledPlugins": { "agile-lifecycle@agile-lifecycle": true }
+}
+```
 
 **Embedded** — an app wrapping the Claude Code CLI can bundle this repo and pass `--plugin-dir` at
 spawn, shipping the lifecycle with the app (no user installation).

@@ -1,0 +1,14 @@
+{
+  "name": "agile-lifecycle",
+  "owner": {
+    "name": "Rob Rivera"
+  },
+  "description": "Marketplace for the agile-lifecycle plugin — this repo lists itself.",
+  "plugins": [
+    {
+      "name": "agile-lifecycle",
+      "source": "./",
+      "description": "An agile, TDD-disciplined development lifecycle for agent-driven projects: bootstrap skills establish the contract, write-stories → plan-cycles → implement-story build it, with fix-bug, refactor-pass, spike, and change-request alongside."
+    }
+  ]
+}
