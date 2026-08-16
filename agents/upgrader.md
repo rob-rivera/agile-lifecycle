@@ -33,10 +33,15 @@ Return a compact report, nothing else:
   `skills: [frontend-design]` block (even commented) and the project observably has a user-facing
   frontend, report the offer with the evidence (what makes it UI-facing) and the enable steps
   (uncomment in both implementer templates + verify `frontend-design@claude-plugins-official` is
-  installed — frontmatter absence is silent — + a Direction-note line). If the preload is already
-  enabled but `docs/design.md` has no **Look & feel** section, that is its own offer: the
-  look-and-feel definition (design decisions recorded once, not re-derived per cycle). Report
-  `none` explicitly.
+  installed — frontmatter absence is silent — + a Direction-note line). **A recorded alternative
+  choice suppresses this offer entirely**: a `skills:` block in the implementer files naming
+  *any* design skill (a project-local `tui-design` counts exactly as much as `frontend-design`),
+  or a `UI craft:` line in `tech-design.md`'s Direction note (including one recording a decline
+  — "UI craft: none, declined <date>"). A deliberate different answer is a choice made, not a
+  gap — never offer a second design skill beside it. If *a* design-skill preload is enabled
+  (whichever skill) but `docs/design.md` has no **Look & feel** section, that is its own offer:
+  the look-and-feel definition (design decisions recorded once, not re-derived per cycle).
+  Report `none` explicitly.
 - `instruction-conflicts` — every instruction surface beyond the root: nested `CLAUDE.md`
   (vendored/pulled subtrees included), `CLAUDE.local.md`, nested `.claude/` trees (settings,
   agents, skills, hooks, commands). Classify each project-owned vs. vendored, and report every

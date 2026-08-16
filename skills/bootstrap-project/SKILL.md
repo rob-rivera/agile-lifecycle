@@ -162,6 +162,12 @@ on; the invariants outrank it everywhere. **Stop for approval.**
     choice as one line in `tech-design.md`'s Direction note ("UI craft: frontend-design,
     preloaded into implementers"). Design pressure is Green craft, scoped by the implementer
     template's own rule — it never touches story drafting or the §8 anchors.
+    **The slot is skill-agnostic**: a project may preload its own design skill instead (a TUI
+    game's `tui-design`, a plotting app's chart-craft skill) — same mechanics, same
+    verify-available caveat, recorded the same way ("UI craft: `<skill>`"). And record a decline
+    too ("UI craft: none, declined `<date>`"): the Direction-note line — whatever it says — is
+    what the upgrade path reads as *choice made*, so it never re-offers against a deliberate
+    answer.
     **When the preload is accepted, also offer the 🛑 look-and-feel definition** — design
     decisions made once here, never re-derived by each cycle's fresh implementer (per-cycle
     derivation drifts): run the `frontend-design` skill against the phase-1 brief to draft its
