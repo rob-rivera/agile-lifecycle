@@ -2,6 +2,21 @@
 
 A Claude Code plugin: an agile, TDD-disciplined development lifecycle for agent-driven projects.
 
+**Quickstart**
+
+```sh
+/plugin marketplace add rob-rivera/agile-lifecycle
+/plugin install agile-lifecycle@agile-lifecycle
+```
+
+Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
+`agile-lifecycle:bootstrap-legacy` (existing codebase), or `agile-lifecycle:bootstrap-prototype`
+(throwaway answer-in-code). The hooks require `jq` on PATH (they no-op silently without it).
+
+> **Maturity: pre-1.0, evolving.** The contract changes as it's road-tested; installed copies
+> update when the plugin version bumps, so upgrades are deliberate, never surprises. MIT-licensed.
+> Issues welcome; PRs by prior discussion, please — the suite's invariants are load-bearing.
+
 > **Status: greenfield and brownfield.** `bootstrap-project` establishes the contract in a fresh
 > project; `bootstrap-legacy` adopts it in an existing codebase (thin descriptive map, intent
 > interview, `observed`/`ratified` knowledge tags, honest lever baselines, safety-net Slice 0).
@@ -178,6 +193,7 @@ per-project customization mechanism.
 
 ## Origin
 
-Extracted from the territory-manager project, where the suite was developed and road-tested. The
-project-specific variants there (e.g. `rust-guardrails.md` references, Rust toolchain levers) are
-instances of this contract.
+Extracted from an earlier private project where the suite was developed and road-tested; the
+project-specific variants there (language-specific guardrails references, toolchain levers) are
+instances of this contract. It now governs several projects, including the desktop app that
+bundles it.
