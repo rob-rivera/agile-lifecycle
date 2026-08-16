@@ -1,0 +1,30 @@
+name: Friction or idea
+description: The procedure worked but fought you, or an improvement would help
+labels: [feedback]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Friction (worked as designed, cost too much)
+        - Idea (new capability or contract change)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      placeholder: "0.19.3"
+  - type: textarea
+    id: what
+    attributes:
+      label: What
+      description: The friction you hit, or the idea. Please don't paste private project content.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: What it cost you, or what it would enable

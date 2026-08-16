@@ -1,0 +1,44 @@
+name: Bug report
+description: A skill, hook, agent, or template misbehaved
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Tip: from any Claude Code session with the plugin loaded,
+        `agile-lifecycle:feedback` composes and files this for you.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: From `.claude-plugin/plugin.json`, or your project's `docs/.contract-version` stamp
+      placeholder: "0.19.3"
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Which skill / hook / agent / template
+      placeholder: "implement-story, cycle validation step"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Include the smallest reproduction you can. Please don't paste private project content.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Claude Code version, install channel (marketplace / --plugin-dir / bundled)
+      placeholder: "macOS 15, Claude Code 2.1.x, marketplace"
