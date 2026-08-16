@@ -1,0 +1,42 @@
+name: pr-checks
+
+# What can actually break in this repo: the four hook scripts (portability — they fail
+# open, so breakage is silent), the JSON manifests, and forgetting the version bump that
+# actually ships a content change to installed copies.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: JSON manifests parse
+        run: |
+          jq empty .claude-plugin/plugin.json
+          jq empty .claude-plugin/marketplace.json
+          jq empty templates/levers.json
+      - name: shellcheck the hooks (warning severity)
+        run: shellcheck -S warning hooks/*.sh
+      - name: Version-bump reminder (warns, never fails)
+        run: |
+          git fetch origin main
+          changed=$(git diff --name-only origin/main...HEAD -- skills/ agents/ hooks/ templates/ references/ .claude-plugin/plugin.json)
+          if [ -n "$changed" ]; then
+            base_ver=$(git show origin/main:.claude-plugin/plugin.json | jq -r .version)
+            pr_ver=$(jq -r .version .claude-plugin/plugin.json)
+            if [ "$base_ver" = "$pr_ver" ]; then
+              echo "::warning::Plugin content changed but version is still $pr_ver — installed copies only update on a version bump. Bump before release, or batch deliberately."
+            else
+              echo "version: $base_ver -> $pr_ver"
+            fi
+          else
+            echo "no plugin-content changes"
+          fi
