@@ -46,9 +46,15 @@ Return a compact report, nothing else:
   and the project observably has a production service surface (a served API, a deployed
   long-running process — cite the evidence), offer the budgets question: ratify the numbers as
   resource `LAW-*`s, seed `bench`, consider an environment-parity law, note §5's
-  budgeted-surfaces gate. **The same suppression rule applies**: any of the three markers —
-  a `bench` lever, a resource `LAW-*`, or a recorded `Resource budgets: none declared` line —
-  is a choice made; never re-ask against it.
+  budgeted-surfaces gate. **This offer covers only the budget machinery** (bench, resource
+  laws, parity, the catalog's *Resource-budget smells*). **The same suppression rule applies**:
+  any of the three markers — a `bench` lever, a resource `LAW-*`, or a recorded
+  `Resource budgets: none declared` line — is a choice made; never re-ask against it.
+  A third, independent offer: **complexity smells** — if the project's `guardrails.md` lacks
+  the catalog's *Complexity smells* floor (accidental quadratic, expensive-call-in-a-loop,
+  unbounded growth, dev-shaped data), report the seeding offer **unconditionally**: complexity
+  is universal code judgment, gated on nothing — a declined budgets question never suppresses
+  it, and no production surface is required (a single-player game's frame loop qualifies).
   Report `none` explicitly.
 - `instruction-conflicts` — every instruction surface beyond the root: nested `CLAUDE.md`
   (vendored/pulled subtrees included), `CLAUDE.local.md`, nested `.claude/` trees (settings,

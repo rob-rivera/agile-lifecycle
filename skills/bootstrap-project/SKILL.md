@@ -70,8 +70,9 @@ don't know about. Divergent content is ratified side-by-side, never silently mer
 retirement or rename takes effect at the next session restart — say so.
 
 **Seed check (upgrade path):** if the project's guardrails catalog lacks the book-seeded smell
-floor (it grew entries organically from zero — the hole the seed exists to prevent), **offer the
-seeding step** as part of the upgrade: select from `references/code-smells.md` per the stack,
+floor — **any section's floor**: a catalog seeded before a catalog section existed (e.g. the
+complexity smells) lacks that section and gets the offer, independently of every other offer's
+answer — **offer the seeding step** as part of the upgrade: select from `references/code-smells.md` per the stack,
 express in its idiom, and **dedupe against the grown entries — grown entries always win** (they
 are project-ratified; seeds only fill the gaps around them). Same 🛑 selection approval as a
 fresh bootstrap. This is orchestrator work, not upgrader work — seeding is judgment. The same
@@ -131,8 +132,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   never role personas).
 - `docs/guardrails.md` — from the template. **Seed the smells**: select from
   `references/code-smells.md` the entries relevant to the stack, express each in the stack's idiom
-  (tell + cure, per the reference's per-language notes), one catalog for code and test smells
-  alike. **Seed the patterns thin**: from `references/patterns.md`, only the few entries the
+  (tell + cure, per the reference's per-language notes), one catalog for code, test, and
+  **complexity** smells alike — the complexity section is universal and rides this ordinary
+  seeding, never gated on the resource-budgets answer below. **Seed the patterns thin**: from `references/patterns.md`, only the few entries the
   stack will visibly need (its paradigm notes govern selection — first-class functions dissolve
   several; don't seed what the language already is), each with its context/forces line; the
   section's iron rule and naming discipline ride in from the template. 🛑 **Present the
@@ -143,8 +145,9 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   red). Optional thin `scripts/` wrappers for CLI convenience.
   **🛑 Ask the resource-budgets question here**: does this system have numbers it must hold in
   production — memory ceilings, latency bounds, throughput floors? Resource judgment errors are
-  invisible at development scale (see the catalog's *Resource & complexity smells*), so the
-  answer is contractual, not aspirational. **If yes**: ratify each number as a resource `LAW-*`
+  invisible at development scale (see the catalog's *Resource-budget smells*), so the answer is
+  contractual, not aspirational. This question governs **only the budget machinery** — the
+  *Complexity smells* were already seeded above and are unaffected by the answer. **If yes**: ratify each number as a resource `LAW-*`
   in `tech-design.md`, seed the `bench` lever (gates against production-shaped fixtures — null
   until real, a documented gap), consider an environment-parity law (dev containers run prod
   limits), and note that §5's budgeted-surfaces gate now binds. **If no** (a CLI, a local tool):
