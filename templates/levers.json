@@ -14,5 +14,9 @@
   "stop": {
     "command": "<kill everything `run` started — idempotent, exit 0 when nothing is running>",
     "what": "How to stop what `run` started. Explicit whenever `run` is long-running: without it, agents and runner UIs guess at process names and leave orphans (stale ports, zombie instances)."
+  },
+  "bench": {
+    "command": null,
+    "what": "The resource-budget gates: benchmarks asserting the project's ratified resource LAW-* budgets (memory, latency, allocations) against production-shaped fixtures. Null until budgets are ratified — a budget nobody has seen enforced is a wish. Remove this entry entirely if the project declared no budgets."
   }
 }

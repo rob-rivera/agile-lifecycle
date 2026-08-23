@@ -141,6 +141,15 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   and `run` commands (`run` launches the app itself — the walking skeleton gives it something to
   launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
   red). Optional thin `scripts/` wrappers for CLI convenience.
+  **🛑 Ask the resource-budgets question here**: does this system have numbers it must hold in
+  production — memory ceilings, latency bounds, throughput floors? Resource judgment errors are
+  invisible at development scale (see the catalog's *Resource & complexity smells*), so the
+  answer is contractual, not aspirational. **If yes**: ratify each number as a resource `LAW-*`
+  in `tech-design.md`, seed the `bench` lever (gates against production-shaped fixtures — null
+  until real, a documented gap), consider an environment-parity law (dev containers run prod
+  limits), and note that §5's budgeted-surfaces gate now binds. **If no** (a CLI, a local tool):
+  record the decline — "Resource budgets: none declared `<date>`" in the Direction note — and
+  drop the `bench` entry. Either way the recorded answer is what the upgrade path respects.
 - `.claude/agents/` — **the model policy**: instantiate every template in `templates/agents/`
   into the project (`implementer`, `implementer-heavy`, `diagnostician`, `researcher`). Two
   knobs, owned by the project, not the plugin:

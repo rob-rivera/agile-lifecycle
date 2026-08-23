@@ -114,6 +114,11 @@ long-running, the explicit `stop` command that kills what it started; write `lev
 the levers and record what actually happens** — failing tests, lint violations, flaky suites — as
 the documented baseline (in `tech-design.md` §7). **Bootstrap never fixes the baseline**; fixing
 is stories. A red baseline is information, not an emergency.
+**🛑 Ask the resource-budgets question** (as in `bootstrap-project`, with brownfield evidence:
+production incidents, OOM kills, and existing prod limits are *observed* budgets — record them
+as such, promote to resource `LAW-*` only on the human's ratification). If yes: seed the `bench`
+lever and note §5's budgeted-surfaces gate binds; if no: record the decline in the Direction
+note. The recorded answer is what the upgrade path respects.
 
 ### 7 — Mechanical contract (no persona)
 - `docs/story-format.md` — from the template, unchanged in structure.
