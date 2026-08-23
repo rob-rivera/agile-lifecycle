@@ -150,6 +150,10 @@ A story is done only when **every** item holds — treat it as a gate, not a gui
 - [ ] Every acceptance criterion is green across the applicable test layers (`tech-design.md`).
 - [ ] Each `AC-*` / `LAW-*` id is cited by the test(s) that satisfy it.
 - [ ] Both levers pass — the `test` and `lint` commands recorded in `levers.json`.
+- [ ] **Budgeted surfaces hold** *(only in projects with ratified resource budgets)*: a story
+  touching a surface governed by a resource `LAW-*` (memory, latency, allocations) also runs the
+  `bench` lever green. The budget is part of done, not a post-release discovery — a budget
+  nobody has seen enforced is a wish.
 - [ ] **Guardrail candidates recorded.** Any novel test/code/smell/pattern call not covered by
   `guardrails.md` is appended to its *Candidates* inbox — **or the story explicitly affirms
   "candidates: none."** Silence is not a pass; this is a required gate, not optional capture

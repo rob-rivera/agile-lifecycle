@@ -58,6 +58,25 @@ whether it lives in `src/` or `tests/` — one catalog, one candidates gate.
 | Obscure Test | Setup noise buries what's being asserted | Extract builders/helpers; arrange-act-assert visible |
 | General Fixture | One giant shared fixture for all tests | Minimal fixture per test |
 
+## Resource & complexity smells
+
+Judgment errors that are **invisible at development scale**: an accidental quadratic at n=200 is
+imperceptible; at production n it's an incident. Complexity errors are *data-shape* errors, and
+memory errors are *environment-parity* errors — neither has a witness until the project gives it
+one (production-shaped fixtures, prod-matched container limits, a `bench` lever gating ratified
+budgets). Seed these for any project with a production service surface.
+
+| Smell | The tell | Typical cure |
+| --- | --- | --- |
+| Accidental Quadratic | Nested iteration over the same collection; sort/lookup inside a loop | Hoist the sort; precompute an index/set; use the library's n·log n |
+| N+1 Query | One query per row of a parent result | Batch, join, or prefetch |
+| Load-Whole-Then-Filter | Reading a full file/table into memory to use a slice | Stream, paginate, push the predicate down |
+| Unbounded Growth | Cache, buffer, or memo with no cap or eviction | Bound it (LRU/TTL/high-water mark); make growth observable |
+| Chatty Serialization | The same payload encoded/decoded repeatedly across a boundary | Serialize once at the edge |
+| Dev-Shaped Data | Fixtures orders of magnitude below production n | Production-shaped fixtures; scale-proportional synthetic data in CI |
+| Dev-Shaped Environment | Local containers with unlimited memory while prod is capped | Run dev with prod's limits — dev should die the way prod dies |
+| Unwitnessed Budget | "Optimized"/"fast enough" as prose, with no executable gate | Ratify the number as a resource `LAW-*`; enforce it via the `bench` lever |
+
 ## Legacy-safety patterns (Feathers, *Working Effectively with Legacy Code*)
 
 Seeded into `guardrails.md` §2 (Patterns) by `bootstrap-legacy` — the moves that make changing

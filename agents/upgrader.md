@@ -41,6 +41,14 @@ Return a compact report, nothing else:
   gap — never offer a second design skill beside it. If *a* design-skill preload is enabled
   (whichever skill) but `docs/design.md` has no **Look & feel** section, that is its own offer:
   the look-and-feel definition (design decisions recorded once, not re-derived per cycle).
+  A second offer: **resource budgets** — if `levers.json` has no `bench` lever, `tech-design.md`
+  registers no resource `LAW-*`, and no `Resource budgets:` line exists in the Direction note,
+  and the project observably has a production service surface (a served API, a deployed
+  long-running process — cite the evidence), offer the budgets question: ratify the numbers as
+  resource `LAW-*`s, seed `bench`, consider an environment-parity law, note §5's
+  budgeted-surfaces gate. **The same suppression rule applies**: any of the three markers —
+  a `bench` lever, a resource `LAW-*`, or a recorded `Resource budgets: none declared` line —
+  is a choice made; never re-ask against it.
   Report `none` explicitly.
 - `instruction-conflicts` — every instruction surface beyond the root: nested `CLAUDE.md`
   (vendored/pulled subtrees included), `CLAUDE.local.md`, nested `.claude/` trees (settings,
