@@ -152,6 +152,16 @@ both).
 plugin knowledge, not project artifacts — the ladder to the giants' shoulders (Fowler/Beck,
 Meszaros, GoF/Kerievsky, and the sensibility roster's corpus anchors).
 
+**Resource budgets are first-class.** A system's production numbers — memory ceilings, latency
+bounds, throughput floors — are ratified as resource `LAW-*`s, enforced by the `bench` lever
+(budget gates run against production-shaped fixtures), and bound into the definition of done:
+story-format §5's budgeted-surfaces gate requires any story touching a governed surface to run
+`bench` green. Both bootstraps ask the budgets question at lever instantiation — a decline is
+recorded, and the upgrade path respects the recorded answer either way. The smell catalog's
+*Resource & complexity smells* section names the judgment errors that are invisible at
+development scale — accidental quadratics, dev-shaped data, dev-shaped environments, unwitnessed
+budgets — each with its tell and cure.
+
 Conventions carried across projects:
 
 - **Ids.** Work items are `STORY-nnnn` / `BUG-nnnn` / `REF-nnnn` / `SPIKE-nnnn`; a story's
