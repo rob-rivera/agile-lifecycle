@@ -157,10 +157,12 @@ bounds, throughput floors — are ratified as resource `LAW-*`s, enforced by the
 (budget gates run against production-shaped fixtures), and bound into the definition of done:
 story-format §5's budgeted-surfaces gate requires any story touching a governed surface to run
 `bench` green. Both bootstraps ask the budgets question at lever instantiation — a decline is
-recorded, and the upgrade path respects the recorded answer either way. The smell catalog's
-*Resource & complexity smells* section names the judgment errors that are invisible at
-development scale — accidental quadratics, dev-shaped data, dev-shaped environments, unwitnessed
-budgets — each with its tell and cure.
+recorded, and the upgrade path respects the recorded answer either way. The smell catalog
+splits the adjacent territory deliberately: *Complexity smells* (accidental quadratics,
+expensive calls in loops, dev-shaped data) are **universal** — seeded in every project
+regardless of the budgets answer, because a single-player game's frame loop cares as much as a
+server — while *Resource-budget smells* (dev-shaped environments, unwitnessed budgets) ship
+only with the budget machinery.
 
 Conventions carried across projects:
 
