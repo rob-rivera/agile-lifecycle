@@ -184,9 +184,10 @@ Conventions carried across projects:
 
 ## Hooks (ship with the plugin)
 
-Prose asks; hooks enforce. Four ship out of the box, all **lifecycle-guarded** (silent no-op in
-any project without `docs/story-format.md`) and **fail-open** (any script surprise → exit 0;
-requires `jq`, silently inactive without it):
+Prose asks; hooks enforce. Five ship out of the box, all **fail-open** (any script surprise →
+exit 0; requires `jq`, silently inactive without it). The first four are **lifecycle-guarded**
+(silent no-op in any project without `docs/story-format.md`); the sweep guard deliberately is
+not — safety travels with the plugin, not with the contract:
 
 - **Stop — the ledger reconciliation gate.** A turn cannot end while the books don't balance:
   STORY/BUG/REF files without ledger rows, or rows without files, block the stop once with a
@@ -199,6 +200,12 @@ requires `jq`, silently inactive without it):
   reminder immediately; the Stop gate is the backstop.
 - **PreToolUse — the branch invariant.** `git commit` on main surfaces a confirmation (ask, not
   deny — deliberate main commits exist).
+- **PreToolUse — the sweep guard.** Recursive filesystem walks from a global root (`find /`,
+  `du ~`, `rg` over `/Users`, a Read/Glob/Grep rooted at home or `/Volumes`) are denied with a
+  message naming the scoped alternative. Born of a real incident: one `find / -iname` for a file
+  sitting in `~/.cargo/registry` swept the whole disk, and the OS billed every privacy prompt to
+  the app embedding the session. Surgical on purpose — specific absolute paths, `git -C`, and
+  scoped searches all pass untouched.
 
 Not hooked, deliberately: the candidates/debt affirmations — verifying an affirmation is
 judgment, not pattern-matching, and stays skill discipline.
