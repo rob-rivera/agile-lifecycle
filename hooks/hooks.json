@@ -40,6 +40,15 @@
             "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/main-commit-ask.sh\""
           }
         ]
+      },
+      {
+        "matcher": "Bash|Read|Glob|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/sweep-guard.sh\""
+          }
+        ]
       }
     ]
   }
