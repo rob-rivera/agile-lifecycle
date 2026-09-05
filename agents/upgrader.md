@@ -23,6 +23,10 @@ Return a compact report, nothing else:
   an error).
 - `missing` — pieces to instantiate, each with its template source and any placeholder values you
   need decided (project name, model mapping, smell selection — decisions are the human's).
+  `scripts/lever` counts as a piece (contract since v0.24: copy + `chmod +x`, no decisions), and
+  implementer agent files that predate it (no `scripts/lever` rule, no `outcome` report field)
+  are reported here with the additive patch from the current templates — the project's `model:`
+  and `skills:` lines stay untouched.
 - `backfill` — for a new `docs/ledger.md`: the rows derivable from `docs/stories/`,
   `docs/bugs/`, `docs/refactors/`, `docs/spikes/` and `git log` (id, title, inferred status,
   evidence). For a new `docs/debt.md`: nothing — debt is never inferred, only observed going

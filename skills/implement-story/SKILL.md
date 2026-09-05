@@ -63,10 +63,13 @@ project's model policy, set at bootstrap; if the project defines no implementer 
 general-purpose sub-agent inheriting the session model). Seed it with: the cycle's
 **Red / Green / Refactor** spec, its **lane**, the relevant `guardrails.md` refs, and the
 instruction to follow **canonical Red→Green→Refactor** and return a **structured report**:
+- `outcome` — first line: `green`, or `failed` / `blocked` / `lever-hang` / `mis-specified`.
 - `summary` — one line.
 - `red` — evidence the test/gate **failed first** (the failing output).
-- `green` — evidence it now passes, **and that the full lint + test levers pass** — not just the new
-  test. ("Green" = both levers green; running one and eyeballing the other is not a pass.)
+- `green` — evidence it now passes, **and the `LEVER test VERDICT=PASS` / `LEVER lint VERDICT=PASS`
+  lines from `scripts/lever`** — not just the new test. ("Green" = both verdicts PASS; running one
+  and eyeballing the other is not a pass, and the SubagentStop gate blocks a green claim the
+  sub-agent's own tool results don't back.)
 - `scope` — attestation that it implemented **only** what the pinned Red requires; any behavior it
   consciously left for a later cycle is named here.
 - `files` — files touched.
@@ -91,9 +94,12 @@ in validation like any other unpinned initiative.
 ### 2 — 🛑 Independently validate (mechanical, not a re-read)
 Run the gates the sub-agent does not control (the levers — the `test` and `lint` commands recorded
 in `levers.json` at the repo root):
-- [ ] The **test lever** — **full** suite, from clean (catches regressions, not just the new test).
+- [ ] The **test lever** — `scripts/lever test`: the **full** suite, from clean (catches
+      regressions, not just the new test); foreground, Bash `timeout` above the lever's cap.
       *(Gate lane: the relevant build/script gate.)*
-- [ ] The **lint lever** — passes (format + lint + any architecture checks).
+- [ ] The **lint lever** — `scripts/lever lint` ends in `VERDICT=PASS` (format + lint + any
+      architecture checks). A HANG or CAP verdict on either lever is the orchestrator's to fix
+      (step 4) — never bypass the runner to make it go away.
 - [ ] **Scope & restraint check** — the diff touches only this cycle's expected files/layers (no
       cross-cycle creep) **and implements only what the pinned Red requires**. Behavior no test in
       *this* cycle pins is untested code or a stolen future red — reject it, even if it looks correct.
@@ -123,6 +129,14 @@ model policy's stronger tier), seeding it with the accumulated failure feedback 
 cycle or return a mis-specification verdict. If it still won't close, **stop and route back to
 `plan-cycles`/`write-stories`** — a cycle that won't close is a signal the plan or the sizing was
 wrong, not something to grind on. Escalate to the user.
+
+**A lever that won't finish is not a failed cycle.** `outcome: lever-hang` (a `HANG` or `CAP`
+verdict from `scripts/lever`, with its state dump) never counts against the bounded retries and
+never escalates — nothing about the cycle is known to be wrong yet. Read the evidence: a `HANG`
+names what the process was waiting on (watch mode, a prompt on stdin, a stale port from `run` —
+kill it with `stop`); a `CAP` says the suite was still working (raise `cap` in `levers.json`, or
+the suite is too slow for a per-cycle gate — record that as debt). Fix the lever — a
+`levers.json` edit, committed on its own — and re-dispatch the **same** cycle.
 
 ### 5 — 🛑 User checkpoint (calibratable cadence)
 Announce briefly what the cycle did, then check whether to proceed. **Cadence is adjustable** —

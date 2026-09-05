@@ -36,15 +36,27 @@ pinned Red, a one-line Green intent, its lane (behavioral or gate), and referenc
   screens, or states. If your seed cites a recorded **Look & feel** section (`docs/design.md`),
   its tokens are **requirements**: build within the recorded palette, type, and direction — never
   re-derive them, however strongly the design skill's taste pulls elsewhere.
-- **Run both levers** (the `test` and `lint` commands in `levers.json`, or the raw toolchain gates
-  the orchestrator names) before reporting green. Green = both levers pass, not just the new test.
+- **Run both levers through the runner** — `scripts/lever test` and `scripts/lever lint` (or the
+  raw toolchain gates the orchestrator names while `levers.json` is still unproven) — before
+  reporting green. Run it in the **foreground** with the Bash tool's `timeout` above the lever's
+  cap (default cap 540s → `timeout: 570000` or more; the lever guard hook rejects less). It ends in
+  one verdict line — `LEVER <name> VERDICT=PASS|FAIL|HANG|CAP` — and green means **PASS for
+  both**, not just the new test. Never run the bare full-suite command (the hook denies it), and
+  never background a lever and report before its verdict is in: a report that claims green
+  without a PASS verdict among this session's tool results is blocked at your stop.
+  **HANG or CAP is a finding, not an obstacle**: do not re-run it unchanged and do not raise the
+  cap yourself — quote the state dump and report `outcome: lever-hang`; the orchestrator owns
+  the lever.
 
 Return a **structured report** — the orchestrator validates independently, so report evidence, not
 assurances:
 
+- `outcome` — first line: `green`, or `failed` / `blocked` / `lever-hang` / `mis-specified`.
+  Anything but `green` is an honest report and routes; a green claim without PASS verdicts does
+  not close.
 - `summary` — one line.
 - `red` — the failing output, witnessed.
-- `green` — evidence the pinned test passes **and** both levers pass.
+- `green` — evidence the pinned test passes **and** the `VERDICT=PASS` lines for both levers.
 - `scope` — attestation you implemented only what the pinned Red requires; anything deferred, named.
 - `files` — files touched.
 - `candidates` — novel test/code/smell cases for the guardrails inbox, or the explicit word "none".

@@ -1,7 +1,9 @@
 {
   "test": {
     "command": "<the full-suite test command>",
-    "what": "One line: what this proves and how to read the result."
+    "what": "One line: what this proves and how to read the result. Agents run every verdict lever through scripts/lever <name>; `stall` = seconds of no output and no CPU before it declares HANG, `cap` = hard ceiling in seconds (keep it under the Bash tool timeout agents pass — the lever guard hook checks).",
+    "stall": 120,
+    "cap": 540
   },
   "lint": {
     "command": null,

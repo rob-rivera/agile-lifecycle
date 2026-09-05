@@ -49,6 +49,26 @@
             "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/sweep-guard.sh\""
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/lever-guard.sh\""
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "implementer|implementer-heavy",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/lever-verdict-gate.sh\""
+          }
+        ]
       }
     ]
   }
