@@ -228,6 +228,10 @@ not with the contract:
 Not hooked, deliberately: the candidates/debt affirmations — verifying an affirmation is
 judgment, not pattern-matching, and stays skill discipline.
 
+Design decisions with a history worth not re-litigating live in `docs/decisions/` — one record
+per decision: the incident, every option weighed with the argument that won or lost, what
+shipped, what was deferred with the design sketched, known gaps, and what would reopen it.
+
 ## Install
 
 **Via marketplace** (recommended) — this repo is its own marketplace
