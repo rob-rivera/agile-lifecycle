@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+# lever — run one lever from levers.json under a watchdog and end with ONE verdict line.
+#
+#   scripts/lever <name> [--stall S] [--cap S] [--tail N] [--verbose] [-- extra args...]
+#   scripts/lever                      # list the levers
+#
+# Why this exists: a test suite that never exits (watch mode, a prompt on stdin, a stale
+# server holding a port) looks exactly like a slow one from the outside, and a tool timeout
+# kills the process at the moment the evidence gets interesting. This wrapper runs the lever
+# in the FOREGROUND, in its own process group with stdin closed, and watches two things every
+# few seconds: is the output still growing, and is the process group still burning CPU? It
+# always returns within `cap` seconds, and its last line is a verdict an agent or a hook can
+# read without judgment:
+#
+#   LEVER <name> VERDICT=PASS exit=0 elapsed=142s log=<path>              exit 0
+#   LEVER <name> VERDICT=FAIL exit=1 elapsed=97s log=<path>               exit 1
+#   LEVER <name> VERDICT=HANG stalled=120s elapsed=310s log=<path>        exit 3   (no output, no CPU for `stall`s)
+#   LEVER <name> VERDICT=CAP elapsed=540s progressing=yes log=<path>      exit 4   (still working at the cap)
+#   LEVER <name> VERDICT=GAP                                              exit 5   (command is null — a documented gap)
+#   usage / configuration errors                                          exit 2
+#
+# HANG and CAP are different findings: HANG means the process stopped working (the state
+# dump names what it was waiting on); CAP means it was still working and the cap is too low.
+# On anything but PASS the last lines of the log are printed above the verdict as evidence.
+#
+# Per-lever defaults live beside the command in levers.json (all optional):
+#   { "test": { "command": "...", "what": "...", "stall": 120, "cap": 540, "tail": 60 } }
+# Keep `cap` below the Bash tool timeout the agent runs this with (the plugin's lever guard
+# hook checks that), or the tool kills the wrapper before it can speak.
+#
+# Extra args after `--` are appended to the command (e.g. a path filter for a scoped run); the
+# verdict is then labelled `<name>[scoped]` — evidence for a red or a quick green, never the lever.
+# Full output always lands in the log; the wrapper prints only the tail unless --verbose.
+# Portable to bash 3.2 (macOS) and Linux; needs jq.
+
+set -u
+
+usage() {
+  sed -n '2,4p' "$0" | sed 's/^# \{0,1\}//'
+  exit 2
+}
+
+command -v jq >/dev/null 2>&1 || { echo "lever: jq is required" >&2; exit 2; }
+
+# ---- locate levers.json (walk up from the cwd; $LEVERS_JSON overrides) --------------------
+levers="${LEVERS_JSON:-}"
+if [ -z "$levers" ]; then
+  d=$(pwd)
+  while [ -n "$d" ] && [ "$d" != "/" ]; do
+    if [ -f "$d/levers.json" ]; then levers="$d/levers.json"; break; fi
+    d=$(dirname "$d")
+  done
+  [ -n "$levers" ] || [ ! -f /levers.json ] || levers=/levers.json
+fi
+[ -n "$levers" ] && [ -f "$levers" ] || { echo "lever: no levers.json found from $(pwd) upward" >&2; exit 2; }
+root=$(dirname "$levers")
+
+# ---- args --------------------------------------------------------------------------------
+name=""; stall_opt=""; cap_opt=""; tail_opt=""; verbose=0; extra=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --stall) shift; stall_opt="${1:-}";;
+    --cap) shift; cap_opt="${1:-}";;
+    --tail) shift; tail_opt="${1:-}";;
+    --verbose|-v) verbose=1;;
+    --) shift; while [ $# -gt 0 ]; do extra="$extra $(printf '%q' "$1")"; shift; done; break;;
+    -h|--help) usage;;
+    -*) echo "lever: unknown option $1" >&2; usage;;
+    *) if [ -z "$name" ]; then name="$1"; else echo "lever: unexpected argument $1 (use -- before extra args)" >&2; usage; fi;;
+  esac
+  shift
+done
+
+if [ -z "$name" ]; then
+  echo "levers in $levers:"
+  jq -r 'to_entries[] | "  \(.key)\t\(if (.value|type)=="string" then .value else (.value.command // "null (documented gap)") end)"' "$levers" 2>/dev/null
+  exit 2
+fi
+
+jq -e --arg n "$name" 'has($n)' "$levers" >/dev/null 2>&1 || { echo "lever: no lever named '$name' in $levers" >&2; exit 2; }
+cmd=$(jq -r --arg n "$name" '.[$n] | if type=="string" then . else (.command // empty) end' "$levers" 2>/dev/null)
+if [ -z "$cmd" ]; then
+  echo "LEVER $name VERDICT=GAP"
+  exit 5
+fi
+opt() { jq -r --arg n "$name" --arg k "$1" '.[$n] | if type=="object" then (.[$k] // empty) else empty end' "$levers" 2>/dev/null; }
+# A run with extra args is a SCOPED run: its verdict is labelled `<name>[scoped]` so nothing
+# reading verdicts (the SubagentStop gate) mistakes it for the full lever.
+label="$name"; [ -n "$extra" ] && label="$name[scoped]"
+stall="${stall_opt:-$(opt stall)}"; stall="${stall:-120}"
+cap="${cap_opt:-$(opt cap)}"; cap="${cap:-540}"
+tail_n="${tail_opt:-$(opt tail)}"; tail_n="${tail_n:-60}"
+tick=2
+
+# ---- log ----------------------------------------------------------------------------------
+tmp="${TMPDIR:-/tmp}"; tmp="${tmp%/}"
+logdir="${LEVER_LOG_DIR:-$tmp/lever-$(printf '%s' "$root" | cksum | cut -d' ' -f1)}"
+mkdir -p "$logdir" 2>/dev/null || logdir="$tmp"
+log="$logdir/$name.log"
+rcfile="$logdir/$name.rc"
+: >"$log"; rm -f "$rcfile"
+
+# ---- process-group helpers ----------------------------------------------------------------
+# Cumulative CPU seconds across the group, parsed from ps's TIME column
+# ([DD-]HH:MM:SS on Linux, MMM:SS.ss on macOS). Any change means the group is working.
+group_cpu() {
+  ps -axo pgid=,time= 2>/dev/null | awk -v g="$1" '
+    $1 == g {
+      t = $2; days = 0
+      if (index(t, "-") > 0) { split(t, dd, "-"); days = dd[1]; t = dd[2] }
+      n = split(t, f, ":"); s = 0; m = 1
+      for (i = n; i >= 1; i--) { s += f[i] * m; m *= 60 }
+      total += s + days * 86400
+    }
+    END { printf "%.2f\n", total + 0 }'
+}
+group_state() {
+  ps -axo pid=,pgid=,stat=,time=,command= 2>/dev/null | awk -v g="$1" '$2 == g { $2 = ""; print "  " substr($0, 1, 160) }'
+}
+kill_group() {
+  kill -TERM -- "-$1" 2>/dev/null
+  sleep 1
+  kill -KILL -- "-$1" 2>/dev/null
+}
+
+# ---- launch: own process group, stdin closed, output to the log ---------------------------
+set -m
+( cd "$root" && bash -c "$cmd$extra" </dev/null >"$log" 2>&1; echo $? >"$rcfile" ) </dev/null >/dev/null 2>&1 &
+pid=$!
+set +m
+pgid=$pid
+trap 'kill_group "$pgid"; echo "LEVER $label VERDICT=ABORTED elapsed=$(( $(date +%s) - start ))s log=$log"; exit 130' INT TERM HUP
+
+start=$(date +%s)
+echo "LEVER $label RUN cmd=[$cmd$extra] stall=${stall}s cap=${cap}s log=$log"
+
+# ---- watchdog -----------------------------------------------------------------------------
+last_size=0; last_cpu=$(group_cpu "$pgid"); last_progress=$start; verdict=""
+while [ ! -s "$rcfile" ]; do
+  sleep "$tick"
+  now=$(date +%s)
+  size=$(wc -c <"$log" 2>/dev/null | tr -d ' ')
+  cpu=$(group_cpu "$pgid")
+  if [ "${size:-0}" != "$last_size" ] || [ "$cpu" != "$last_cpu" ]; then
+    last_size="${size:-0}"; last_cpu="$cpu"; last_progress=$now
+  fi
+  [ -s "$rcfile" ] && break
+  if [ $((now - last_progress)) -ge "$stall" ]; then verdict=HANG; break; fi
+  if [ $((now - start)) -ge "$cap" ]; then verdict=CAP; break; fi
+done
+elapsed=$(( $(date +%s) - start ))
+
+show_tail() {
+  echo "--- last $1 lines of $log ---"
+  tail -n "$1" "$log" 2>/dev/null
+  echo "--- end ---"
+}
+
+if [ -n "$verdict" ]; then
+  state=$(group_state "$pgid")
+  kill_group "$pgid"
+  wait "$pid" 2>/dev/null
+  if [ "$verbose" = 1 ]; then cat "$log"; else show_tail "$tail_n"; fi
+  if [ "$verdict" = HANG ]; then
+    echo "--- process group at stall (pid pgid stat cputime command) ---"
+    printf '%s\n' "$state"
+    echo "LEVER $label VERDICT=HANG stalled=${stall}s elapsed=${elapsed}s log=$log"
+    exit 3
+  fi
+  echo "LEVER $label VERDICT=CAP elapsed=${elapsed}s progressing=yes cap=${cap}s log=$log"
+  exit 4
+fi
+
+wait "$pid" 2>/dev/null
+rc=$(tr -d '[:space:]' <"$rcfile" 2>/dev/null); rc="${rc:-1}"
+trap - INT TERM HUP
+if [ "$rc" = 0 ]; then
+  if [ "$verbose" = 1 ]; then cat "$log"; else show_tail 15; fi
+  echo "LEVER $label VERDICT=PASS exit=0 elapsed=${elapsed}s log=$log"
+  exit 0
+fi
+if [ "$verbose" = 1 ]; then cat "$log"; else show_tail "$tail_n"; fi
+echo "LEVER $label VERDICT=FAIL exit=$rc elapsed=${elapsed}s log=$log"
+exit 1

@@ -110,10 +110,13 @@ says what new code aims at. **Stop for the user's choice.**
 
 ### 6 — Levers & the honest baseline
 Discover the real test/lint/run commands (recon usually found them) — and when `run` is
-long-running, the explicit `stop` command that kills what it started; write `levers.json`. **Run
-the levers and record what actually happens** — failing tests, lint violations, flaky suites — as
-the documented baseline (in `tech-design.md` §7). **Bootstrap never fixes the baseline**; fixing
-is stories. A red baseline is information, not an emergency.
+long-running, the explicit `stop` command that kills what it started; write `levers.json` and
+seed `scripts/lever` from `templates/scripts/lever` (`chmod +x`). **Run the levers through it and
+record what actually happens** — failing tests, lint violations, flaky suites — as the documented
+baseline (in `tech-design.md` §7). **Bootstrap never fixes the baseline**; fixing is stories. A
+red baseline is information, not an emergency — and so is a `HANG` verdict: a suite that needs
+watch mode switched off or a port freed is recorded as found, with `stall`/`cap` tuned in
+`levers.json` so the runner's verdicts are trustworthy from day one.
 **🛑 Ask the resource-budgets question** (as in `bootstrap-project`, with brownfield evidence:
 production incidents, OOM kills, and existing prod limits are *observed* budgets — record them
 as such, promote to resource `LAW-*` only on the human's ratification). If yes: seed the `bench`

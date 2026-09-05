@@ -44,7 +44,8 @@ Name the tools that implement each layer in this stack. -->
 
 <!-- The stack (languages, frameworks, build). The levers — the project's test, lint, and run
 commands — are recorded machine-readably in `levers.json` at the repo root; this section explains
-them. Optional: thin `scripts/` wrappers for CLI convenience. -->
+them. `scripts/lever <name>` is how agents run them (foreground watchdog, one verdict line; its
+`stall`/`cap` knobs live in the manifest); other thin `scripts/` wrappers are optional. -->
 
 ## Change Log
 

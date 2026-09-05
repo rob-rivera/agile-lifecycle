@@ -149,7 +149,8 @@ move); fixtures before generators is a **D** split that unblocks a thread.
 A story is done only when **every** item holds — treat it as a gate, not a guideline:
 - [ ] Every acceptance criterion is green across the applicable test layers (`tech-design.md`).
 - [ ] Each `AC-*` / `LAW-*` id is cited by the test(s) that satisfy it.
-- [ ] Both levers pass — the `test` and `lint` commands recorded in `levers.json`.
+- [ ] Both levers pass — `scripts/lever test` and `scripts/lever lint` (the commands recorded in
+  `levers.json`) end in `VERDICT=PASS`.
 - [ ] **Budgeted surfaces hold** *(only in projects with ratified resource budgets)*: a story
   touching a surface governed by a resource `LAW-*` (memory, latency, allocations) also runs the
   `bench` lever green. The budget is part of done, not a post-release discovery — a budget

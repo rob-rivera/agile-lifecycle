@@ -132,7 +132,7 @@ should say so):
 | **Tech design** — architecture boundaries + test-layers section | `docs/tech-design.md` | all |
 | **Domain design doc** — settled product/system rules | `docs/design.md` | write-stories, fix-bug |
 | **Roadmap / slice plan** | `docs/slice-plan.md` | write-stories (optional origin) |
-| **Lever manifest** — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge), and projects with ratified resource budgets add `bench` (the budget gates — see the §5 budgeted-surfaces clause); projects may add more (seed from `templates/levers.json`) | `levers.json` | implement-story, fix-bug (raw toolchain gates until defined; `scripts/` wrappers optional) |
+| **Lever manifest** — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge), and projects with ratified resource budgets add `bench` (the budget gates — see the §5 budgeted-surfaces clause); projects may add more (seed from `templates/levers.json`). **`scripts/lever`** is the lever runner seeded beside it (from `templates/scripts/lever`): foreground, own process group, stdin closed, a watchdog on output growth and CPU, one verdict line — `PASS`/`FAIL`/`HANG`/`CAP` — with per-lever `stall`/`cap` knobs in the manifest | `levers.json`, `scripts/lever` | implement-story, fix-bug (raw toolchain gates until defined); the lever guard + verdict gate hooks |
 | **Model policy** — sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
 | **Work ledger** — one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention | `docs/ledger.md` | all build/fix/refactor skills |
 | **Debt registry** — observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
@@ -177,6 +177,11 @@ Conventions carried across projects:
   in place — it stops and routes to a human decision, because amending a law is a ratification,
   not an edit.
 - **Branch discipline.** Per-cycle commits on story/fix branches — never `main`.
+- **Levers run through the runner.** `scripts/lever <name>` is how any agent runs a verdict
+  lever; a report's green is its `VERDICT=PASS` lines. `HANG` (stopped working — the state dump
+  says on what) and `CAP` (still working at the ceiling) are different findings, and neither is
+  a failed cycle: a lever that won't finish routes to the orchestrator as a `levers.json` fix,
+  never into retries.
 - **Disposable plans.** The cycle breakdown is burned at story close; durable knowledge lives in
   the docs and the ledger, not in plans.
 - **The affirmative candidates gate.** "candidates: none" is a required statement, not a
@@ -184,10 +189,11 @@ Conventions carried across projects:
 
 ## Hooks (ship with the plugin)
 
-Prose asks; hooks enforce. Five ship out of the box, all **fail-open** (any script surprise →
-exit 0; requires `jq`, silently inactive without it). The first four are **lifecycle-guarded**
-(silent no-op in any project without `docs/story-format.md`); the sweep guard deliberately is
-not — safety travels with the plugin, not with the contract:
+Prose asks; hooks enforce. Seven ship out of the box, all **fail-open** (any script surprise →
+exit 0; requires `jq`, silently inactive without it). Four are **lifecycle-guarded** (silent
+no-op in any project without `docs/story-format.md`); the two lever hooks key on `levers.json`
+instead; the sweep guard deliberately is guarded by nothing — safety travels with the plugin,
+not with the contract:
 
 - **Stop — the ledger reconciliation gate.** A turn cannot end while the books don't balance:
   STORY/BUG/REF files without ledger rows, or rows without files, block the stop once with a
@@ -206,9 +212,25 @@ not — safety travels with the plugin, not with the contract:
   sitting in `~/.cargo/registry` swept the whole disk, and the OS billed every privacy prompt to
   the app embedding the session. Surgical on purpose — specific absolute paths, `git -C`, and
   scoped searches all pass untouched.
+- **PreToolUse — the lever guard.** In a project with `levers.json`, the bare full-suite
+  `test`/`lint`/`bench` command is denied and pointed at `scripts/lever <name>` (scoped runs —
+  one test, one file — pass: a witnessed red needs them), and a runner call whose Bash timeout
+  is below the lever's cap is denied with the number to pass. Born of a real incident: an
+  implementer whose suite outran the tool timeout learned to background it, and reported green
+  before the run had finished.
+- **SubagentStop — the lever verdict gate.** An `implementer`/`implementer-heavy` cannot return
+  while claiming green unless its own transcript holds a `LEVER <name> VERDICT=PASS` **tool
+  result** for every required lever, latest verdict winning — prose is not consulted when the
+  transcript is available. An honest non-green `outcome:` (`failed`, `blocked`, `lever-hang`,
+  `mis-specified`) passes, and the orchestrator routes it. What the gate refuses is the third
+  thing: a green claim the harness's own record doesn't back.
 
 Not hooked, deliberately: the candidates/debt affirmations — verifying an affirmation is
 judgment, not pattern-matching, and stays skill discipline.
+
+Design decisions with a history worth not re-litigating live in `docs/decisions/` — one record
+per decision: the incident, every option weighed with the argument that won or lost, what
+shipped, what was deferred with the design sketched, known gaps, and what would reopen it.
 
 ## Install
 

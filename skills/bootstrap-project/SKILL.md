@@ -142,7 +142,12 @@ on; the invariants outrank it everywhere. **Stop for approval.**
 - `levers.json` (repo root) — the machine-readable lever manifest: the project's `test`, `lint`,
   and `run` commands (`run` launches the app itself — the walking skeleton gives it something to
   launch). Provisional until Slice 0 proves them (a lever nobody has seen fail is an unwitnessed
-  red). Optional thin `scripts/` wrappers for CLI convenience.
+  red). **Seed `scripts/lever`** from `templates/scripts/lever` (copy, `chmod +x`): the lever
+  runner — it runs a lever in the foreground under a watchdog (output growth + CPU) and ends in
+  one verdict line (`PASS` / `FAIL` / `HANG` / `CAP`) that implementers report and the plugin's
+  hooks enforce. Set each verdict lever's `stall` (silence before `HANG`, default 120s) and `cap`
+  (hard ceiling, default 540s — keep it under the Bash tool timeout agents pass) in `levers.json`
+  when the defaults don't fit the suite. Other thin `scripts/` wrappers stay optional.
   **🛑 Ask the resource-budgets question here**: does this system have numbers it must hold in
   production — memory ceilings, latency bounds, throughput floors? Resource judgment errors are
   invisible at development scale (see the catalog's *Resource-budget smells*), so the answer is

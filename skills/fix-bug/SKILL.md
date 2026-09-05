@@ -176,9 +176,10 @@ interactive app, a pty/scripted-input harness that asserts the corrected behavio
 hang) is the honest check.
 
 ### 6 — 🛑 Independently validate, then capture
-Run the gates the fix's author doesn't control — the project's levers (the `test` and `lint`
-commands in `levers.json`; test lever runs the full suite) — and read the diff for scope (fixes the
-reproduced defect, nothing more). Then:
+Run the gates the fix's author doesn't control — the project's levers through the runner
+(`scripts/lever test`, `scripts/lever lint`: full suite, foreground, Bash `timeout` above the cap;
+a `HANG`/`CAP` verdict is a lever problem to fix first, as in implement-story step 4) — and read
+the diff for scope (fixes the reproduced defect, nothing more). Then:
 - **Commit** — message cites the `BUG-nnnn`, the RCA verdict, the fix, and the end-to-end verification;
   the project's required trailer, if any.
 - **Candidate gate** — a bug is *evidence of a real failure mode*, so it very often earns a

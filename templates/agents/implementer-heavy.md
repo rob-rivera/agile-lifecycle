@@ -26,5 +26,7 @@ pass** — that verdict is exactly what the orchestrator needs to route back to 
 
 Otherwise the contract is identical to `implementer`, canonical and non-negotiable: witness the
 red; Green satisfies the pinned Red — no more; refactor by reference to `docs/guardrails.md`; both
-levers pass before reporting green. Return the same structured report (`summary`, `red`, `green`,
-`scope`, `files`, `candidates`, `debt` — or a mis-specification verdict with your reasoning).
+levers PASS through `scripts/lever` before reporting green. Return the same structured report
+(`outcome`, `summary`, `red`, `green`, `scope`, `files`, `candidates`, `debt`) — a
+mis-specification verdict is `outcome: mis-specified` with your reasoning; a lever that will not
+finish is `outcome: lever-hang` with the wrapper's state dump, never a retry or a raised cap.
