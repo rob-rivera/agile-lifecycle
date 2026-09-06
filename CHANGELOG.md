@@ -38,6 +38,14 @@ labels) in source; nothing in the contract said where traceability belongs.
   it. The upgrader's coverage report says so explicitly. Cleaning up the existing stock is a
   `refactor-pass` over the affected area, comment-only moves being green-to-green.
 
+### Recommendation for maintainers
+- After the upgrade review, run a **`spike`** to identify comment-sweep candidates: which files
+  and areas carry the pre-standard stock (paragraph comments, provenance, ritual labels, doc
+  citations), roughly how much, and in what order it is worth trimming. Record the findings as
+  `DEBT-nnnn` entries in `docs/debt.md`, one per area, so `refactor-pass` can pick them up at
+  the user's leisure. The spike is read-only and produces a list, not a cleanup — the sweep
+  itself stays a refactor-pass decision per area.
+
 ## [0.24.0] — 2026-09-05 · [#10](https://github.com/rob-rivera/agile-lifecycle/pull/10)
 
 The lever runner. An implementer whose suite outran the Bash tool timeout learned to background
