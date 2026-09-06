@@ -126,7 +126,8 @@ note. The recorded answer is what the upgrade path respects.
 ### 7 — Mechanical contract (no persona)
 - `docs/story-format.md` — from the template, unchanged in structure.
 - `docs/guardrails.md` — from the template; seed smells from `references/code-smells.md` per the
-  stack (🛑 approve the selection), **plus the legacy-safety patterns** (seams, sprout/wrap,
+  stack (🛑 approve the selection; the *Comments* entry is fixed in the template, not selected),
+  **plus the legacy-safety patterns** (seams, sprout/wrap,
   characterization) into §2, plus any project anti-patterns the survey observed — as dated
   *candidates*, not settled entries.
 - `.claude/agents/` — the model policy, exactly as in `bootstrap-project` (same templates, same
@@ -140,8 +141,10 @@ note. The recorded answer is what the upgrade path respects.
   `.claude-plugin/plugin.json`), so the SessionStart drift line can announce future contract
   upgrades. Same rules as `bootstrap-project`: rewritten at every upgrade review, never
   hand-edited to hush the line.
-- `CLAUDE.md` — **merge** contract pointers into whatever exists. Phase 2's precedence notes
-  live here — the root records which nested instruction files were subordinated and on what.
+- `CLAUDE.md` — **merge** contract pointers into whatever exists, including a **Code comments**
+  pointer to the catalog's *Comments* entry (the one surface every writer of code loads — the
+  legacy comment style is exactly what this standard corrects, so it is never optional here).
+  Phase 2's precedence notes live here — the root records which nested instruction files were subordinated and on what.
 
 ### 8 — 🛑 Slice plan — the safety net, not a skeleton
 The app already walks; the brownfield promise is "we can prove we didn't break what already

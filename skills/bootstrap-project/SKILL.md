@@ -134,7 +134,8 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   `references/code-smells.md` the entries relevant to the stack, express each in the stack's idiom
   (tell + cure, per the reference's per-language notes), one catalog for code, test, and
   **complexity** smells alike — the complexity section is universal and rides this ordinary
-  seeding, never gated on the resource-budgets answer below. **Seed the patterns thin**: from `references/patterns.md`, only the few entries the
+  seeding, never gated on the resource-budgets answer below. The *Comments* entry is **fixed**,
+  not selected — it ships in the template; leave it in place. **Seed the patterns thin**: from `references/patterns.md`, only the few entries the
   stack will visibly need (its paradigm notes govern selection — first-class functions dissolve
   several; don't seed what the language already is), each with its context/forces line; the
   section's iron rule and naming discipline ride in from the template. 🛑 **Present the
@@ -216,8 +217,10 @@ on; the invariants outrank it everywhere. **Stop for approval.**
   already open, however blank, plus the levers proven (built/wired through stories, including any
   runner affordances the host environment provides). Sketch Slice 1 from the design's highest-value
   thread. This is the plugin's standing proposal; the human approves the plan.
-- `CLAUDE.md` — point at the contract: the authority docs, the levers, the lifecycle skills, and
-  the project's chosen sensibility (so later sessions know the taste the design was cut to). Any
+- `CLAUDE.md` — point at the contract: the authority docs, the levers, the lifecycle skills, the
+  project's chosen sensibility (so later sessions know the taste the design was cut to), and a
+  **Code comments** pointer to the catalog's *Comments* entry (the root instruction file is the
+  one surface every writer of code loads — dispatched agents and inline work alike). Any
   instruction-reconciliation precedence notes live here — the root is the one instruction
   authority, and it records which nested files were subordinated and on what.
 

@@ -40,6 +40,21 @@ These are the plugin's invariants, restated as this project's law:
 *Seeded at bootstrap (selection approved by the human); grown via candidates. Each entry: the
 smell, its tell **in this stack**, the idiomatic cure.*
 
+- **SMELL: Comments** *(Fowler; Beck's "comments as deodorant". A fixed entry — ships in every
+  catalog and applies to every cycle, seeded into the dispatch or not.)* — A good comment does
+  two jobs: it says how to use a function (inputs, outputs, effects), and it explains what is not
+  evident from the code. It is terse — just enough to make the code clear, repeating nothing the
+  code already says. Everything else is the smell: narration of *how*; a paragraph on one line;
+  history — which story, AC, bug, or cycle produced the line (that lives in the ledger, the
+  commit, and the cycle report), and references into the docs — a `LAW-*` id or a design
+  section cited and then restated (the docs point at the code, never the reverse); test-ritual labels (`// Act:`, `// Assert:`, `// Witnessed:` —
+  the report's vocabulary, not the test's); and a comment left describing code that has since
+  changed. Cure: for narration, refactor until the comment is redundant; for history, delete it;
+  for a genuine non-evident reason, cut to the reason itself. **Keep comments in sync:** when
+  you change code a comment describes, rewrite the comment to say what the code now does, to
+  the same standard as a new one — never a changelog ("was X, now Y", dates, ids).
+  <!-- Add one good and one bad example from this codebase once it has them. -->
+
 <!-- SMELL entries seeded by bootstrap-project go here -->
 
 ## Candidates (inbox)

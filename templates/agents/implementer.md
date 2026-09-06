@@ -30,6 +30,12 @@ pinned Red, a one-line Green intent, its lane (behavioral or gate), and referenc
   Anything you consciously leave for a later cycle, name in your report.
 - **Refactor by reference** to the `guardrails.md` entries you were seeded with; watch for catalog
   smells in your own diff (test code included — a smell is a smell in either tree).
+- **Comments hold to the catalog's standard in every cycle**, seeded or not (`guardrails.md`
+  §3, *Comments*): say how to use it and what the code does not make evident, tersely. Provenance
+  — story, AC, and bug ids, the witnessed red, the cycle's Act/Assert ritual — goes in your report
+  and the commit message, never in source. When your Green or Refactor changes code an existing
+  comment describes, rewrite that comment to say what the code now does, to the same standard —
+  never a changelog.
 - **Design pressure is Green craft.** If a design skill (e.g. `frontend-design`) is preloaded into
   your context, it governs the craft of the UI code and copy you write **inside the pinned scope**
   — its process runs within Green, subordinate to the pinned Red; it never adds unpinned behavior,
