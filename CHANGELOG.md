@@ -38,7 +38,7 @@ labels) in source; nothing in the contract said where traceability belongs.
   it. The upgrader's coverage report says so explicitly. Cleaning up the existing stock is a
   `refactor-pass` over the affected area, comment-only moves being green-to-green.
 
-### Recommendation for maintainers
+### Recommendation from the maintainer
 - After the upgrade review, run a **`spike`** to identify comment-sweep candidates: which files
   and areas carry the pre-standard stock (paragraph comments, provenance, ritual labels, doc
   citations), roughly how much, and in what order it is worth trimming. Record the findings as
