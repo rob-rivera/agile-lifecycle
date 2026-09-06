@@ -134,19 +134,29 @@ should say so):
 | **Domain design doc** — settled product/system rules | `docs/design.md` | write-stories, fix-bug |
 | **Roadmap / slice plan** | `docs/slice-plan.md` | write-stories (optional origin) |
 | **Lever manifest** — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge), and projects with ratified resource budgets add `bench` (the budget gates — see the §5 budgeted-surfaces clause); projects may add more (seed from `templates/levers.json`). **`scripts/lever`** is the lever runner seeded beside it (from `templates/scripts/lever`): foreground, own process group, stdin closed, a watchdog on output growth and CPU, one verdict line — `PASS`/`FAIL`/`HANG`/`CAP` — with per-lever `stall`/`cap` knobs in the manifest | `levers.json`, `scripts/lever` | implement-story, fix-bug (raw toolchain gates until defined); the lever guard + verdict gate hooks |
-| **Model policy** — sub-agent model per role; orchestrator model is the session's, recommended in CLAUDE.md | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
+| **Model policy** — sub-agent model per role (seeded from `templates/agents/`; the `model:` line is the project's choice); orchestrator model is the session's, recommended in CLAUDE.md | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
 | **Work ledger** — one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention | `docs/ledger.md` | all build/fix/refactor skills |
 | **Debt registry** — observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
 | **Artifacts** | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
 | **Contract version stamp** — one line: the plugin version the contract was instantiated/last reviewed against; written by the bootstraps and every upgrade review — the SessionStart hook compares it to the loaded plugin and announces drift | `docs/.contract-version` | SessionStart hook (advisory only) |
 
-The plugin also ships two agents of its own (plugin machinery, deliberately cheaper than the
+The plugin also ships three agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
-fan-out reader — and **`upgrader`** (sonnet) — the contract mechanic that diffs a project against
-the current contract and instantiates approved pieces on the resume/upgrade path, including the
-**migration report** for prior-iteration projects (skill shadowing, role-equivalent renames,
-schema drift — every retirement/rename/patch a human decision; local-skills-or-plugin, never
-both).
+fan-out reader; **`builder`** (sonnet) — bootstrap-prototype's may-delegate lane, building the
+marked prototype from the critical answers and the assumptions ledger (throwaway by contract, so
+no project model policy governs it); and **`upgrader`** (sonnet) — the contract mechanic that
+diffs a project against the current contract and instantiates approved pieces on the
+resume/upgrade path. Its diff report separates **missing** pieces (instantiated from templates),
+**drift** (present artifacts lacking current schema elements — additive patches; substantive
+divergence is surfaced side by side for the human), **offers** (optional features the project
+predates — UI-craft preload, resource budgets, complexity smells — never listed as missing, and
+suppressed by any recorded answer including a decline), **instruction conflicts** (nested or
+vendored `CLAUDE.md` / `.claude/` trees contradicting the root), and, for prior-iteration
+projects, the **migration report** (skill shadowing, role-equivalent renames — every
+retirement/rename/patch a human decision; local-skills-or-plugin, never both). One drift check
+runs in every project: **comment-standard coverage** — every project-owned surface that steers a
+writer of code (guardrails, implementer agents, root `CLAUDE.md`, nested project-owned
+instruction files) is reported covered or patched, so the standard cannot be half-adopted.
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
 (`references/code-smells.md`, `references/patterns.md`, `references/sensibilities.md`) are
@@ -185,6 +195,13 @@ Conventions carried across projects:
   never into retries.
 - **Disposable plans.** The cycle breakdown is burned at story close; durable knowledge lives in
   the docs and the ledger, not in plans.
+- **The comment standard.** A comment says how to use a function (inputs, outputs, effects) or
+  explains what is not evident from the code — terse, repeating nothing the code says. Provenance
+  (story, AC, bug ids; the witnessed red; Act/Assert ritual) lives in the cycle report, the
+  commit, and the ledger, never in source. Changing code a comment describes means rewriting the
+  comment to the same standard — never a changelog. A fixed catalog entry, pointed at from
+  `CLAUDE.md` and both implementer agents, so it reaches every cycle whether or not a planner
+  seeds it.
 - **The affirmative candidates gate.** "candidates: none" is a required statement, not a
   default — silence never passes for review.
 
@@ -273,6 +290,21 @@ spawn, shipping the lifecycle with the app (no user installation).
 
 A project-level skill with the same name overrides the plugin's version — that is the intended
 per-project customization mechanism.
+
+## Releasing and contributing
+
+`main` is protected: every change lands by pull request. Two workflows run on the repo:
+
+- **pr-checks** — the JSON manifests parse, `shellcheck -S warning` over `hooks/*.sh`, and a
+  version-bump reminder when plugin content changes without a bump (a warning, never a failure).
+- **release-tag** — on merge to `main`, tags `v<version>` from `plugin.json` if that tag doesn't
+  exist. Tags are a consequence of the version field; an unchanged version is a no-op.
+
+A release is therefore a PR that bumps `plugin.json`'s `version`, adds the matching
+[`CHANGELOG.md`](CHANGELOG.md) entry (what changed, why, the PR), and — for a design-level change
+— a record in `docs/decisions/`. Issues come through the repo's forms (bug report,
+friction-or-idea) or from inside a session via `agile-lifecycle:feedback`, which fills the same
+fields. PRs by prior discussion, please — the suite's invariants are load-bearing.
 
 ## Origin
 
