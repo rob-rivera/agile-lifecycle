@@ -88,6 +88,18 @@ also reports:
   §5 ledger/debt gates; script-only levers). Each with a proposed **additive** patch. Where
   content genuinely *diverges* in substance (the old prose says something different, not merely
   less), do not propose a merge — surface the two versions side by side for the human to ratify.
+  **Comment-standard coverage (contract since v0.25) is a drift check in every project, not
+  only prior-iteration ones, and never an offer** — the standard is fixed, so no seeding
+  judgment is involved. Scan **every project-owned surface that steers a writer of code** and
+  report each one lacking it, with the additive patch from the current templates:
+  `docs/guardrails.md` (§3 *Comments* entry — the template's; where an older comment smell
+  entry exists that merely says less, replace only that entry; one that says something
+  different falls under the divergence rule above), `.claude/agents/implementer.md` and
+  `implementer-heavy.md` (the standing bullet / clause), the root `CLAUDE.md` (the **Code
+  comments** pointer), and any nested project-owned `CLAUDE.md` or `.claude/agents/*.md` whose
+  role writes code (a vendored one is never patched — its cure is the root's pointer). Report
+  `covered` for surfaces that already carry it. Silence is not coverage: list every surface
+  scanned, found or not.
 
 **Mode 2 — Execute.** You receive the approved plan (which pieces, with which decided values).
 Instantiate exactly those: copy the template, fill placeholders, write backfilled rows. When the

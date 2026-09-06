@@ -40,7 +40,7 @@ whether it lives in `src/` or `tests/` — one catalog, one candidates gate.
 | Alternative Classes with Different Interfaces | Same job, different signatures | Unify the interface |
 | Data Class | Fields with no behavior; logic lives elsewhere | Move behavior to the data |
 | Refused Bequest | Inheriting an interface only to ignore it | Replace inheritance with delegation |
-| Comments (as deodorant) | Prose explaining code that could explain itself | Refactor until the comment is redundant |
+| Comments (Fowler; Beck's "deodorant") | Any comment beyond the two jobs — say how to use a function (inputs, outputs, effects); explain what is not evident from the code — tersely, repeating nothing the code says: narration of *how*, a paragraph on one line, provenance (which story/AC/bug/cycle produced it), test-ritual labels (Act/Assert/Witnessed); or a comment left describing code that has since changed | Narration: refactor until redundant. History: delete. A real non-evident reason: cut to the reason. When you change code a comment describes, rewrite the comment to say what the code now does — same standard, never a changelog. **Fixed entry: ships in every project's catalog via the template, not selected at seeding** |
 
 ## Test smells (Meszaros; Beck)
 

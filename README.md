@@ -128,7 +128,7 @@ should say so):
 | Role | Default path | Required by |
 | --- | --- | --- |
 | **Story format & sizing spec** — incl. §8 craft anchors (books cited at drafting moments — never role personas; the doc wins on conflict) | `docs/story-format.md` | all build/fix skills (§-references must hold — seed from `templates/story-format.md`) |
-| **Guardrails catalog** — two-sided: smells to move away from + patterns to move toward, with *Candidates* inbox + canonical-TDD rules; patterns are refactoring destinations named canonically from the literature, never design starting points | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug, refactor-pass (seeded by bootstrap from `references/code-smells.md` + thinly from `references/patterns.md`) |
+| **Guardrails catalog** — two-sided: smells to move away from + patterns to move toward, with *Candidates* inbox + canonical-TDD rules; patterns are refactoring destinations named canonically from the literature, never design starting points; one fixed entry, *Comments*, ships in every catalog (the comment standard — two jobs, terse, kept in sync with the code it describes) and is pointed at from CLAUDE.md and the implementer agents | `docs/guardrails.md` | plan-cycles, implement-story, fix-bug, refactor-pass (seeded by bootstrap from `references/code-smells.md` + thinly from `references/patterns.md`) |
 | **Tech design** — architecture boundaries + test-layers section | `docs/tech-design.md` | all |
 | **Domain design doc** — settled product/system rules | `docs/design.md` | write-stories, fix-bug |
 | **Roadmap / slice plan** | `docs/slice-plan.md` | write-stories (optional origin) |

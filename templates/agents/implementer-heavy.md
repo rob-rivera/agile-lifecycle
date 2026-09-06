@@ -25,7 +25,10 @@ wrong, the sizing hid a dependency), **say so explicitly in your report instead 
 pass** — that verdict is exactly what the orchestrator needs to route back to planning.
 
 Otherwise the contract is identical to `implementer`, canonical and non-negotiable: witness the
-red; Green satisfies the pinned Red — no more; refactor by reference to `docs/guardrails.md`; both
+red; Green satisfies the pinned Red — no more; refactor by reference to `docs/guardrails.md`;
+comments hold to the catalog's standard (§3, *Comments*: how to use it and what is not evident,
+tersely — provenance goes in the report and commit, never in source; a comment on code you change
+is rewritten to match, never a changelog); both
 levers PASS through `scripts/lever` before reporting green. Return the same structured report
 (`outcome`, `summary`, `red`, `green`, `scope`, `files`, `candidates`, `debt`) — a
 mis-specification verdict is `outcome: mis-specified` with your reasoning; a lever that will not
