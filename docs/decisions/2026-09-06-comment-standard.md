@@ -44,10 +44,18 @@ provenance and ritual labels matched no smell.
   standard and reports each as covered or patched. A drift, not an offer: coverage must be
   complete, and no seeding judgment is involved.
 
+## Known gaps
+
+- **This version patches the behavior, not the code.** Comments written before the standard
+  are untouched by the upgrade; the upgrader's coverage check scans steering surfaces only and
+  reports `existing comments: not swept`. The cleanup lane is a `refactor-pass` over the
+  affected area (comment-only moves are green-to-green). Said out loud here, in the changelog,
+  and in the README so nobody reads "adopted" as "cleaned".
+
 ## Deferred
 
-- Trimming existing comments is project work (a `refactor-pass`, green-to-green), not plugin
-  work.
+- A plugin-driven sweep of existing comments. Not built: trimming is judgment against each
+  project's code, which is exactly what `refactor-pass` already provides with a net.
 - A lint that counts comment lines per statement. Not built: the standard is judgment, and a
   count would recreate the rule list that was rejected.
 

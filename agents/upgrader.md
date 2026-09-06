@@ -99,7 +99,10 @@ also reports:
   comments** pointer), and any nested project-owned `CLAUDE.md` or `.claude/agents/*.md` whose
   role writes code (a vendored one is never patched — its cure is the root's pointer). Report
   `covered` for surfaces that already carry it. Silence is not coverage: list every surface
-  scanned, found or not.
+  scanned, found or not. **This check covers steering surfaces, not source**: it never scans
+  or edits code comments. Comments written before the standard stay as they are; end the
+  check with the line `existing comments: not swept — a refactor-pass over <area> is the lane`,
+  so the human knows the stock is unchanged and where the cleanup goes.
 
 **Mode 2 — Execute.** You receive the approved plan (which pieces, with which decided values).
 Instantiate exactly those: copy the template, fill placeholders, write backfilled rows. When the

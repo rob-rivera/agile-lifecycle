@@ -32,6 +32,12 @@ labels) in source; nothing in the contract said where traceability belongs.
 ### Changed
 - `references/code-smells.md`: the *Comments (as deodorant)* row now carries the standard.
 
+### Not included
+- **No sweep of existing code.** This version corrects the behavior going forward — new and
+  touched comments follow the standard — but does not scan or rewrite comments written before
+  it. The upgrader's coverage report says so explicitly. Cleaning up the existing stock is a
+  `refactor-pass` over the affected area, comment-only moves being green-to-green.
+
 ## [0.24.0] — 2026-09-05 · [#10](https://github.com/rob-rivera/agile-lifecycle/pull/10)
 
 The lever runner. An implementer whose suite outran the Bash tool timeout learned to background

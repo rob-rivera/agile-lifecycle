@@ -157,6 +157,8 @@ retirement/rename/patch a human decision; local-skills-or-plugin, never both). O
 runs in every project: **comment-standard coverage** — every project-owned surface that steers a
 writer of code (guardrails, implementer agents, root `CLAUDE.md`, nested project-owned
 instruction files) is reported covered or patched, so the standard cannot be half-adopted.
+The check patches the steering, not the code: comments written before the standard are not
+swept, and the report says so — a `refactor-pass` over the affected area is the cleanup lane.
 
 `bootstrap-project` creates all of the above in a greenfield project. Plugin references
 (`references/code-smells.md`, `references/patterns.md`, `references/sensibilities.md`) are
@@ -201,7 +203,8 @@ Conventions carried across projects:
   commit, and the ledger, never in source. Changing code a comment describes means rewriting the
   comment to the same standard — never a changelog. A fixed catalog entry, pointed at from
   `CLAUDE.md` and both implementer agents, so it reaches every cycle whether or not a planner
-  seeds it.
+  seeds it. Adopting it changes what gets written from now on; existing comments are cleaned up
+  by a `refactor-pass`, never by the upgrade.
 - **The affirmative candidates gate.** "candidates: none" is a required statement, not a
   default — silence never passes for review.
 

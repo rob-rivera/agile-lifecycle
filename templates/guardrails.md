@@ -46,7 +46,8 @@ smell, its tell **in this stack**, the idiomatic cure.*
   evident from the code. It is terse — just enough to make the code clear, repeating nothing the
   code already says. Everything else is the smell: narration of *how*; a paragraph on one line;
   history — which story, AC, bug, or cycle produced the line (that lives in the ledger, the
-  commit, and the cycle report); test-ritual labels (`// Act:`, `// Assert:`, `// Witnessed:` —
+  commit, and the cycle report), and references into the docs — a `LAW-*` id or a design
+  section cited and then restated (the docs point at the code, never the reverse); test-ritual labels (`// Act:`, `// Assert:`, `// Witnessed:` —
   the report's vocabulary, not the test's); and a comment left describing code that has since
   changed. Cure: for narration, refactor until the comment is redundant; for history, delete it;
   for a genuine non-evident reason, cut to the reason itself. **Keep comments in sync:** when
