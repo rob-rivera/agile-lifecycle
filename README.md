@@ -21,7 +21,8 @@ Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
 (throwaway answer-in-code). The hooks require `jq` on PATH (they no-op silently without it).
 
 > **Maturity: pre-1.0, evolving.** The contract changes as it's road-tested; installed copies
-> update when the plugin version bumps, so upgrades are deliberate, never surprises. MIT-licensed.
+> update when the plugin version bumps, so upgrades are deliberate, never surprises — each bump
+> has an entry in [`CHANGELOG.md`](CHANGELOG.md). MIT-licensed.
 > Issues welcome — from inside a session, `agile-lifecycle:feedback` composes and files one for
 > you. PRs by prior discussion, please — the suite's invariants are load-bearing.
 
@@ -243,7 +244,8 @@ shipped, what was deferred with the design sketched, known gaps, and what would 
 ```
 
 Skills are then invocable as `agile-lifecycle:write-stories`, etc. Updates ship by version bump —
-installed copies update when `plugin.json`'s `version` changes. Requires `jq` on PATH for the
+installed copies update when `plugin.json`'s `version` changes, and every bump gets a
+`CHANGELOG.md` entry (what changed, why, the PR). Requires `jq` on PATH for the
 hooks (they no-op silently without it); hook scripts assume a POSIX shell with `bash` available.
 
 **Per-session (no install)** — point any session at a checkout or zip:
