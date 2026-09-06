@@ -1,6 +1,6 @@
 # Decision: the comment standard (v0.25.0)
 
-**Date:** 2026-09-06 · **Status:** shipped, under observation · **PR:** TBD
+**Date:** 2026-09-06 · **Status:** shipped, under observation · **PR:** #11
 
 ## The observation
 
