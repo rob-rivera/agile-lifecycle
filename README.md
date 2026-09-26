@@ -17,8 +17,8 @@ build software that is not just working, it's good.
 ```
 
 Then, in any project: `agile-lifecycle:bootstrap-project` (fresh folder),
-`agile-lifecycle:bootstrap-legacy` (existing codebase), or `agile-lifecycle:bootstrap-prototype`
-(throwaway answer-in-code). The hooks require `jq` on PATH (they no-op silently without it).
+`agile-lifecycle:bootstrap-legacy` (existing codebase), or `agile-lifecycle:prototype` (a
+runnable answer — on an empty folder, or as a tracer bullet against a fresh contract). The hooks require `jq` on PATH (they no-op silently without it).
 
 > **Maturity: pre-1.0, evolving.** The contract changes as it's road-tested; installed copies
 > update when the plugin version bumps, so upgrades are deliberate, never surprises — each bump
@@ -66,13 +66,21 @@ skill reads the project's authority docs live and never hardcodes their content.
   human decisions promote to **`ratified`** — only ratified rules trigger the contradiction gate)
   → honest lever baselines (recorded, never fixed) → safety-net Slice 0 (characterize only the
   first area of change). Merges into existing `CLAUDE.md`/settings; never overwrites.
-- **bootstrap-prototype** — prompt + empty folder → a runnable prototype: an answer in
+- **prototype** (formerly `bootstrap-prototype`) — a runnable prototype: an answer in
   executable form, spike's sibling (the invariants govern *production*; a prototype isn't one,
   and its `PROTOTYPE.md` marker prints the price — no contract, no tests, no safety net).
-  Bounded critical-question interview (everything else a named assumption in the marker's
-  ledger), minimal `run` lever, re-entry checkpoint against feature creep, and a graduation
-  gate: **keep it** → `bootstrap-legacy` excavates it (the marker is pre-written intent);
-  **discard** → `bootstrap-project` with the knowledge. Never graduates silently.
+  Detects the project's state and loads one of three forks. **Greenfield** (empty folder):
+  bounded critical-question interview (everything else a named assumption in the marker's
+  ledger), minimal `run` lever, re-entry checkpoint against feature creep, graduation gate —
+  **keep it** → `bootstrap-legacy` excavates it (the marker is pre-written intent); **discard** →
+  `bootstrap-project` with the knowledge. **Design-in-hand** (contract present, no code yet): the
+  tracer bullet — the design is the spec, built on a `prototype/<slug>` branch under a
+  `PROTO-nnnn` ledger row, every deviation from the design logged as the payload, a demo decision
+  table pinned before building. **Graduation** (a kept tracer bullet): as-built map (`surveyor`
+  fan-out), design reconciliation (design was wrong → Change Log; prototype was wrong → story;
+  undecided → Open Question), honest lever baseline, legacy-safety patterns seeded, Slice 0
+  re-baselined to a safety net; the merge to `main` is the gate. Never graduates silently, never
+  fixes a defect during graduation.
 
 ### Building designed behavior
 
@@ -135,16 +143,16 @@ should say so):
 | **Roadmap / slice plan** | `docs/slice-plan.md` | write-stories (optional origin) |
 | **Lever manifest** — one truth for agents, humans, and host-app runner UIs. Canonical shape: `{"<name>": {"command": string\|null, "what": string}}` (bare-string shorthand allowed; `null` = documented gap). `test`/`lint`/`run` are the standard levers; a long-running `run` pairs with an explicit `stop` (how to kill what `run` started — never implicit process knowledge), and projects with ratified resource budgets add `bench` (the budget gates — see the §5 budgeted-surfaces clause); projects may add more (seed from `templates/levers.json`). **`scripts/lever`** is the lever runner seeded beside it (from `templates/scripts/lever`): foreground, own process group, stdin closed, a watchdog on output growth and CPU, one verdict line — `PASS`/`FAIL`/`HANG`/`CAP` — with per-lever `stall`/`cap` knobs in the manifest | `levers.json`, `scripts/lever` | implement-story, fix-bug (raw toolchain gates until defined); the lever guard + verdict gate hooks |
 | **Model policy** — sub-agent model per role (seeded from `templates/agents/`; the `model:` line is the project's choice); orchestrator model is the session's, recommended in CLAUDE.md | `.claude/agents/implementer.md`, `implementer-heavy.md`, `diagnostician.md`, `researcher.md` | implement-story, fix-bug, spike (fallback when absent: general-purpose sub-agent, `inherit`) |
-| **Work ledger** — one row per STORY/BUG/REF; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention | `docs/ledger.md` | all build/fix/refactor skills |
+| **Work ledger** — one row per STORY/BUG/REF/SPIKE/PROTO; statuses owned by the skills that change them — "what's outstanding?" lives here, the slice plan stays intention | `docs/ledger.md` | all build/fix/refactor skills |
 | **Debt registry** — observed-but-unfixed structural debt, `DEBT-nnnn`; fed by implementer reports at the affirmative close gate, consumed by refactor-pass at intake, promoted to stories only by human decision | `docs/debt.md` | implement-story, fix-bug, refactor-pass |
-| **Artifacts** | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md` | written by the skills |
+| **Artifacts** | `docs/stories/STORY-nnnn-*.md`, `docs/bugs/BUG-nnnn-*.md`, `docs/refactors/REF-nnnn-*.md`, `docs/spikes/SPIKE-nnnn-*.md`, `docs/prototypes/PROTO-nnnn-*.md` (the tracer-bullet record; greenfield prototypes keep the root `PROTOTYPE.md` marker instead) | written by the skills |
 | **Contract version stamp** — one line: the plugin version the contract was instantiated/last reviewed against; written by the bootstraps and every upgrade review — the SessionStart hook compares it to the loaded plugin and announces drift | `docs/.contract-version` | SessionStart hook (advisory only) |
 
 The plugin also ships three agents of its own (plugin machinery, deliberately cheaper than the
 session model; projects may override by name): **`surveyor`** (haiku) — bootstrap-legacy's
-fan-out reader; **`builder`** (sonnet) — bootstrap-prototype's may-delegate lane, building the
-marked prototype from the critical answers and the assumptions ledger (throwaway by contract, so
-no project model policy governs it); and **`upgrader`** (sonnet) — the contract mechanic that
+fan-out reader; **`builder`** (sonnet) — `prototype`'s may-delegate lane, building the marked
+prototype from the critical answers and the assumptions ledger (throwaway by contract, so no
+project model policy governs it); and **`upgrader`** (sonnet) — the contract mechanic that
 diffs a project against the current contract and instantiates approved pieces on the
 resume/upgrade path. Its diff report separates **missing** pieces (instantiated from templates),
 **drift** (present artifacts lacking current schema elements — additive patches; substantive

@@ -42,7 +42,10 @@ noise (and cost).
 
 **Check for the contract first.** If `docs/story-format.md` exists, this is already a lifecycle
 project — code presence is *expected* (it was built through the discipline) and is never grounds
-for a brownfield stop. Take the **resume/upgrade path**, delegated to the plugin's **`upgrader`
+for a brownfield stop. One exception before anything else: a `PROTOTYPE.md` marker beside the
+contract means a `prototype` tracer bullet is in flight — route to `prototype` (its re-entry
+checkpoint; graduation adopts the code into this contract), never the upgrade path. Otherwise
+take the **resume/upgrade path**, delegated to the plugin's **`upgrader`
 agent** (mid-tier by design — checks and file mechanics don't need the orchestrator's model):
 dispatch it in **diff mode** to compare the project against the current contract (this doc's
 phase 4 list) and report missing pieces, pending decisions, ledger backfill candidates, and
@@ -95,7 +98,7 @@ anything found: *would bootstrap have to reverse-engineer intent from it?* Class
   and reconcile any contradiction with the contract being built (same keep / subordinate /
   archive decisions as the upgrade path's `instruction-conflicts`, each the human's call).
 - **Prototype (marked) → graduation choice** — a `PROTOTYPE.md` marker means the code was built
-  by `bootstrap-prototype` as an answer, not production. Never refuse it as brownfield; ask the
+  by `prototype` as an answer, not production. Never refuse it as brownfield; ask the
   graduation question instead: **keep it** (→ `bootstrap-legacy`, the marker is its
   highest-trust prior-knowledge input) or **discard** (proceed greenfield here, carrying the
   marker's knowledge into phase 1 — the code dies, per the spike rule).

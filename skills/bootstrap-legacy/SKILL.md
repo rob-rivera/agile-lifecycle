@@ -46,11 +46,14 @@ use — most ratification happens later, story by story, not during bootstrap.
 ## Procedure
 
 ### 0 — Detect state & route
-- Contract present (`docs/story-format.md`) → this is a lifecycle project; route to
-  `bootstrap-project`'s resume/upgrade path.
+- Contract present (`docs/story-format.md`) → this is a lifecycle project. With a `PROTOTYPE.md`
+  marker beside it, a `prototype` tracer bullet is in flight — route to `prototype`, whose
+  graduation fork adopts the code into the existing contract (this skill's job, minus the intent
+  reconstruction the contract already did). Otherwise route to `bootstrap-project`'s
+  resume/upgrade path.
 - No real code (greenfield by `bootstrap-project`'s tiers) → route to `bootstrap-project`.
 - Otherwise proceed. Enumerate **prior-knowledge sources** in rough trust order: `PROTOTYPE.md`
-  (a `bootstrap-prototype` marker — intent recorded at authoring time, the one source that
+  (a `prototype` marker — intent recorded at authoring time, the one source that
   outranks the code's own docs) > `CLAUDE.md` ≈ CI configs (operationally honest) > README >
   code comments > `docs/` prose (rots fastest). All of it enters as *observed*-grade evidence —
   the marker included; recorded intent still gets ratified by a human, not grandfathered.
