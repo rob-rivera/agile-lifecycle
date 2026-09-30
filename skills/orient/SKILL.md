@@ -20,8 +20,9 @@ it.
 
 ### 1 — Read the state (lifecycle project)
 If `docs/ledger.md` exists, this is a lifecycle project. Read, in order:
-- `docs/ledger.md` — the outstanding rows (anything not *done*/*fixed*/*closed*/*answered*),
-  and the most recently updated ones.
+- `docs/ledger.md` — the outstanding rows (anything not *done*/*fixed*/*closed*/*answered*/
+  *graduated*/*discarded*), and the most recently updated ones. A `PROTO-` row still *exploring*
+  means a tracer bullet is in flight — `prototype`'s re-entry checkpoint is the next step.
 - `docs/slice-plan.md` or the slice plan section of `docs/tech-design.md` — the current slice
   and what remains in it.
 - `docs/debt.md` — open entries (count them; name one or two only if they're the natural next
@@ -33,8 +34,9 @@ If `docs/ledger.md` exists, this is a lifecycle project. Read, in order:
 No ledger → orient from the repo: current branch and working-tree state, the last few commits,
 README/`CLAUDE.md` for what the project is, and anything obviously in flight (uncommitted
 changes, TODO markers in recently touched files). Say plainly that the project has no lifecycle
-contract — and that `bootstrap-project` / `bootstrap-legacy` adopt one, `bootstrap-prototype`
-skips one on purpose — but only as a pointer, never as a push.
+contract — and that `bootstrap-project` / `bootstrap-legacy` adopt one, `prototype` skips one
+on purpose (a root `PROTOTYPE.md` means it already did — its re-entry checkpoint is the next
+step) — but only as a pointer, never as a push.
 
 ### 3 — Brief
 One screen, in this order:

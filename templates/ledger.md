@@ -11,4 +11,5 @@
 <!-- Statuses — STORY: drafted → planned → in progress → done.
      BUG: open / open (deferred) → fixed.
      REF: in progress → closed.
-     SPIKE: in progress → answered. -->
+     SPIKE: in progress → answered.
+     PROTO: exploring → graduated | discarded. -->

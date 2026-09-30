@@ -8,6 +8,44 @@ level changes also get a record under `docs/decisions/`.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow SemVer,
 pre-1.0 (minor bumps may change the contract; the upgrader carries projects across).
 
+## [0.26.0] — 2026-09-26 · [#12](https://github.com/rob-rivera/agile-lifecycle/pull/12)
+
+Prototypes inside a contract. A project fresh out of `bootstrap-project` had no lane for a
+tracer bullet — stand the design up fast, see how it holds, keep it if it lands — because
+`bootstrap-prototype` refused wherever a contract existed and `bootstrap-legacy` would have
+re-excavated intent the contract had already recorded. Design record:
+`docs/decisions/2026-09-26-prototype-forks.md`.
+
+### Added
+- **`prototype` skill forks.** Phase 0 detects project state and reads one of three procedure
+  files beside `SKILL.md` — the first skill in the plugin with supporting files. `greenfield.md`
+  is the previous procedure, moved verbatim. `design-in-hand.md` (contract present, no code):
+  the design replaces the prompt, a demo decision table is pinned before building, every
+  deviation from the design is logged as the payload, the build lives on `prototype/<slug>`
+  under a ledger row; exits are still exploring / keep / discard (knowledge ratified, record on
+  `main`, branch dies). `graduate.md` (a kept tracer bullet): recon, `surveyor` as-built map
+  (`tech-design.md §8 As built (observed)`), design reconciliation (design was wrong → Change
+  Log; prototype was wrong → story candidate; undecided → Open Question), honest lever baseline,
+  legacy-safety patterns and debt seeded, Slice 0 re-baselined from walking skeleton to safety
+  net, and the merge to `main` as the graduation gate. Graduation never fixes a defect.
+- **`PROTO-nnnn` id family.** `docs/prototypes/PROTO-nnnn-<slug>.md` is the tracer bullet's
+  record (the marker itself; a three-line root `PROTOTYPE.md` stub keeps the sentinel routing
+  checks look for). Statuses *exploring → graduated | discarded*. Ledger template comment,
+  `ledger-nudge` and `stop-gate` hooks, orient, and the README artifact list extended.
+- `templates/prototype.md` gains *Design under test*, *Demo decision table*, and *Deviations
+  from the design* sections, and a graduation section for each context.
+- `builder` agent reports `deviations` alongside `assumptions` when building against a design.
+
+### Changed
+- **`bootstrap-prototype` renamed `prototype`** — the first rename in the plugin. Its description
+  carries "Formerly bootstrap-prototype" for one release so selection still lands; markers
+  written by older versions name the old skill in their re-entry line, which the new one
+  honors. All routing lines in `bootstrap-project`, `bootstrap-legacy`, and `orient` updated,
+  and both bootstraps now route *contract + marker* to `prototype` instead of the upgrade path.
+- `session-start` hook: *answered*, *graduated*, and *discarded* rows no longer count as
+  outstanding work (answered spikes had been listed as outstanding since the filter was written).
+- This changelog.
+
 ## [0.25.0] — 2026-09-06 · [#11](https://github.com/rob-rivera/agile-lifecycle/pull/11)
 
 The comment standard. Implementers were writing paragraph comments on single lines, narrating

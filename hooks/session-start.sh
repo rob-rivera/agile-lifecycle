@@ -13,7 +13,7 @@ branch=$(git branch --show-current 2>/dev/null)
 
 if [ -f docs/ledger.md ]; then
   open_rows=$(grep -E '^\|' docs/ledger.md 2>/dev/null \
-    | grep -viE '^\| *Id *\||^\| *-+ *\|| done | fixed | closed | retired ' || true)
+    | grep -viE '^\| *Id *\||^\| *-+ *\|| done | fixed | closed | retired | answered | graduated | discarded ' || true)
   if [ -n "$open_rows" ]; then
     echo "- outstanding work (docs/ledger.md):"
     printf '%s\n' "$open_rows" | sed 's/^/    /'
